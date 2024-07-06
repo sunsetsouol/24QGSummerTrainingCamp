@@ -1,2 +1,1 @@
-# 24QGSummerTrainingCamp
-QG2024年暑假训练营
+# QG_Job_Profile
