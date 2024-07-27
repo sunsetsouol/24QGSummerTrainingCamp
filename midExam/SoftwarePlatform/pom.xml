@@ -2,11 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.faken</groupId>
-    <artifactId>AI-Project</artifactId>
+    <groupId>com.qg24</groupId>
+    <artifactId>SoftwarePlatform</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>AI-Project</name>
-    <description>AI-Project</description>
+    <name>SoftwarePlatform</name>
+    <description>SoftwarePlatform</description>
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -108,7 +108,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
-                    <mainClass>com.faken.aiproject.AiProjectApplication</mainClass>
+                    <mainClass>com.qg24.softwareplatform.SoftwarePlatformApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>
