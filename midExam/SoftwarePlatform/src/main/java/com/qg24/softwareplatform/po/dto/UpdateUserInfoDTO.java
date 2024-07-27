@@ -3,6 +3,7 @@ package com.qg24.softwareplatform.po.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 @AllArgsConstructor
@@ -10,7 +11,6 @@ import lombok.NoArgsConstructor;
 public class UpdateUserInfoDTO {
     private String userId;
     private String username;
-    private String image;
+    private MultipartFile image;
     private String description;
-
 }
