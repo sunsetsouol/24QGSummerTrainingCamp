@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+/**
+ * 用户查看自己的申请记录
+ */
 public class UserApplicationRecordVO {
     /**
      * 创建时间
@@ -41,7 +44,7 @@ public class UserApplicationRecordVO {
      */
     private String version;
     /**
-     * 版本
+     * 版本(普通0/专业1)
      */
     private String versionType;
 }

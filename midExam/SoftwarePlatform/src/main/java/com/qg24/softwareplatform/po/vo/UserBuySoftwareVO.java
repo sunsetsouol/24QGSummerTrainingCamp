@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+/**
+ * 用户授权过(买过的)软件，过不过期都展示，前端判断是否过期，进行提示
+ */
 public class UserBuySoftwareVO {
     /**
      * 过期时间

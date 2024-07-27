@@ -8,6 +8,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FingerprintVO {
-    private String hardware;
+    /**
+     *硬件别名
+     */
+    private String hardwareName;
+    /**
+     * 硬件表主键
+     */
     private long userFingerprintId;
 }

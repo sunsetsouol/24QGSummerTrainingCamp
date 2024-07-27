@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+/**
+ * 首页个人信息视图
+ */
 public class HomePageUserInfoVO {
     /**
      * 头像url

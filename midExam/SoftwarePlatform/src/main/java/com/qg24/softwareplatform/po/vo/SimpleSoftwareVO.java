@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+/**
+ * 主页/排行榜 软件简要信息
+ */
 public class SimpleSoftwareVO {
     /**
      * 创建时间

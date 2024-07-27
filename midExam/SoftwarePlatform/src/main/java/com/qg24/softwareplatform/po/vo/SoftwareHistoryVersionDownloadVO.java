@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+/**
+ * 记录用户下载过的软件版本
+ */
 public class SoftwareHistoryVersionDownloadVO {
     /**
      * 创建时间
