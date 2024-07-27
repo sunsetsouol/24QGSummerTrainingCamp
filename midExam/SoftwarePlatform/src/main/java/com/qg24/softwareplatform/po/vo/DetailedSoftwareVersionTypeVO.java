@@ -22,5 +22,5 @@ public class DetailedSoftwareVersionTypeVO {
     /**
      * 普/专
      */
-    private long softwareVersionType;
+    private long VersionType;
 }
