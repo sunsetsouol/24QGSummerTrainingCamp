@@ -1,6 +1,8 @@
 package com.qg24.softwareplatform.controller;
 
+import com.qg24.softwareplatform.po.dto.EmailDTO;
 import com.qg24.softwareplatform.po.dto.LoginDTO;
+import com.qg24.softwareplatform.po.dto.RegisterDTO;
 import com.qg24.softwareplatform.po.result.Result;
 import org.springframework.web.bind.annotation.*;
 
