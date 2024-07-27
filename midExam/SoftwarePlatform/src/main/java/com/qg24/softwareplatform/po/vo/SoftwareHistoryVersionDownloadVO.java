@@ -18,5 +18,5 @@ public class SoftwareHistoryVersionDownloadVO {
     /**
     软件版本号
      */
-    private String softwareVersion;
+    private String Version;
 }

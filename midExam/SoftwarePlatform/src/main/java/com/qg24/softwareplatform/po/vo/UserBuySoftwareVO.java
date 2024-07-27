@@ -14,7 +14,7 @@ public class UserBuySoftwareVO {
     /**
      * 过期时间
      */
-    private String outdateTime;
+    private String expirationTime;
     /**
      * 软件名称
      */
