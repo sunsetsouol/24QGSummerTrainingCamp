@@ -53,26 +53,46 @@ public class AdminServiceImpl implements AdminService {
     @Transactional
     public boolean updateSoftwareInfoTempStatus(int softwareInfoTempId, int status) {
         if(adminMapper.updateSoftwareInfoTemp(softwareInfoTempId,status)==1){
-            SoftwareInfoTemp softwareInfoTemp = adminMapper.getSoftwareInfoTemp(softwareInfoTempId);//获得记录信息
-            Software software = new Software();
-            BeanUtils.copyProperties(softwareInfoTemp,software);
-            //将简要描述存入软件表中
-            software.setDescription(softwareInfoTemp.getBriefDescription());
-            software.setCreateTime(softwareInfoTemp.getApplicationTime());
-            int count = adminMapper.insertNewSoftwareTable(software);
-            if(count!=0){
-                //将新软件信息存入软件下载表中
-                SoftwareVersionDownload softwareVersionDownload = new SoftwareVersionDownload();
-                BeanUtils.copyProperties(softwareInfoTemp,softwareVersionDownload);
-                softwareVersionDownload.setSoftwareId(software.getSoftwareId());
-                softwareVersionDownload.setCreateTime(softwareInfoTemp.getApplicationTime());
-                if(adminMapper.insertNewSoftwareDownloadTable(softwareVersionDownload)==1){
-                    return true;
+            if(status==1){
+                //通过
+                SoftwareInfoTemp softwareInfoTemp = adminMapper.getSoftwareInfoTemp(softwareInfoTempId);//获得记录信息
+                Software software = new Software();
+                BeanUtils.copyProperties(softwareInfoTemp,software);
+                //将简要描述存入软件表中
+                software.setDescription(softwareInfoTemp.getBriefDescription());
+                if(softwareInfoTemp.getTypeStatus()==0){
+                    //上传新软件(即第一次上传,不是迭代)
+                    software.setCreateTime(softwareInfoTemp.getApplicationTime());
+                    int count = adminMapper.insertNewSoftwareTable(software);
+                    if(count!=0){
+                        //将新软件信息存入软件下载表中
+                        SoftwareVersionDownload softwareVersionDownload = new SoftwareVersionDownload();
+                        BeanUtils.copyProperties(softwareInfoTemp,softwareVersionDownload);
+                        softwareVersionDownload.setSoftwareId(software.getSoftwareId());
+                        softwareVersionDownload.setCreateTime(softwareInfoTemp.getApplicationTime());
+                        if(adminMapper.insertNewSoftwareDownloadTable(softwareVersionDownload)==1){
+                            return true;
+                        }else{
+                            return false;
+                        }
+                    }else {
+                        return false;
+                    }
                 }else{
-                    return false;
+                    //迭代软件版本
+                    //将新数据插入软件下载表
+                    SoftwareVersionDownload softwareVersionDownload = new SoftwareVersionDownload();
+                    BeanUtils.copyProperties(softwareInfoTemp,softwareVersionDownload);
+                    softwareVersionDownload.setSoftwareId(adminMapper.getSoftwareId(softwareInfoTemp.getSoftwareName()));
+                    softwareVersionDownload.setCreateTime(softwareInfoTemp.getApplicationTime());
+                    if(adminMapper.insertNewSoftwareDownloadTable(softwareVersionDownload)==1){
+                        return true;
+                    }else{
+                        return false;
+                    }
                 }
-            }else {
-                return false;
+            }else{
+                return true;
             }
         }else{
             return false;

@@ -9,6 +9,7 @@ import com.qg24.softwareplatform.po.entity.SoftwareInfoTemp;
 import com.qg24.softwareplatform.po.entity.SoftwareVersionDownload;
 import com.qg24.softwareplatform.po.result.PageBean;
 import com.qg24.softwareplatform.po.vo.DetailedSoftwareVersionTypeVO;
+import com.qg24.softwareplatform.po.vo.ShowRequiredAuthSoftwareVO;
 import com.qg24.softwareplatform.po.vo.SimpleSoftwareVO;
 import com.qg24.softwareplatform.po.vo.SoftwareHistoryVersionDownloadVO;
 import com.qg24.softwareplatform.service.SoftwareService;
@@ -88,6 +89,7 @@ public class SoftwareServiceImpl implements SoftwareService {
             //查找为非空则进行entity类包装为vo类
             DetailedSoftwareVersionTypeVO detailedSoftwareVersionTypeVO = new DetailedSoftwareVersionTypeVO();
             BeanUtils.copyProperties(ordinarySoftwareVersionInfo, detailedSoftwareVersionTypeVO);
+            detailedSoftwareVersionTypeVO.setDescription(ordinarySoftwareVersionInfo.getDetailedDescription());
             //添加到list集合中
             detailedSoftwareVersionTypeVOList.add(detailedSoftwareVersionTypeVO);
         }
@@ -97,6 +99,7 @@ public class SoftwareServiceImpl implements SoftwareService {
             //查找为非空则进行entity类包装为vo类
             DetailedSoftwareVersionTypeVO detailedSoftwareVersionTypeVO = new DetailedSoftwareVersionTypeVO();
             BeanUtils.copyProperties(professionalSoftwareVersionInfo, detailedSoftwareVersionTypeVO);
+            detailedSoftwareVersionTypeVO.setDescription(professionalSoftwareVersionInfo.getDetailedDescription());
             //添加到list集合中
             detailedSoftwareVersionTypeVOList.add(detailedSoftwareVersionTypeVO);
         }
@@ -167,6 +170,14 @@ public class SoftwareServiceImpl implements SoftwareService {
         softwareInfoTemp.setTagsString(softwareInfoTemp.getTags().toString());
 
         return softwareMapper.addSoftwareInfoTemp(softwareInfoTemp);
+    }
+
+    @Override
+    public List<ShowRequiredAuthSoftwareVO> showRequiredAuthSoftware(int userId) {
+        //使用联表查询，使用外连方式
+        List<ShowRequiredAuthSoftwareVO> showRequiredAuthSoftwareVOList = softwareMapper.querySoftwareVersionDownloadUserNoAuth(userId);
+
+        return showRequiredAuthSoftwareVOList;
     }
 
 

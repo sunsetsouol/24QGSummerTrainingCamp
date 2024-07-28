@@ -17,7 +17,7 @@ public class Software {
 
     private String description;
 
-    private int downloadCount;
+    private double downloadCount;
 
     private int softwareId;
 

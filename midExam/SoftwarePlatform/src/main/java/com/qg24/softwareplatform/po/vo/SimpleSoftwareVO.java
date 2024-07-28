@@ -22,7 +22,7 @@ public class SimpleSoftwareVO {
     /**
      * 软件ID
      */
-    private long softwareId;
+    private int softwareId;
     /**
      * 软件图标url
      */

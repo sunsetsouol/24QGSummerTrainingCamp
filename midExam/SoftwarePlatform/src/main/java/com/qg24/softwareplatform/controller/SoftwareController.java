@@ -7,6 +7,7 @@ import com.qg24.softwareplatform.po.entity.Software;
 import com.qg24.softwareplatform.po.result.PageBean;
 import com.qg24.softwareplatform.po.result.Result;
 import com.qg24.softwareplatform.po.vo.DetailedSoftwareVersionTypeVO;
+import com.qg24.softwareplatform.po.vo.ShowRequiredAuthSoftwareVO;
 import com.qg24.softwareplatform.po.vo.SimpleSoftwareVO;
 import com.qg24.softwareplatform.po.vo.SoftwareHistoryVersionDownloadVO;
 import com.qg24.softwareplatform.service.SoftwareService;
@@ -89,4 +90,17 @@ public class SoftwareController {
         }
 
     }
+
+    //用户查看需要购买的软件信息
+    @GetMapping("showRequiredAuthSoftware")
+    public Result<?> showRequiredAuthSoftware(@RequestParam("userId") int userId){
+        List<ShowRequiredAuthSoftwareVO> showRequiredAuthSoftwareVOList = softwareService.showRequiredAuthSoftware(userId);
+        if (showRequiredAuthSoftwareVOList.isEmpty()){
+            return Result.error("");
+        }else{
+            return Result.success("",showRequiredAuthSoftwareVOList);
+        }
+    }
+
+
 }

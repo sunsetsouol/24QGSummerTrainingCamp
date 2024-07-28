@@ -8,6 +8,13 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import com.qg24.softwareplatform.po.vo.ShowRequiredAuthSoftwareVO;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -73,6 +80,8 @@ public interface SoftwareMapper {
             "#{winUrl},#{linuxUrl},#{macUrl},#{tagsString},#{typeStatus},#{passedStatus},#{author})")
     int addSoftwareInfoTemp(SoftwareInfoTemp softwareInfoTemp);
 
+
+    List<ShowRequiredAuthSoftwareVO> querySoftwareVersionDownloadUserNoAuth(@Param("userId") int userId);
 
     @Select("select software_id, version_type from user_software_auth where user_id = #{userId}")
     List<Map<String, Object>> select(String userId);
