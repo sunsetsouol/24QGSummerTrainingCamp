@@ -1,5 +1,6 @@
 package com.qg24.softwareplatform.po.vo;
 
+import com.alibaba.fastjson2.JSON;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -49,4 +50,16 @@ public class UserApplicationRecordVO {
      * 版本(普通0/专业1)
      */
     private String versionType;
+
+    private String tagsString;
+    public void StringToTags(){
+        if(tagsString!=null){
+            tags= JSON.parseArray(tagsString, String.class);
+        }
+    }
+    public void TagsToString(){
+        if(tags!=null){
+            tagsString=JSON.toJSONString(tags);
+        }
+    }
 }

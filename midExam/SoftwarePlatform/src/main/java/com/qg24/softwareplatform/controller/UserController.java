@@ -22,7 +22,7 @@ public class UserController {
      */
     @Autowired
     private UserService userService;
-    @GetMapping("/user/homePageShowSoftware")
+    @GetMapping("/homePageShowSoftware")
     public Result<PageBean<SimpleSoftwareVO>> homePageShowSoftware(@ModelAttribute ShowPersonalSoftwareInfoDTO dto){
         int total = userService.getTotalSoftware(dto.getUserId());
         List<SimpleSoftwareVO> list = userService.getHomePageShowSoftware(dto);
