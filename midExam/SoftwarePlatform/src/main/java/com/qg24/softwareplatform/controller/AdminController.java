@@ -60,6 +60,7 @@ public class AdminController {
     @PostMapping("/verifyApplication")
     public Result<?> verifyApplication(@RequestParam("softwareInfoTempId")int softwareInfoTempId,@RequestParam("status")int status){
         if(adminService.updateSoftwareInfoTempStatus(softwareInfoTempId,status)){
+            //将通过的软件信息存入软件信息表中
             return Result.success("Success");
         }else{
             return Result.error("Failed");

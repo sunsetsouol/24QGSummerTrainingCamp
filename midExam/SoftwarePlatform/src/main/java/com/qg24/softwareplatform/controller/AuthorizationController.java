@@ -59,7 +59,7 @@ public class AuthorizationController {
     //(非前端)本地软件发送信息进行服务器比对接口
     @PostMapping("/onlineVertification")
     public Result<?> onlineVertification(){
-
+        return null;
     }
 
 

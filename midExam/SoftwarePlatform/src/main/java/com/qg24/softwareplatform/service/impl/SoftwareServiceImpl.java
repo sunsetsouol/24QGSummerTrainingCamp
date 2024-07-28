@@ -3,7 +3,6 @@ package com.qg24.softwareplatform.service.impl;
 import com.qg24.softwareplatform.mapper.SoftwareMapper;
 import com.qg24.softwareplatform.po.dto.HistorySoftwareVersionDTO;
 import com.qg24.softwareplatform.po.dto.HomePageShowSoftwareDTO;
-import com.qg24.softwareplatform.po.dto.UpdateSoftwareDTO;
 import com.qg24.softwareplatform.po.dto.UploadNewSoftwareDTO;
 import com.qg24.softwareplatform.po.entity.Software;
 import com.qg24.softwareplatform.po.entity.SoftwareInfoTemp;
