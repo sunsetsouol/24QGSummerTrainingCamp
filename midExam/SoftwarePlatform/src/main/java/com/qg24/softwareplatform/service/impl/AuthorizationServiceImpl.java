@@ -123,7 +123,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
                 for (SoftwareSimpleInfoDTO softwareSimpleInfoDTO : array) {
                         //判断是否有这个信息匹配
                     if(onlineVertificationDTO.getSoftwareName().equals(softwareSimpleInfoDTO.getSoftwareName())
-                    && onlineVertificationDTO.getVersionType().equals(softwareSimpleInfoDTO.getVersionType())) {
+                    && onlineVertificationDTO.getVersionType() == (softwareSimpleInfoDTO.getVersionType())) {
                         //两个信息都匹配则为成功
                         return true;
                     }

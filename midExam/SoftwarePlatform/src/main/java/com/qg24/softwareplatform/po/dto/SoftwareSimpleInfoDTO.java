@@ -22,5 +22,5 @@ public class SoftwareSimpleInfoDTO {
     /**
      * 软件版本(普/专)
      */
-    private String versionType;
+    private int versionType;
 }
