@@ -4,12 +4,14 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-@Data
 @Component
-@ConfigurationProperties(prefix = "huawei-obs")
-public class HuaweiOBSProperties {
-    private String ak;
-    private String sk;
-    private String endPoint;
+@ConfigurationProperties(prefix = "alioss")
+@Data
+public class AliOssProperties {
+
+    private String endpoint;
+    private String accessKeyId;
+    private String accessKeySecret;
     private String bucketName;
+
 }

@@ -26,6 +26,7 @@
                 </foreach>
             </if>
         </where>
+    </select>
     <select id="querySoftwareVersionDownloadUserNoAuth"
             resultType="com.qg24.softwareplatform.po.vo.ShowRequiredAuthSoftwareVO">
         SELECT DISTINCT

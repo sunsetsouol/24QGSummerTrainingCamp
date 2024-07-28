@@ -43,7 +43,6 @@ public class SoftwareController {
 
     }
 
-
     // 软件详情页 上半部分基本软件信息
     @GetMapping("/basicSoftwareInfo")
     public Result<?> basicSoftwareInfo(@RequestParam("softwareId") int softwareId){
