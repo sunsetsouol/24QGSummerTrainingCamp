@@ -14,6 +14,7 @@ import com.qg24.softwareplatform.service.SoftwareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -81,7 +82,7 @@ public class SoftwareController {
 
     // 上传软件/更新软件
     @PostMapping("/upload")
-    public Result<?> upload(@ModelAttribute UploadNewSoftwareDTO uploadNewSoftwareDTO){
+    public Result<?> upload(@ModelAttribute UploadNewSoftwareDTO uploadNewSoftwareDTO) throws IOException {
         if (softwareService.uploadNewSoftware(uploadNewSoftwareDTO) != 0){
             return Result.success("",null);
         }else {

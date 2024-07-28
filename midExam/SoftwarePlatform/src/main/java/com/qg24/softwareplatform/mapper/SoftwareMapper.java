@@ -76,7 +76,7 @@ public interface SoftwareMapper {
             "detailed_description,win_url,linux_url,mac_url,tags,type_status,passed_status,author) " +
             "values(#{userId},#{softwareName},#{versionType},#{version},#{briefDescription},#{detailedDescription}," +
             "#{winUrl},#{linuxUrl},#{macUrl},#{tagsString},#{typeStatus},#{passedStatus},#{author})")
-    int addSoftwareInforTemp(SoftwareInfoTemp softwareInfoTemp);
+    int addSoftwareInfoTemp(SoftwareInfoTemp softwareInfoTemp);
 
 
     List<ShowRequiredAuthSoftwareVO> querySoftwareVersionDownloadUserNoAuth(@Param("userId") int userId);
