@@ -1,7 +1,7 @@
 package com.qg24.softwareplatform.controller;
 
 import com.qg24.softwareplatform.po.dto.UserHomePageShowSoftwareDTO;
-import com.qg24.softwareplatform.po.vo.HomePageShowSoftwareVO;
+import com.qg24.softwareplatform.po.vo.UserHomePageShowSoftwareVO;
 import com.qg24.softwareplatform.po.result.Result;
 import com.qg24.softwareplatform.po.vo.SimpleSoftwareVO;
 import com.qg24.softwareplatform.po.vo.UserApplicationRecordVO;
@@ -25,7 +25,7 @@ public class UserController {
     public Result<?> homePageShowSoftware(@ModelAttribute UserHomePageShowSoftwareDTO dto){
         int total = userService.getTotalSoftware(dto.getUserId());
         List<SimpleSoftwareVO> list = userService.getHomePageShowSoftware(dto);
-        HomePageShowSoftwareVO vo = new HomePageShowSoftwareVO();
+        UserHomePageShowSoftwareVO vo = new UserHomePageShowSoftwareVO();
         if(list!=null){
             vo.setTotal(total);
             vo.setList(list);
