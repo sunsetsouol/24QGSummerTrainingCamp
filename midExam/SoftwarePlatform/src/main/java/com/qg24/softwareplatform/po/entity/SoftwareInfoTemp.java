@@ -1,5 +1,6 @@
 package com.qg24.softwareplatform.po.entity;
 
+import com.alibaba.fastjson2.JSON;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -40,6 +41,16 @@ public class SoftwareInfoTemp {
  
     private String userId;
 
-    private String tagsToString;
+    private String tagsString;
 
+    public void TagsToString(){
+        if(tags!=null){
+            tagsString= JSON.toJSONString(tags);
+        }
+    }
+    public void StringToTags(){
+        if(tagsString!=null){
+            tags=JSON.parseArray(tagsString, String.class);
+        }
+    }
 }

@@ -128,7 +128,7 @@ public class SoftwareServiceImpl implements SoftwareService {
         //设置通过状态码为0(0代办/1通过/2拒绝)
         softwareInfoTemp.setPassedStatus(0);
         //将list集合转化为string存入数据库
-        softwareInfoTemp.setTagsToString(softwareInfoTemp.getTags().toString());
+        softwareInfoTemp.setTagsString(softwareInfoTemp.getTags().toString());
 
         return softwareMapper.addSoftwareInfoTemp(softwareInfoTemp);
     }

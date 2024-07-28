@@ -1,8 +1,6 @@
 package com.qg24.softwareplatform.controller;
 
-import com.qg24.softwareplatform.po.dto.HomePageShowSoftwareDTO;
 import com.qg24.softwareplatform.po.dto.ShowPersonalSoftwareInfoDTO;
-import com.qg24.softwareplatform.po.entity.HomePageShowSoftwareVO;
 import com.qg24.softwareplatform.po.result.PageBean;
 import com.qg24.softwareplatform.po.result.Result;
 import com.qg24.softwareplatform.po.vo.SimpleSoftwareVO;
@@ -12,7 +10,6 @@ import com.qg24.softwareplatform.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -40,7 +37,7 @@ public class UserController {
      */
     @GetMapping("/applicationRecord")
     public Result<?> applicationRecord(@RequestParam("userId")String userId){
-        List<UserApplicationRecordVO> list = new ArrayList<>();
+        List<UserApplicationRecordVO> list;
         list=userService.getApplicationRecord(userId);
         if(list!=null){
             return Result.success("",list);
