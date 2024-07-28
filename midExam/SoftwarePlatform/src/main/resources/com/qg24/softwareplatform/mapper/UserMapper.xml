@@ -20,7 +20,10 @@
             description = #{description},
         </if>
         <if test="image != null">
-            image = #{image}
+            image = #{image},
+        </if>
+        <if test="updateTime != null">
+            update_time = #{updateTime}
         </if>
         where user_id = #{userId}
     </update>
