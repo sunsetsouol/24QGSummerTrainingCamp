@@ -37,10 +37,19 @@ public class HardwareController {
         return Result.error("unknown");
     }
 
-    //删除硬件指纹
+    /**
+     * 用户删除硬件指纹信息
+     * @param useHardwareId
+     * @return
+     */
     @DeleteMapping("/deleteFingerprint")
     public Result<?> deleteFingerprint(@RequestParam("useHardwareId") int useHardwareId){
-
+        boolean b = hardwareService.deleteFingerprintByUseHardwareId(useHardwareId);
+        if(b){
+            return Result.success("删除该指纹信息成功");
+        }else {
+            return Result.error("删除该指纹信息失败");
+        }
     }
 
 
@@ -59,7 +68,6 @@ public class HardwareController {
             return Result.success("success" , list);
         }
     }
-
 
 
 }
