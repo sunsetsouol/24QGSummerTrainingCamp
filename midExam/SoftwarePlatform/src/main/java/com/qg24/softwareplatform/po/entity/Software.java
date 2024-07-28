@@ -33,6 +33,8 @@ public class Software {
 
     private String createTime;
 
+    private String userId;
+
     //将tags转为string便于存入mysql
     public void TagsToString(){
         if(tags != null){
