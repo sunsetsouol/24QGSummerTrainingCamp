@@ -23,11 +23,11 @@ import java.util.List;
 public class SoftwareServiceImpl implements SoftwareService {
     @Autowired
     SoftwareMapper softwareMapper;
-    @Override
-    public List<SimpleSoftwareVO> homePageShowSoftware(HomePageShowSoftwareDTO homePageShowSoftwareDTO) {
-        //DOTO
-        return new ArrayList<>();
-    }
+//    @Override
+//    public List<SimpleSoftwareVO> homePageShowSoftware(HomePageShowSoftwareDTO homePageShowSoftwareDTO) {
+//        //DOTO
+//        return new ArrayList<>();
+//    }
 
     @Override
     public List<SimpleSoftwareVO> softwareRanking() {
@@ -103,7 +103,7 @@ public class SoftwareServiceImpl implements SoftwareService {
         //设置通过状态码为0(0代办/1通过/2拒绝)
         softwareInfoTemp.setPassedStatus(0);
         //将list集合转化为string存入数据库
-        softwareInfoTemp.setTagsToString(softwareInfoTemp.getTags().toString());
+        softwareInfoTemp.setTagsString(softwareInfoTemp.getTags().toString());
 
         return softwareMapper.addSoftwareInfoTemp(softwareInfoTemp);
     }

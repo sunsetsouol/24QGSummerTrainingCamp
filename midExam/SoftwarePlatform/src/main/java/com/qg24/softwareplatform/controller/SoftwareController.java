@@ -22,11 +22,13 @@ public class SoftwareController {
     @Autowired
     private SoftwareService softwareService;
     //首页分页展示软件
-    @GetMapping("/homePageShowSoftware")
+    /*@GetMapping("/homePageShowSoftware")
     public Result<PageBean<SimpleSoftwareVO>> homePageShowSoftware(@RequestParam HomePageShowSoftwareDTO homePageShowSoftwareDTO){
         PageBean<SimpleSoftwareVO> pageBean = softwareService.homePageShowSoftware(homePageShowSoftwareDTO);
         return Result.success("", pageBean);
     }
+
+     */
 
     //软件热门排行
     @GetMapping("/softwareRanking")

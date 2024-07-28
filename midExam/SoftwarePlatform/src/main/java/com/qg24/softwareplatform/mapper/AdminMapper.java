@@ -25,16 +25,18 @@ public interface AdminMapper {
     int updateSoftwareInfoTemp(@Param("softwareInfoTempId") int softwareInfoTempId, @Param("status") int status);
 
     //找到审查记录
+    @Result(property = "tagsString",column = "tags")
     @Select("select * from software_info_temp where software_info_temp_id=#{softwareInfoTempId}")
     SoftwareInfoTemp getSoftwareInfoTemp(int softwareInfoTempId);
 
     //插入新软件信息到软件表(返回主键)
-    @Options(useGeneratedKeys = true, keyProperty = "software_id")
-    @Insert("insert into software (author,user_id,tags,description,software_image,create_time) values (#{author},#{userId},#{description},#{softwareImage},#{createTime})")
+    @Options(useGeneratedKeys = true, keyProperty = "softwareId")
+    @Insert("insert into software (software_name,author,user_id,tags,description,softwareImage,createTime) " +
+            "values (#{softwareName},#{author},#{userId},#{tagsString},#{description},#{softwareImage},#{createTime})")
     int insertNewSoftwareTable(Software software);
 
     //插入新软件信息到软件历史版本下载表
-    @Insert("insert into software_version_download (software_id,version_type,version,price,win_url,linux_url,mac_url,creat_time,detailed_description) " +
-            "values (#{softwareId},#{versionType},#{version},#{price}.#{WinUrl},#{LinuxUrl},#{MacUrl},#{creatTime},#{detailedDescription})")
+    @Insert("insert into software_version_download (software_id,version_type,version,price,win_url,linux_url,mac_url,create_time,detailed_description) " +
+            "values (#{softwareId},#{versionType},#{version},#{price},#{winUrl},#{linuxUrl},#{macUrl},#{createTime},#{detailedDescription})")
     int insertNewSoftwareDownloadTable(SoftwareVersionDownload softwareVersionDownload);
 }
