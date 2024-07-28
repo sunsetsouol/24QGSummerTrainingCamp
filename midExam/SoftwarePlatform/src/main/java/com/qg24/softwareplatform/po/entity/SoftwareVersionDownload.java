@@ -14,7 +14,7 @@ public class SoftwareVersionDownload {
 
     private String detailedDescription;
 
-    private double price;
+    private float price;
 
     private int softwareId;
 
