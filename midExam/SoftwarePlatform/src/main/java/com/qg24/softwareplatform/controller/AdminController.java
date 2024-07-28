@@ -3,16 +3,25 @@ package com.qg24.softwareplatform.controller;
 import com.qg24.softwareplatform.po.dto.UpdateSoftwareLatestInfoDTO;
 import com.qg24.softwareplatform.po.entity.Software;
 import com.qg24.softwareplatform.po.result.Result;
+import com.qg24.softwareplatform.service.AdminService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
     /**
-     * 管理员更改软件信息
+     * 管理员更改基本软件信息
      */
+    @Autowired
+    private AdminService adminService;
     @PostMapping("/updateSoftwareBasicInfo")
     public Result<?> UpdateSoftWareBasicInfo(@RequestBody Software software){
+        if(adminService.updateSoftwareBasicInfo(software)){
+            return Result.success("Success");
+        }else{
+            return Result.error("Failed");
+        }
     }
 
     /**
@@ -20,6 +29,11 @@ public class AdminController {
      */
     @PostMapping("/updateSoftwareLatestInfo")
     public Result<?> updateSoftwareLatestInfo(@RequestBody UpdateSoftwareLatestInfoDTO updateSoftwareLatestInfoDTO){
+        if(adminService.updateSoftwareLatestInfo(updateSoftwareLatestInfoDTO)){
+            return Result.success("Success");
+        }else{
+            return Result.error("Failed");
+        }
     }
 
     /**
