@@ -14,4 +14,5 @@ public class NewUserInfoDTO {
     private String userId;
     private MultipartFile headImage;
     private String image;
+    private String UpdateTime;
 }

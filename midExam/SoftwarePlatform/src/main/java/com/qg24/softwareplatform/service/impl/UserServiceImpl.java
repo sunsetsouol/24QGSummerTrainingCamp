@@ -17,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.qg24.softwareplatform.util.AliOssUtil;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -65,13 +67,18 @@ public class UserServiceImpl implements UserService {
     public boolean uploadNewUserInfo(NewUserInfoDTO dto) throws IOException {
         String url = "";
         MultipartFile headImage = dto.getHeadImage();
+        //获取当前时间
+        LocalDateTime localDatetime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String time = localDatetime.format(formatter);
+        dto.setUpdateTime(time);
         if(!headImage.isEmpty()){
             String extension = Objects.requireNonNull(headImage.getOriginalFilename()).substring(headImage.getOriginalFilename().lastIndexOf("."));
             String fileName = UUID.randomUUID() + extension;
             byte[] bytes = headImage.getBytes();
             url = aliOssUtil.upload(bytes, fileName);//上传文件,获得url
+            dto.setImage(url);
         }
-        dto.setImage(url);
         if(userMapper.updateUserInfo(dto)==1){
             return true;
         }else{
