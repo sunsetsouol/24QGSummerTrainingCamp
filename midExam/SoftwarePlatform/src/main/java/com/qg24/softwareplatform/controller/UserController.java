@@ -2,6 +2,7 @@ package com.qg24.softwareplatform.controller;
 
 import com.qg24.softwareplatform.po.dto.HomePageShowSoftwareDTO;
 import com.qg24.softwareplatform.po.dto.ShowPersonalSoftwareInfoDTO;
+import com.qg24.softwareplatform.po.entity.HomePageShowSoftwareVO;
 import com.qg24.softwareplatform.po.result.PageBean;
 import com.qg24.softwareplatform.po.result.Result;
 import com.qg24.softwareplatform.po.vo.SimpleSoftwareVO;
@@ -17,6 +18,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+
+    // TODO 个人开发的软件有普 专 两种 是否忽略?
     /**
      * 个人页面展示个人开发的软件
      */

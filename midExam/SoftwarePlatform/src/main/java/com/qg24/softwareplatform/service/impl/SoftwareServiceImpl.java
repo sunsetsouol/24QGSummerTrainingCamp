@@ -7,6 +7,7 @@ import com.qg24.softwareplatform.po.dto.UploadNewSoftwareDTO;
 import com.qg24.softwareplatform.po.entity.Software;
 import com.qg24.softwareplatform.po.entity.SoftwareInfoTemp;
 import com.qg24.softwareplatform.po.entity.SoftwareVersionDownload;
+import com.qg24.softwareplatform.po.result.PageBean;
 import com.qg24.softwareplatform.po.vo.DetailedSoftwareVersionTypeVO;
 import com.qg24.softwareplatform.po.vo.SimpleSoftwareVO;
 import com.qg24.softwareplatform.po.vo.SoftwareHistoryVersionDownloadVO;
@@ -16,18 +17,42 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 @Service
 public class SoftwareServiceImpl implements SoftwareService {
+
     @Autowired
-    SoftwareMapper softwareMapper;
-//    @Override
-//    public List<SimpleSoftwareVO> homePageShowSoftware(HomePageShowSoftwareDTO homePageShowSoftwareDTO) {
-//        //DOTO
-//        return new ArrayList<>();
-//    }
+    private SoftwareMapper softwareMapper;
+
+    @Override
+    public PageBean<SimpleSoftwareVO> homePageShowSoftware(HomePageShowSoftwareDTO homePageShowSoftwareDTO) {
+        PageBean<SimpleSoftwareVO> pageBean = new PageBean<>();
+        List<SimpleSoftwareVO> simpleSoftwareVOS = new ArrayList<>();
+
+        int offset = (homePageShowSoftwareDTO.getPage() - 1) * homePageShowSoftwareDTO.getPageSize();
+        List<Software> softwareList = softwareMapper.pagedQuerySoftwareBySoftNameAndTags(homePageShowSoftwareDTO.getSoftwareName(), offset, homePageShowSoftwareDTO.getPageSize());
+        int total = softwareMapper.getTotal(homePageShowSoftwareDTO.getSoftwareName(), homePageShowSoftwareDTO.getTags());
+        List<String> tags = homePageShowSoftwareDTO.getTags();
+        // 将tagString转换为List类型的tags
+        softwareList.forEach(Software::TagsToList);
+
+        // 进行子集的判断
+        softwareList.forEach(software -> {
+            if (new HashSet<>(tags).containsAll(software.getTags())) {
+                // tags为用户想要软件拥有的标签, 查询软件时软件的标签应该为tags的子集
+                SimpleSoftwareVO simpleSoftwareVO = new SimpleSoftwareVO();
+                BeanUtils.copyProperties(software, simpleSoftwareVO);
+                simpleSoftwareVOS.add(simpleSoftwareVO);
+            }
+        });
+
+        pageBean.setTotal((long) total);
+        pageBean.setData(simpleSoftwareVOS);
+
+        return pageBean;
+    }
 
     @Override
     public List<SimpleSoftwareVO> softwareRanking() {
@@ -92,7 +117,7 @@ public class SoftwareServiceImpl implements SoftwareService {
     public int uploadNewSoftware(UploadNewSoftwareDTO uploadNewSoftwareDTO) {
         SoftwareInfoTemp softwareInfoTemp = new SoftwareInfoTemp();
         BeanUtils.copyProperties(uploadNewSoftwareDTO, softwareInfoTemp);
-        //DOTO 模拟文件上传后返回了url实现数据库操作逻辑（并没有实现文件上传到云端服务器的逻辑）
+        // TODO 模拟文件上传后返回了url实现数据库操作逻辑（并没有实现文件上传到云端服务器的逻辑）
         String winUrl = "www.WindowsDownload.com";
         String linuxUrl = "www.LinuxDownload.com";
         String macUrl = "www.MacDownload.com";
