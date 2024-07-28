@@ -14,6 +14,7 @@ import com.qg24.softwareplatform.util.TimeUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -30,9 +31,9 @@ public class AuthorizationServiceImpl implements AuthorizationService {
      * @return
      */
     @Override
-    public boolean purchaseAuth(PurchaseDTO purchaseDTO) {
+    public boolean purchaseAuth(@RequestBody PurchaseDTO purchaseDTO) {
         //把软件列表转化为字符串
-        String s = purchaseDTO.getAuthSoftwareDTOList().toString();
+        String s = purchaseDTO.getSoftwareList().toString();
 
         //添加订单信息先
         Order order = new Order();
@@ -48,7 +49,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
         authorizationMapper.addUserSoftwareLicense(userSoftwareLicense);
 
         //添加用户软件授权表
-        List<AuthSoftwareDTO> authSoftwareDTOList = purchaseDTO.getAuthSoftwareDTOList();
+        List<AuthSoftwareDTO> authSoftwareDTOList = purchaseDTO.getSoftwareList();
         //遍历购买的每一个软件
         for (AuthSoftwareDTO authSoftwareDTO : authSoftwareDTOList) {
             //一条一条添加到用户软件授权表
@@ -68,7 +69,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
      * @return
      */
     @Override
-    public String checkAuth(CheckAuthDTO checkAuthDTO) {
+    public String checkAuth(@RequestBody CheckAuthDTO checkAuthDTO) {
         //搜索用户软件授权表
         UserSoftwareAuth userSoftwareAuth = new UserSoftwareAuth();
         BeanUtils.copyProperties(checkAuthDTO, userSoftwareAuth);
@@ -90,15 +91,19 @@ public class AuthorizationServiceImpl implements AuthorizationService {
      * @return
      */
     @Override
-    public DownloadUrlsVO getDownloadUrls(CheckAuthDTO checkAuthDTO) {
+    public DownloadUrlsVO getDownloadUrls(@RequestBody CheckAuthDTO checkAuthDTO) {
         SoftwareVersionDownload softVersionDownload = new SoftwareVersionDownload();
         BeanUtils.copyProperties(checkAuthDTO, softVersionDownload);
         //查找下载地址
         SoftwareVersionDownload softwareVersionDownload = authorizationMapper.selectByThreeInfo(softVersionDownload);
         //返回地址
-        DownloadUrlsVO downloadUrlsVO = new DownloadUrlsVO();
-        BeanUtils.copyProperties(softwareVersionDownload, downloadUrlsVO);
-        return downloadUrlsVO;
+        if(softwareVersionDownload == null){
+            return null;
+        }else {
+            DownloadUrlsVO downloadUrlsVO = new DownloadUrlsVO();
+            BeanUtils.copyProperties(softwareVersionDownload, downloadUrlsVO);
+            return downloadUrlsVO;
+        }
     }
 
     /**

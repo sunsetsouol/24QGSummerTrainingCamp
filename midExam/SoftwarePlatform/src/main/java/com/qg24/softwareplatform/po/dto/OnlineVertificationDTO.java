@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OnlineVertificationDTO {
    private String fingerprint;
-   private String versionType;
+   private int versionType;
    private String softwareName;
 
 }
