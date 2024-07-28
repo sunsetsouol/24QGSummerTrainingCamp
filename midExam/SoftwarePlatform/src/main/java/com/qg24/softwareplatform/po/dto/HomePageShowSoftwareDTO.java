@@ -4,11 +4,23 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class HomePageShowSoftwareDTO {
-    private int page;
-    private int pageSize;
-    private String userId;
+    /**
+     * 页码
+     */
+    private long page;
+    /**
+     * 软件名
+     */
+    private String softwareName;
+    /**
+     * 标签
+     */
+    private List<String> tags;
+
 }

@@ -27,7 +27,11 @@ public class Software {
 
     private List<String> tags;
 
+    private String softwareImage;
+
     private String tagsString;
+
+    private String createTime;
 
     //将tags转为string便于存入mysql
     public void TagsToString(){

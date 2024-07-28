@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.mail.Multipart;
 import java.util.List;
 
 /**
@@ -14,15 +13,12 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UploadNewSoftwareDTO {
-
+public class UpdateSoftwareDTO {
     private String softwareName;
 
     private int versionType;
 
     private String version;
-
-    private String briefDescription;
 
     private String detailedDescription;
 

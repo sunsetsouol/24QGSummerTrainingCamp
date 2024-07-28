@@ -14,10 +14,6 @@ public class SoftwareVersionDownload {
 
     private String detailedDescription;
 
-    private String linuxUrl;
-
-    private String macUrl;
-
     private double price;
 
     private int softwareId;
@@ -27,5 +23,9 @@ public class SoftwareVersionDownload {
     private int versionType;
 
     private String winUrl;
+
+    private String linuxUrl;
+
+    private String macUrl;
 
 }

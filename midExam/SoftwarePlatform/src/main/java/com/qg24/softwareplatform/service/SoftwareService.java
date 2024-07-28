@@ -1,0 +1,22 @@
+package com.qg24.softwareplatform.service;
+
+import com.qg24.softwareplatform.po.dto.HistorySoftwareVersionDTO;
+import com.qg24.softwareplatform.po.dto.HomePageShowSoftwareDTO;
+import com.qg24.softwareplatform.po.entity.Software;
+import com.qg24.softwareplatform.po.vo.DetailedSoftwareVersionTypeVO;
+import com.qg24.softwareplatform.po.vo.SimpleSoftwareVO;
+import com.qg24.softwareplatform.po.vo.SoftwareHistoryVersionDownloadVO;
+
+import java.util.List;
+
+public interface SoftwareService {
+    List<SimpleSoftwareVO> homePageShowSoftware(HomePageShowSoftwareDTO homePageShowSoftwareDTO);
+
+    List<SimpleSoftwareVO> softwareRanking();
+
+    Software basicSoftwareInfo(int softwareId);
+
+    List<DetailedSoftwareVersionTypeVO> detailedSoftwareInfo(int softwareId);
+
+    List<SoftwareHistoryVersionDownloadVO> historySoftwareVersion(HistorySoftwareVersionDTO historySoftwareVersionDTO);
+}
