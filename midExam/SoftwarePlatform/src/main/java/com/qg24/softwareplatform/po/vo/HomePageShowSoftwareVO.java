@@ -1,4 +1,4 @@
-package com.qg24.softwareplatform.po.entity;
+package com.qg24.softwareplatform.po.vo;
 
 import com.qg24.softwareplatform.po.vo.SimpleSoftwareVO;
 import lombok.AllArgsConstructor;
