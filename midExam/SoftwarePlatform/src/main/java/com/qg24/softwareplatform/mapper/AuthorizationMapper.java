@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 @Mapper
 public interface AuthorizationMapper {
 
@@ -32,5 +34,10 @@ public interface AuthorizationMapper {
     //获取软件的三个下载地址
     @Select("select * from software_version_download where software_id = #{softwareId} And version_type = #{versionType} And version = #{version}")
     public SoftwareVersionDownload selectByThreeInfo(SoftwareVersionDownload softVersionDownload);
+
+    //根据指纹信息查询用户购买的许可
+    @Select("select * from user_software_license where fingerprint = #{fingerprint}")
+    public List<UserSoftwareLicense> selectByFingerprint(String fingerprint);
+
 
 }

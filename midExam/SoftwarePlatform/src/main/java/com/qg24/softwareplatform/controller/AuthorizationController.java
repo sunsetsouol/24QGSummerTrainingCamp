@@ -2,6 +2,7 @@ package com.qg24.softwareplatform.controller;
 
 
 import com.qg24.softwareplatform.po.dto.CheckAuthDTO;
+import com.qg24.softwareplatform.po.dto.OnlineVertificationDTO;
 import com.qg24.softwareplatform.po.dto.PurchaseDTO;
 import com.qg24.softwareplatform.po.result.Result;
 import com.qg24.softwareplatform.po.vo.DownloadUrlsVO;
@@ -56,10 +57,19 @@ public class AuthorizationController {
     }
 
 
-    //(非前端)本地软件发送信息进行服务器比对接口
+    /**
+     * (非前端)本地软件发送信息进行服务器比对接口
+     * @param onlineVertificationDTO
+     * @return
+     */
     @PostMapping("/onlineVertification")
-    public Result<?> onlineVertification(){
-
+    public Result<?> onlineVertification(@RequestBody OnlineVertificationDTO onlineVertificationDTO){
+        boolean b = authorizationService.onlineVertification(onlineVertificationDTO);
+        if(b){
+            return Result.success("通过");
+        }else {
+            return Result.error("不通过");
+        }
     }
 
 
