@@ -4,10 +4,9 @@ import com.qg24.softwareplatform.po.dto.UpdateSoftwareLatestInfoDTO;
 import com.qg24.softwareplatform.po.dto.UserLicenseDTO;
 import com.qg24.softwareplatform.po.entity.Software;
 import com.qg24.softwareplatform.po.entity.SoftwareInfoTemp;
+import com.qg24.softwareplatform.po.entity.SoftwareVersionDownload;
 import com.qg24.softwareplatform.po.entity.UserSoftwareLicense;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -23,5 +22,21 @@ public interface AdminMapper {
     List<SoftwareInfoTemp> getSoftwareInfoTempPages(@Param("limit") int limit,@Param("offset")int offset);
 
     //管理员审查版本,更改审查记录的状态码
-    int updateSoftwareInfoTemp(int softwareInfoTempId,int status);
+    int updateSoftwareInfoTemp(@Param("softwareInfoTempId") int softwareInfoTempId, @Param("status") int status);
+
+    //找到审查记录
+    @Result(property = "tagsString",column = "tags")
+    @Select("select * from software_info_temp where software_info_temp_id=#{softwareInfoTempId}")
+    SoftwareInfoTemp getSoftwareInfoTemp(int softwareInfoTempId);
+
+    //插入新软件信息到软件表(返回主键)
+    @Options(useGeneratedKeys = true, keyProperty = "softwareId")
+    @Insert("insert into software (software_name,author,user_id,tags,description,softwareImage,createTime) " +
+            "values (#{softwareName},#{author},#{userId},#{tagsString},#{description},#{softwareImage},#{createTime})")
+    int insertNewSoftwareTable(Software software);
+
+    //插入新软件信息到软件历史版本下载表
+    @Insert("insert into software_version_download (software_id,version_type,version,price,win_url,linux_url,mac_url,create_time,detailed_description) " +
+            "values (#{softwareId},#{versionType},#{version},#{price},#{winUrl},#{linuxUrl},#{macUrl},#{createTime},#{detailedDescription})")
+    int insertNewSoftwareDownloadTable(SoftwareVersionDownload softwareVersionDownload);
 }

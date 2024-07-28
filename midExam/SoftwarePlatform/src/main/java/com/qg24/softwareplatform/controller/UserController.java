@@ -1,7 +1,7 @@
 package com.qg24.softwareplatform.controller;
 
-import com.qg24.softwareplatform.po.dto.UserHomePageShowSoftwareDTO;
-import com.qg24.softwareplatform.po.vo.UserHomePageShowSoftwareVO;
+import com.qg24.softwareplatform.po.dto.ShowPersonalSoftwareInfoDTO;
+import com.qg24.softwareplatform.po.result.PageBean;
 import com.qg24.softwareplatform.po.result.Result;
 import com.qg24.softwareplatform.po.vo.SimpleSoftwareVO;
 import com.qg24.softwareplatform.po.vo.UserApplicationRecordVO;
@@ -10,29 +10,26 @@ import com.qg24.softwareplatform.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
+
+    // TODO 个人开发的软件有普 专 两种 是否忽略?
     /**
      * 个人页面展示个人开发的软件
      */
     @Autowired
     private UserService userService;
-    @GetMapping("/user/homePageShowSoftware")
-    public Result<?> homePageShowSoftware(@ModelAttribute UserHomePageShowSoftwareDTO dto){
+    @GetMapping("/homePageShowSoftware")
+    public Result<PageBean<SimpleSoftwareVO>> homePageShowSoftware(@ModelAttribute ShowPersonalSoftwareInfoDTO dto){
         int total = userService.getTotalSoftware(dto.getUserId());
         List<SimpleSoftwareVO> list = userService.getHomePageShowSoftware(dto);
-        UserHomePageShowSoftwareVO vo = new UserHomePageShowSoftwareVO();
-        if(list!=null){
-            vo.setTotal(total);
-            vo.setList(list);
-            return Result.success("",vo);
-        }else{
-            return Result.error("Failed");
-        }
+        PageBean<SimpleSoftwareVO> simpleSoftwareVOPageBean = new PageBean<>();
+        simpleSoftwareVOPageBean.setData(list);
+        simpleSoftwareVOPageBean.setTotal((long)total);
+        return Result.success("", simpleSoftwareVOPageBean);
     }
 
     /**
@@ -40,7 +37,7 @@ public class UserController {
      */
     @GetMapping("/applicationRecord")
     public Result<?> applicationRecord(@RequestParam("userId")String userId){
-        List<UserApplicationRecordVO> list = new ArrayList<>();
+        List<UserApplicationRecordVO> list;
         list=userService.getApplicationRecord(userId);
         if(list!=null){
             return Result.success("",list);

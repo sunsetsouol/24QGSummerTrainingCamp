@@ -10,19 +10,22 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface SoftwareMapper {
 
 
     /**
-     * 主页分页查询软件，模糊查询，标签查询
+     * 主页分页查询软件，模糊查询
      * @return List<Software>
      */
-//    List<Software> pagedQuerySoftwareBySoftNameAndTages();
+    @Result(property = "tagString", column = "tags")
+    List<Software> pagedQuerySoftwareBySoftNameAndTags(String softName, int offset, int pageSize);
 
     /**
      * 根据下载量判断软件最热排行
@@ -77,4 +80,9 @@ public interface SoftwareMapper {
 
 
     List<ShowRequiredAuthSoftwareVO> querySoftwareVersionDownloadUserNoAuth(@Param("userId") int userId);
+
+    @Select("select software_id, version_type from user_software_auth where user_id = #{userId}")
+    List<Map<String, Object>> select(String userId);
+
+    int getTotal(@Param("softwareName") String softwareName, @Param("tags") List<String> tags);
 }

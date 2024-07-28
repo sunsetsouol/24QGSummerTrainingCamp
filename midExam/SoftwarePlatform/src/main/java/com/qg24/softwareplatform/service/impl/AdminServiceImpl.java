@@ -4,9 +4,12 @@ import com.qg24.softwareplatform.mapper.AdminMapper;
 import com.qg24.softwareplatform.po.dto.UpdateSoftwareLatestInfoDTO;
 import com.qg24.softwareplatform.po.entity.Software;
 import com.qg24.softwareplatform.po.entity.SoftwareInfoTemp;
+import com.qg24.softwareplatform.po.entity.SoftwareVersionDownload;
 import com.qg24.softwareplatform.service.AdminService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,9 +50,30 @@ public class AdminServiceImpl implements AdminService {
 
     //管理员更改审核通过状态码
     @Override
+    @Transactional
     public boolean updateSoftwareInfoTempStatus(int softwareInfoTempId, int status) {
         if(adminMapper.updateSoftwareInfoTemp(softwareInfoTempId,status)==1){
-            return true;
+            SoftwareInfoTemp softwareInfoTemp = adminMapper.getSoftwareInfoTemp(softwareInfoTempId);//获得记录信息
+            Software software = new Software();
+            BeanUtils.copyProperties(softwareInfoTemp,software);
+            //将简要描述存入软件表中
+            software.setDescription(softwareInfoTemp.getBriefDescription());
+            software.setCreateTime(softwareInfoTemp.getApplicationTime());
+            int count = adminMapper.insertNewSoftwareTable(software);
+            if(count!=0){
+                //将新软件信息存入软件下载表中
+                SoftwareVersionDownload softwareVersionDownload = new SoftwareVersionDownload();
+                BeanUtils.copyProperties(softwareInfoTemp,softwareVersionDownload);
+                softwareVersionDownload.setSoftwareId(software.getSoftwareId());
+                softwareVersionDownload.setCreateTime(softwareInfoTemp.getApplicationTime());
+                if(adminMapper.insertNewSoftwareDownloadTable(softwareVersionDownload)==1){
+                    return true;
+                }else{
+                    return false;
+                }
+            }else {
+                return false;
+            }
         }else{
             return false;
         }

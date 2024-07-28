@@ -1,6 +1,7 @@
 package com.qg24.softwareplatform.controller;
 
 import com.qg24.softwareplatform.po.dto.UpdateSoftwareLatestInfoDTO;
+import com.qg24.softwareplatform.po.dto.VerifyApplicationDTO;
 import com.qg24.softwareplatform.po.entity.Software;
 import com.qg24.softwareplatform.po.entity.SoftwareInfoTemp;
 import com.qg24.softwareplatform.po.result.Result;
@@ -14,11 +15,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
+
+    @Autowired
+    private AdminService adminService;
+
     /**
      * 管理员更改基本软件信息
      */
-    @Autowired
-    private AdminService adminService;
     @PostMapping("/updateSoftwareBasicInfo")
     public Result<?> UpdateSoftWareBasicInfo(@RequestBody Software software){
         if(adminService.updateSoftwareBasicInfo(software)){
@@ -58,8 +61,9 @@ public class AdminController {
      * 新软件/新版本  审核通过/驳回
      */
     @PostMapping("/verifyApplication")
-    public Result<?> verifyApplication(@RequestParam("softwareInfoTempId")int softwareInfoTempId,@RequestParam("status")int status){
-        if(adminService.updateSoftwareInfoTempStatus(softwareInfoTempId,status)){
+    public Result<?> verifyApplication(@RequestBody VerifyApplicationDTO dto){
+        if(adminService.updateSoftwareInfoTempStatus(dto.getSoftwareInfoTempId(),dto.getStatus())){
+            //将通过的软件信息存入软件信息表中
             return Result.success("Success");
         }else{
             return Result.error("Failed");

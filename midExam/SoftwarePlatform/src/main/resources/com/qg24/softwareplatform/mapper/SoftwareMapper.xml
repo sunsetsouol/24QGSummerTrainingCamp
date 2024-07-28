@@ -4,6 +4,24 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qg24.softwareplatform.mapper.SoftwareMapper">
 
+    <select id="pagedQuerySoftwareBySoftNameAndTags"
+            resultType="com.qg24.softwareplatform.po.entity.Software">
+        select * from software
+        <where>
+            <if test="softwareName != null">and software_name = #{softwareName}</if>
+        </where>
+        limit #{offset}, #{pageSize}
+    </select>
+    <select id="getTotal" resultType="java.lang.Integer">
+        select count(*) from software
+        <where>
+            <if test="softwareName != null">and software_name = #{softwareName}</if>
+            <if test="tags != null">
+                <foreach collection="tags" item="tag">
+                    and tags like concat('%', #{tag}, '%')
+                </foreach>
+            </if>
+        </where>
     <select id="querySoftwareVersionDownloadUserNoAuth"
             resultType="com.qg24.softwareplatform.po.vo.ShowRequiredAuthSoftwareVO">
         SELECT DISTINCT
@@ -28,4 +46,6 @@
             (svd.software_id, svd.version_type) != (usa.software_id, usa.version_type)
            OR (usa.software_id IS NULL AND usa.version_type IS NULL);
     </select>
+
+
 </mapper>

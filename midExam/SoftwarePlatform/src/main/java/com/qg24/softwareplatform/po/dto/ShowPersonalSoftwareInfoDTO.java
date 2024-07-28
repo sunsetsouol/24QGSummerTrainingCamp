@@ -4,23 +4,22 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * 软件简要信息
- */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SoftwareSimpleInfoDTO {
+public class ShowPersonalSoftwareInfoDTO {
     /**
-     * 软件id
+     * 用户ID
      */
-    private String softwareId;
+    private String userId;
+
     /**
-     * 软件名
+     * 页码
      */
-    private String softwareName;
+    private int page;
+
     /**
-     * 软件版本(普/专)
+     * 一页记录数
      */
-    private int versionType;
+    private int pageSize;
 }

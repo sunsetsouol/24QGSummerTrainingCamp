@@ -2,6 +2,7 @@ package com.qg24.softwareplatform.controller;
 
 
 import com.qg24.softwareplatform.po.dto.CheckAuthDTO;
+import com.qg24.softwareplatform.po.dto.OnlineVertificationDTO;
 import com.qg24.softwareplatform.po.dto.PurchaseDTO;
 import com.qg24.softwareplatform.po.result.Result;
 import com.qg24.softwareplatform.po.vo.DownloadUrlsVO;
@@ -50,16 +51,28 @@ public class AuthorizationController {
         }else if ("success".equals(s)){
             //有授权，返回下载的地址
             DownloadUrlsVO downloadUrls = authorizationService.getDownloadUrls(checkAuthDTO);
+            if (downloadUrls == null){
+                return Result.error("可惜了，没有下载地址");
+            }
             return Result.success("可以下载", downloadUrls);
         }
         return Result.error("unknown");
     }
 
 
-    //(非前端)本地软件发送信息进行服务器比对接口
+    /**
+     * (非前端)本地软件发送信息进行服务器比对接口
+     * @param onlineVertificationDTO
+     * @return
+     */
     @PostMapping("/onlineVertification")
-    public Result<?> onlineVertification(){
-        return null;
+    public Result<?> onlineVertification(@RequestBody OnlineVertificationDTO onlineVertificationDTO){
+        boolean b = authorizationService.onlineVertification(onlineVertificationDTO);
+        if(b){
+            return Result.success("通过");
+        }else {
+            return Result.error("不通过");
+        }
     }
 
 
