@@ -29,9 +29,25 @@
         update software_version_download
         set
         <if test="detailedDescription != null">
-            detailedDescription = #{detailedDescription}
+            detailedDescription = #{detailedDescription},
         </if>
         update_at = NOW()
         Where softwareId = #{softwareId} and versionType = #{versionType} and version = #{version}
+    </update>
+
+    <select id="getSoftwareInfoTempPages" resultType="com.qg24.softwareplatform.po.entity.SoftwareInfoTemp">
+        SELECT *
+        FROM software_info_temp
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <update id="updateSoftwareInfoTemp">
+        update software_info_temp
+        set
+        <if test="status != null">
+            passedStatus = #{status},
+        </if>
+        update_at = NOW()
+        Where softwareInfoTempId = #{softwareInfoTempId}
     </update>
 </mapper>

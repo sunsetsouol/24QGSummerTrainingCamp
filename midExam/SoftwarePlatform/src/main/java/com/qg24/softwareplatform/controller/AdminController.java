@@ -2,10 +2,14 @@ package com.qg24.softwareplatform.controller;
 
 import com.qg24.softwareplatform.po.dto.UpdateSoftwareLatestInfoDTO;
 import com.qg24.softwareplatform.po.entity.Software;
+import com.qg24.softwareplatform.po.entity.SoftwareInfoTemp;
 import com.qg24.softwareplatform.po.result.Result;
 import com.qg24.softwareplatform.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
@@ -41,6 +45,13 @@ public class AdminController {
      */
     @GetMapping("/showVerificationHistory")
     public Result<?> showVerificationHistory(@RequestParam("page") int page,@RequestParam("pageSize")int pageSize){
+        List<SoftwareInfoTemp> list = new ArrayList<>();
+        list = adminService.getSoftwareInfoTempList(page,pageSize);
+        if(list!=null){
+            return Result.success("",list);
+        }else{
+            return Result.error("Failed");
+        }
     }
 
     /**
@@ -48,5 +59,10 @@ public class AdminController {
      */
     @PostMapping("/verifyApplication")
     public Result<?> verifyApplication(@RequestParam("softwareInfoTempId")int softwareInfoTempId,@RequestParam("status")int status){
+        if(adminService.updateSoftwareInfoTempStatus(softwareInfoTempId,status)){
+            return Result.success("Success");
+        }else{
+            return Result.error("Failed");
+        }
     }
 }

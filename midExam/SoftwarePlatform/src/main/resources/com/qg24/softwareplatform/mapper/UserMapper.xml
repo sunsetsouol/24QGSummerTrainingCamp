@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qg24.softwareplatform.mapper.UserMapper">
+    <select id="getUserSoftware" resultType="com.qg24.softwareplatform.po.vo.SimpleSoftwareVO">
+        SELECT *
+        FROM software
+        WHERE userId = #{userId}
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="getApplicationRecord" resultType="com.qg24.softwareplatform.po.vo.UserApplicationRecordVO">
+        SELECT *
+        FROM software_info_temp
+        WHERE userId = #{userId}
+    </select>
+</mapper>
