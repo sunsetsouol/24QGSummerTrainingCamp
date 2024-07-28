@@ -13,6 +13,7 @@ import com.qg24.softwareplatform.service.SoftwareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -23,7 +24,7 @@ public class SoftwareController {
     private SoftwareService softwareService;
     // 首页分页展示软件
     @GetMapping("/homePageShowSoftware")
-    public Result<PageBean<SimpleSoftwareVO>> homePageShowSoftware(@RequestParam HomePageShowSoftwareDTO homePageShowSoftwareDTO){
+    public Result<PageBean<SimpleSoftwareVO>> homePageShowSoftware(@ModelAttribute HomePageShowSoftwareDTO homePageShowSoftwareDTO){
         PageBean<SimpleSoftwareVO> pageBean = softwareService.homePageShowSoftware(homePageShowSoftwareDTO);
         return Result.success("", pageBean);
     }
@@ -80,7 +81,7 @@ public class SoftwareController {
 
     // 上传软件/更新软件
     @PostMapping("/upload")
-    public Result<?> upload(@ModelAttribute UploadNewSoftwareDTO uploadNewSoftwareDTO){
+    public Result<?> upload(@ModelAttribute UploadNewSoftwareDTO uploadNewSoftwareDTO) throws IOException {
         if (softwareService.uploadNewSoftware(uploadNewSoftwareDTO) != 0){
             return Result.success("",null);
         }else {

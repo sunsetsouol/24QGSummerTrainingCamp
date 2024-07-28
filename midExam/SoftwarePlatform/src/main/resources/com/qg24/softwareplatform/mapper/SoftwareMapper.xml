@@ -3,20 +3,24 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qg24.softwareplatform.mapper.SoftwareMapper">
+    <resultMap id="softwareTagResultMap" type="com.qg24.softwareplatform.po.entity.Software">
+        <result property="tagsString" column="tags"/>
+    </resultMap>
 
     <select id="pagedQuerySoftwareBySoftNameAndTags"
-            resultType="com.qg24.softwareplatform.po.entity.Software">
+            resultType="com.qg24.softwareplatform.po.entity.Software" resultMap="softwareTagResultMap">
         select * from software
         <where>
-            <if test="softwareName != null">and software_name = #{softwareName}</if>
+            <if test="softwareName != ''">and software_name = #{softwareName}</if>
         </where>
         limit #{offset}, #{pageSize}
     </select>
+
     <select id="getTotal" resultType="java.lang.Integer">
         select count(*) from software
         <where>
-            <if test="softwareName != null">and software_name = #{softwareName}</if>
-            <if test="tags != null">
+            <if test="softwareName != ''">and software_name = #{softwareName}</if>
+            <if test="tags.size > 0 and tags != null">
                 <foreach collection="tags" item="tag">
                     and tags like concat('%', #{tag}, '%')
                 </foreach>
