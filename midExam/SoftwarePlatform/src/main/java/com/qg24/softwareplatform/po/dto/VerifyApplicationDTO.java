@@ -7,8 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserHomePageShowSoftwareDTO {
-    private int page;
-    private String userId;
-    private int pageSize;
+public class VerifyApplicationDTO {
+    private int softwareInfoTempId;
+    private int status;
 }

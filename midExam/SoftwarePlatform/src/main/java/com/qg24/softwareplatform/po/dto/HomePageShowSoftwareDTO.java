@@ -16,12 +16,15 @@ public class HomePageShowSoftwareDTO {
     private int page;
 
     /**
-     *
+     * 记录数
      */
+    private int pageSize;
+
     /**
      * 软件名
      */
     private String softwareName;
+
     /**
      * 标签
      */
