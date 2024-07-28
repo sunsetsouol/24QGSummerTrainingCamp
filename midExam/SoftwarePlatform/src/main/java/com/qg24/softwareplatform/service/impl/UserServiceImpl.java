@@ -26,6 +26,8 @@ import java.util.UUID;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private AliOssUtil aliOssUtil;
     @Override
     public int getTotalSoftware(String userId) {
         return userMapper.getTotalNumber(userId);
@@ -60,14 +62,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int uploadNewUserInfo(NewUserInfoDTO dto) throws IOException {
+    public boolean uploadNewUserInfo(NewUserInfoDTO dto) throws IOException {
         String url = "";
         MultipartFile headImage = dto.getHeadImage();
         if(!headImage.isEmpty()){
             String extension = Objects.requireNonNull(headImage.getOriginalFilename()).substring(headImage.getOriginalFilename().lastIndexOf("."));
             String fileName = UUID.randomUUID() + extension;
             byte[] bytes = headImage.getBytes();
-            url = aliOssUtil.upload(bytes, fileName);
+            url = aliOssUtil.upload(bytes, fileName);//上传文件,获得url
+        }
+        dto.setImage(url);
+        if(userMapper.updateUserInfo(dto)==1){
+            return true;
+        }else{
+            return false;
         }
     }
 }

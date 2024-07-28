@@ -21,5 +21,5 @@ public interface UserService {
 
     List<UserBuySoftwareVO> getAvailableSoftware(String userId);// 获取用户购买过的软件
 
-    int uploadNewUserInfo(NewUserInfoDTO dto) throws IOException;//用户上传新的用户信息
+    boolean uploadNewUserInfo(NewUserInfoDTO dto) throws IOException;//用户上传新的用户信息
 }
