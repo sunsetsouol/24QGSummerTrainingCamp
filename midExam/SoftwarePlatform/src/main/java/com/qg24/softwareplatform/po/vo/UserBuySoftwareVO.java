@@ -22,5 +22,5 @@ public class UserBuySoftwareVO {
     /**
      * 版本
      */
-    private String versionType;
+    private int versionType;
 }

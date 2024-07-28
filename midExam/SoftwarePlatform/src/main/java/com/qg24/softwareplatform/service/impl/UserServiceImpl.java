@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserBuySoftwareVO> getAvailableSoftware(String userId) {
-        List<UserSoftwareAuth> list = userMapper.getAvailableSoftware(userId);//获得用户授权过的软件
+        List<UserSoftwareAuth> list = userMapper.getAvailableSoftware(userId);//获得授权过的软件
         List<UserBuySoftwareVO> listBuy = new ArrayList<>();
         for(int i=0;i<list.size();i++){
             UserBuySoftwareVO userBuySoftwareVO = new UserBuySoftwareVO();
