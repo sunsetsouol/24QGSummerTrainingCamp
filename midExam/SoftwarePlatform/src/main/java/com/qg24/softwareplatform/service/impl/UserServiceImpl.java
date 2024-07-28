@@ -2,6 +2,7 @@ package com.qg24.softwareplatform.service.impl;
 
 import com.qg24.softwareplatform.mapper.UserMapper;
 import com.qg24.softwareplatform.po.dto.HomePageShowSoftwareDTO;
+import com.qg24.softwareplatform.po.dto.UserHomePageShowSoftwareDTO;
 import com.qg24.softwareplatform.po.entity.UserSoftwareAuth;
 import com.qg24.softwareplatform.po.result.Result;
 import com.qg24.softwareplatform.po.vo.SimpleSoftwareVO;
@@ -25,7 +26,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<SimpleSoftwareVO> getHomePageShowSoftware(HomePageShowSoftwareDTO dto) {
+    public List<SimpleSoftwareVO> getHomePageShowSoftware(UserHomePageShowSoftwareDTO dto) {
         return userMapper.getUserSoftware(dto.getUserId(),dto.getPageSize(),(dto.getPage()-1)* dto.getPageSize());
     }
 
