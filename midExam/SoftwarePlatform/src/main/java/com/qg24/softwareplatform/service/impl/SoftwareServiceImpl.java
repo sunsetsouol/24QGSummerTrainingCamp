@@ -33,4 +33,10 @@ public class SoftwareServiceImpl implements SoftwareService {
         }
         return softwareVOList;
     }
+
+    @Override
+    public Software basicSoftwareInfo(int softwareId) {
+        Software software = softwareMapper.querySoftwareInfoBySoftId(softwareId);
+        return software;
+    }
 }

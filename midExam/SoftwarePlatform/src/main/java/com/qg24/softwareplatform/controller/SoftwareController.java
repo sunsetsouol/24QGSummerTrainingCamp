@@ -3,6 +3,7 @@ package com.qg24.softwareplatform.controller;
 import com.qg24.softwareplatform.po.dto.HomePageShowSoftwareDTO;
 import com.qg24.softwareplatform.po.dto.UpdateSoftwareLatestInfoDTO;
 import com.qg24.softwareplatform.po.dto.UploadNewSoftwareDTO;
+import com.qg24.softwareplatform.po.entity.Software;
 import com.qg24.softwareplatform.po.result.Result;
 import com.qg24.softwareplatform.po.vo.SimpleSoftwareVO;
 import com.qg24.softwareplatform.service.SoftwareService;
@@ -49,6 +50,12 @@ public class SoftwareController {
     //软件详情页 上半部分基本软件信息
     @GetMapping("/basicSoftwareInfo")
     public Result<?> basicSoftwareInfo(@RequestParam("softwareId") int softwareId){
+        Software software = softwareService.basicSoftwareInfo(softwareId);
+        if (software != null ){
+            return Result.success("",software);
+        }else {
+            return Result.error("");
+        }
 
     }
 
