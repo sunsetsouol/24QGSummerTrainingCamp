@@ -2,6 +2,7 @@ package com.qg24.softwareplatform.service;
 
 import com.qg24.softwareplatform.po.dto.HomePageShowSoftwareDTO;
 import com.qg24.softwareplatform.po.entity.Software;
+import com.qg24.softwareplatform.po.vo.DetailedSoftwareVersionTypeVO;
 import com.qg24.softwareplatform.po.vo.SimpleSoftwareVO;
 
 import java.util.List;
@@ -12,4 +13,6 @@ public interface SoftwareService {
     List<SimpleSoftwareVO> softwareRanking();
 
     Software basicSoftwareInfo(int softwareId);
+
+    List<DetailedSoftwareVersionTypeVO> detailedSoftwareInfo(int softwareId);
 }

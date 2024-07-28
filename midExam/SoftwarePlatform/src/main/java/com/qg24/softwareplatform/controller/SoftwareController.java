@@ -5,6 +5,7 @@ import com.qg24.softwareplatform.po.dto.UpdateSoftwareLatestInfoDTO;
 import com.qg24.softwareplatform.po.dto.UploadNewSoftwareDTO;
 import com.qg24.softwareplatform.po.entity.Software;
 import com.qg24.softwareplatform.po.result.Result;
+import com.qg24.softwareplatform.po.vo.DetailedSoftwareVersionTypeVO;
 import com.qg24.softwareplatform.po.vo.SimpleSoftwareVO;
 import com.qg24.softwareplatform.service.SoftwareService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +64,12 @@ public class SoftwareController {
     //软件详情页 下半部分 普通/专业 软件信息
     @GetMapping("/detailedSoftwareInfo")
     public Result<?> detailedSoftwareInfo(@RequestParam("softwareId") int softwareId){
-
+        List<DetailedSoftwareVersionTypeVO> detailedSoftwareVersionTypeVOList = softwareService.detailedSoftwareInfo(softwareId);
+        if (detailedSoftwareVersionTypeVOList.isEmpty()){
+            return Result.error("");
+        }else {
+            return Result.success("",detailedSoftwareVersionTypeVOList);
+        }
     }
 
     //软件详情页下半 历史查看

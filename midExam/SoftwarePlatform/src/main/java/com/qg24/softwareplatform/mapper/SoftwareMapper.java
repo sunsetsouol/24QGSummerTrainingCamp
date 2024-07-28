@@ -1,6 +1,7 @@
 package com.qg24.softwareplatform.mapper;
 
 import com.qg24.softwareplatform.po.entity.Software;
+import com.qg24.softwareplatform.po.entity.SoftwareVersionDownload;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Mapper
 public interface SoftwareMapper {
+
 
     /**
      * 主页分页查询软件，模糊查询，标签查询
@@ -30,4 +32,12 @@ public interface SoftwareMapper {
      */
     @Select("select * from software where software_id = #{softwareId}")
     Software querySoftwareInfoBySoftId(@RequestParam("softwareId") int softwareId);
+
+
+    @Select("select * from software_version_download where software_id = #{softwareId} And version_type = 0 order by create_time desc limit 1")
+    SoftwareVersionDownload queryLastestOrdinaryDetaliedSoftware(int softwareId);
+
+    @Select("select * from software_version_download where software_id = #{softwareId} And version_type = 1 order by create_time desc limit 1")
+    SoftwareVersionDownload queryLastestProfessionalDetaliedSoftware(int softwareId);
+
 }

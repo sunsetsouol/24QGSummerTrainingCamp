@@ -3,6 +3,8 @@ package com.qg24.softwareplatform.service.impl;
 import com.qg24.softwareplatform.mapper.SoftwareMapper;
 import com.qg24.softwareplatform.po.dto.HomePageShowSoftwareDTO;
 import com.qg24.softwareplatform.po.entity.Software;
+import com.qg24.softwareplatform.po.entity.SoftwareVersionDownload;
+import com.qg24.softwareplatform.po.vo.DetailedSoftwareVersionTypeVO;
 import com.qg24.softwareplatform.po.vo.SimpleSoftwareVO;
 import com.qg24.softwareplatform.service.SoftwareService;
 import org.springframework.beans.BeanUtils;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -38,5 +41,23 @@ public class SoftwareServiceImpl implements SoftwareService {
     public Software basicSoftwareInfo(int softwareId) {
         Software software = softwareMapper.querySoftwareInfoBySoftId(softwareId);
         return software;
+    }
+
+    @Override
+    public List<DetailedSoftwareVersionTypeVO> detailedSoftwareInfo(int softwareId) {
+        List<DetailedSoftwareVersionTypeVO> detailedSoftwareVersionTypeVOList = new ArrayList<>();
+        SoftwareVersionDownload ordinarySoftwareVersionInfo = softwareMapper.queryLastestOrdinaryDetaliedSoftware(softwareId);
+        if (ordinarySoftwareVersionInfo != null) {
+            DetailedSoftwareVersionTypeVO detailedSoftwareVersionTypeVO = new DetailedSoftwareVersionTypeVO();
+            BeanUtils.copyProperties(ordinarySoftwareVersionInfo, detailedSoftwareVersionTypeVO);
+            detailedSoftwareVersionTypeVOList.add(detailedSoftwareVersionTypeVO);
+        }
+        SoftwareVersionDownload professionalSoftwareVersionInfo = softwareMapper.queryLastestProfessionalDetaliedSoftware(softwareId);
+        if (professionalSoftwareVersionInfo != null) {
+            DetailedSoftwareVersionTypeVO detailedSoftwareVersionTypeVO = new DetailedSoftwareVersionTypeVO();
+            BeanUtils.copyProperties(professionalSoftwareVersionInfo, detailedSoftwareVersionTypeVO);
+            detailedSoftwareVersionTypeVOList.add(detailedSoftwareVersionTypeVO);
+        }
+        return detailedSoftwareVersionTypeVOList;
     }
 }

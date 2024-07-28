@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SoftVersionDownload {
+public class SoftwareVersionDownload {
     private int softVersionId;
 
     private String createTime;
