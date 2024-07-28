@@ -105,7 +105,7 @@ public class SoftwareServiceImpl implements SoftwareService {
         //将list集合转化为string存入数据库
         softwareInfoTemp.setTagsToString(softwareInfoTemp.getTags().toString());
 
-        return softwareMapper.addSoftwareInforTemp(softwareInfoTemp);
+        return softwareMapper.addSoftwareInfoTemp(softwareInfoTemp);
     }
 
 
