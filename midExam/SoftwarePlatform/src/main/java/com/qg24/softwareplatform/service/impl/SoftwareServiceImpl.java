@@ -15,6 +15,7 @@ import com.qg24.softwareplatform.service.SoftwareService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -114,7 +115,7 @@ public class SoftwareServiceImpl implements SoftwareService {
     }
 
     @Override
-    public int uploadNewSoftware(UploadNewSoftwareDTO uploadNewSoftwareDTO) {
+    public int uploadNewSoftware(@ModelAttribute UploadNewSoftwareDTO uploadNewSoftwareDTO) {
         SoftwareInfoTemp softwareInfoTemp = new SoftwareInfoTemp();
         BeanUtils.copyProperties(uploadNewSoftwareDTO, softwareInfoTemp);
         // TODO 模拟文件上传后返回了url实现数据库操作逻辑（并没有实现文件上传到云端服务器的逻辑）
