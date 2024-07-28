@@ -16,6 +16,8 @@ import java.util.List;
 @NoArgsConstructor
 public class UploadNewSoftwareDTO {
 
+    private String userId;
+
     private String softwareName;
 
     private int versionType;
@@ -28,7 +30,9 @@ public class UploadNewSoftwareDTO {
 
     private String author;
 
-    private String applicationTime;
+    private List<String> tags;
+
+    private int typeStatus;
 
     private MultipartFile winPackage;
 

@@ -28,7 +28,7 @@ public class SoftwareInfoTemp {
  
     private String briefDescription;
   
-    private int softwareId;
+    private String softwareName;
 
     private String version;
   
@@ -39,5 +39,7 @@ public class SoftwareInfoTemp {
     private int typeStatus;
  
     private String userId;
+
+    private String tagsToString;
 
 }
