@@ -1,5 +1,6 @@
 package com.qg24.softwareplatform.po.dto;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,8 +8,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserHomePageShowSoftwareDTO {
-    private int page;
-    private String userId;
-    private int pageSize;
+public class OnlineVertificationDTO {
+   private String fingerprint;
+   private String versionType;
+   private String softwareName;
+
 }

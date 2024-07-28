@@ -1,9 +1,9 @@
 package com.qg24.softwareplatform.service.impl;
 
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONArray;
 import com.qg24.softwareplatform.mapper.AuthorizationMapper;
-import com.qg24.softwareplatform.po.dto.AuthSoftwareDTO;
-import com.qg24.softwareplatform.po.dto.CheckAuthDTO;
-import com.qg24.softwareplatform.po.dto.PurchaseDTO;
+import com.qg24.softwareplatform.po.dto.*;
 import com.qg24.softwareplatform.po.entity.Order;
 import com.qg24.softwareplatform.po.entity.SoftwareVersionDownload;
 import com.qg24.softwareplatform.po.entity.UserSoftwareAuth;
@@ -99,6 +99,33 @@ public class AuthorizationServiceImpl implements AuthorizationService {
         DownloadUrlsVO downloadUrlsVO = new DownloadUrlsVO();
         BeanUtils.copyProperties(softwareVersionDownload, downloadUrlsVO);
         return downloadUrlsVO;
+    }
+
+    /**
+     * (非前端)本地软件发送信息进行服务器比对接口
+     * @param onlineVertificationDTO
+     * @return
+     */
+    @Override
+    public boolean onlineVertification(OnlineVertificationDTO onlineVertificationDTO) {
+        List<UserSoftwareLicense> userSoftwareLicenses = authorizationMapper.selectByFingerprint(onlineVertificationDTO.getFingerprint());
+        //遍历每一个许可文件
+        for (UserSoftwareLicense userSoftwareLicense : userSoftwareLicenses) {
+            //先判断这条许可有无过期
+            if(TimeUtils.parseTime(userSoftwareLicense.getExpirationTime()).isAfter(LocalDateTime.now())){
+                //没过期，获取当时买的软件的授权信息
+                List<SoftwareSimpleInfoDTO> array = JSON.parseArray(userSoftwareLicense.getSoftwareList(), SoftwareSimpleInfoDTO.class);
+                for (SoftwareSimpleInfoDTO softwareSimpleInfoDTO : array) {
+                        //判断是否有这个信息匹配
+                    if(onlineVertificationDTO.getSoftwareName().equals(softwareSimpleInfoDTO.getSoftwareName())
+                    && onlineVertificationDTO.getVersionType().equals(softwareSimpleInfoDTO.getVersionType())) {
+                        //两个信息都匹配则为成功
+                        return true;
+                    }
+                }
+            }
+        }
+        return false; //失败
     }
 
 

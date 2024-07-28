@@ -7,7 +7,6 @@ import com.qg24.softwareplatform.po.entity.SoftwareInfoTemp;
 import com.qg24.softwareplatform.po.entity.SoftwareVersionDownload;
 import com.qg24.softwareplatform.po.entity.UserSoftwareLicense;
 import org.apache.ibatis.annotations.*;
-import shade.jetbrains.annotations.PropertyKey;
 
 import java.util.List;
 
@@ -23,7 +22,7 @@ public interface AdminMapper {
     List<SoftwareInfoTemp> getSoftwareInfoTempPages(@Param("limit") int limit,@Param("offset")int offset);
 
     //管理员审查版本,更改审查记录的状态码
-    int updateSoftwareInfoTemp(int softwareInfoTempId,int status);
+    int updateSoftwareInfoTemp(@Param("softwareInfoTempId") int softwareInfoTempId, @Param("status") int status);
 
     //找到审查记录
     @Select("select * from software_info_temp where softwareInfoTempId=#{softwareInfoTempId}")

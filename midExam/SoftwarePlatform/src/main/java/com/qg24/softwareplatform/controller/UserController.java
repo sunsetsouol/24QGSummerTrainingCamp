@@ -1,7 +1,9 @@
 package com.qg24.softwareplatform.controller;
 
-import com.qg24.softwareplatform.po.dto.UserHomePageShowSoftwareDTO;
-import com.qg24.softwareplatform.po.vo.UserHomePageShowSoftwareVO;
+import com.qg24.softwareplatform.po.dto.HomePageShowSoftwareDTO;
+import com.qg24.softwareplatform.po.dto.ShowPersonalSoftwareInfoDTO;
+import com.qg24.softwareplatform.po.entity.HomePageShowSoftwareVO;
+import com.qg24.softwareplatform.po.result.PageBean;
 import com.qg24.softwareplatform.po.result.Result;
 import com.qg24.softwareplatform.po.vo.SimpleSoftwareVO;
 import com.qg24.softwareplatform.po.vo.UserApplicationRecordVO;
@@ -22,17 +24,13 @@ public class UserController {
     @Autowired
     private UserService userService;
     @GetMapping("/user/homePageShowSoftware")
-    public Result<?> homePageShowSoftware(@ModelAttribute UserHomePageShowSoftwareDTO dto){
+    public Result<PageBean<SimpleSoftwareVO>> homePageShowSoftware(@ModelAttribute ShowPersonalSoftwareInfoDTO dto){
         int total = userService.getTotalSoftware(dto.getUserId());
         List<SimpleSoftwareVO> list = userService.getHomePageShowSoftware(dto);
-        UserHomePageShowSoftwareVO vo = new UserHomePageShowSoftwareVO();
-        if(list!=null){
-            vo.setTotal(total);
-            vo.setList(list);
-            return Result.success("",vo);
-        }else{
-            return Result.error("Failed");
-        }
+        PageBean<SimpleSoftwareVO> simpleSoftwareVOPageBean = new PageBean<>();
+        simpleSoftwareVOPageBean.setData(list);
+        simpleSoftwareVOPageBean.setTotal((long)total);
+        return Result.success("", simpleSoftwareVOPageBean);
     }
 
     /**
