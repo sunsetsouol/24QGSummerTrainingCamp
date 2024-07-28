@@ -1,10 +1,12 @@
 package com.qg24.softwareplatform.mapper;
 
 import com.qg24.softwareplatform.po.entity.Order;
+import com.qg24.softwareplatform.po.entity.SoftwareVersionDownload;
 import com.qg24.softwareplatform.po.entity.UserSoftwareAuth;
 import com.qg24.softwareplatform.po.entity.UserSoftwareLicense;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface AuthorizationMapper {
@@ -22,6 +24,13 @@ public interface AuthorizationMapper {
     public void addUserSoftwareAuth(UserSoftwareAuth userSoftwareAuth);
 
 
+    //搜索是否有授权信息
+    @Select("select * from user_software_auth where user_id = #{userId} And software_id = #{softwareId} And version_type = #{versionType}")
+    public UserSoftwareAuth selectByAllInfo(UserSoftwareAuth userSoftwareAuth);
 
+
+    //获取软件的三个下载地址
+    @Select("select * from software_version_download where software_id = #{softwareId} And version_type = #{versionType} And version = #{version}")
+    public SoftwareVersionDownload selectByThreeInfo(SoftwareVersionDownload softVersionDownload);
 
 }
