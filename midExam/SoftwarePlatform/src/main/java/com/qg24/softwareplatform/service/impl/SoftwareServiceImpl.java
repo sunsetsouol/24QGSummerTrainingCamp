@@ -3,7 +3,9 @@ package com.qg24.softwareplatform.service.impl;
 import com.qg24.softwareplatform.mapper.SoftwareMapper;
 import com.qg24.softwareplatform.po.dto.HistorySoftwareVersionDTO;
 import com.qg24.softwareplatform.po.dto.HomePageShowSoftwareDTO;
+import com.qg24.softwareplatform.po.dto.UploadNewSoftwareDTO;
 import com.qg24.softwareplatform.po.entity.Software;
+import com.qg24.softwareplatform.po.entity.SoftwareInfoTemp;
 import com.qg24.softwareplatform.po.entity.SoftwareVersionDownload;
 import com.qg24.softwareplatform.po.vo.DetailedSoftwareVersionTypeVO;
 import com.qg24.softwareplatform.po.vo.SimpleSoftwareVO;
@@ -84,5 +86,27 @@ public class SoftwareServiceImpl implements SoftwareService {
             SoftwareHistoryVersionDownloadVOList.add(SoftwareHistoryVersionDownloadVO);
         }
         return SoftwareHistoryVersionDownloadVOList;
+    }
+
+    @Override
+    public int uploadNewSoftware(UploadNewSoftwareDTO uploadNewSoftwareDTO) {
+        SoftwareInfoTemp softwareInfoTemp = new SoftwareInfoTemp();
+        BeanUtils.copyProperties(uploadNewSoftwareDTO, softwareInfoTemp);
+        //DOTO 模拟文件上传后返回了url实现数据库操作逻辑（并没有实现文件上传到云端服务器的逻辑）
+        String winUrl = "www.WindowsDownload.com";
+        String linuxUrl = "www.LinuxDownload.com";
+        String macUrl = "www.MacDownload.com";
+        softwareInfoTemp.setWinUrl(winUrl);
+        softwareInfoTemp.setLinuxUrl(linuxUrl);
+        softwareInfoTemp.setMacUrl(macUrl);
+
+        //设置申请类型状态码0上传/1更新
+        softwareInfoTemp.setTypeStatus(0);
+        //设置通过状态码为0(0代办/1通过/2拒绝)
+        softwareInfoTemp.setPassedStatus(0);
+        //将list集合转化为string存入数据库
+        softwareInfoTemp.setTagsToString(softwareInfoTemp.getTags().toString());
+
+        return softwareMapper.addSoftwareInforTemp(softwareInfoTemp);
     }
 }

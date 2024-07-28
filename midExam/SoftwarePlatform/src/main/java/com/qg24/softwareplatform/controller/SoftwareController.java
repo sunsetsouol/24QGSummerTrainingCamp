@@ -88,10 +88,12 @@ public class SoftwareController {
 
     //上传软件
     @PostMapping("/upload")
-    public Result<?> upload(@RequestBody UploadNewSoftwareDTO uploadNewSoftwareDTO,
-                            @RequestParam("winPackage") MultipartFile winPackage,
-                            @RequestParam("linuxPackage") MultipartFile linuxPackage,
-                            @RequestParam("macPackage") MultipartFile macPackage){
+    public Result<?> upload(@ModelAttribute UploadNewSoftwareDTO uploadNewSoftwareDTO){
+         if (softwareService.uploadNewSoftware(uploadNewSoftwareDTO) != 0){
+             return Result.success("",null);
+         }else {
+             return Result.error("");
+         }
 
     }
 

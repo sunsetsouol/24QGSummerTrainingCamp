@@ -2,8 +2,10 @@ package com.qg24.softwareplatform.mapper;
 
 import com.qg24.softwareplatform.po.dto.HistorySoftwareVersionDTO;
 import com.qg24.softwareplatform.po.entity.Software;
+import com.qg24.softwareplatform.po.entity.SoftwareInfoTemp;
 import com.qg24.softwareplatform.po.entity.SoftwareVersionDownload;
 import com.qg24.softwareplatform.po.vo.SoftwareHistoryVersionDownloadVO;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -59,4 +61,14 @@ public interface SoftwareMapper {
     @Select("select * from software_version_download where software_id = #{softwareId} And version_type = #{versionType} order by create_time desc")
     List<SoftwareVersionDownload> querySoftwareVersionDownloadBySoftwareIdAndVersionType(HistorySoftwareVersionDTO historySoftwareVersionDTO);
 
+    /**
+     * 新增软件信息申请表（上传新软件/更新新版本）
+     * @param softwareInfoTemp
+     * @return
+     */
+    @Insert("insert into software_info_temp(user_id,software_name,version_type,version,brief_description," +
+            "detailed_description,win_url,linux_url,mac_url,tags,type_status,passed_status,author) " +
+            "values(#{userId},#{softwareName},#{versionType},#{verison},#{briefDescription},#{detailedDescription}," +
+            "#{applicationTime},#{winUrl},#{linuxUrl},#{macUrl},#{tagsToString},#{typeStatus},#{passedStatus},#{author})")
+    int addSoftwareInforTemp(SoftwareInfoTemp softwareInfoTemp);
 }
