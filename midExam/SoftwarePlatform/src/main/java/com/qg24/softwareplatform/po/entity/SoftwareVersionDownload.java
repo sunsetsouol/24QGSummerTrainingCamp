@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SoftVersionDownload {
-    private int softVersionId;
+public class SoftwareVersionDownload {
+    private int softwareVersionDownloadId;
 
     private String createTime;
 
@@ -20,12 +20,12 @@ public class SoftVersionDownload {
 
     private double price;
 
-    private int softId;
+    private int softwareId;
 
     private String version;
 
     private int versionType;
 
-    private int winUrl;
+    private String winUrl;
 
 }
