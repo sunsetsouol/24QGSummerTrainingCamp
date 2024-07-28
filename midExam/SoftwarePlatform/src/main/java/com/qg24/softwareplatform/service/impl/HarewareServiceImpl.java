@@ -39,6 +39,7 @@ public class HarewareServiceImpl implements HardwareService {
                 fingerprintVO.setHardwareName(userHardware.getHardwareName());
                 list.add(fingerprintVO);
             }
+            return list;
         }
         //直接返回空集合
         return null;
