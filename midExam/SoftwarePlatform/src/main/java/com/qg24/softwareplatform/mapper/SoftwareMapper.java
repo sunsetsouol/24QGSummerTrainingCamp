@@ -5,7 +5,6 @@ import com.qg24.softwareplatform.po.entity.Software;
 import com.qg24.softwareplatform.po.entity.SoftwareInfoTemp;
 import com.qg24.softwareplatform.po.entity.SoftwareVersionDownload;
 import org.apache.ibatis.annotations.*;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -68,8 +67,8 @@ public interface SoftwareMapper {
      */
     @Insert("insert into software_info_temp(user_id,software_name,version_type,version,brief_description," +
             "detailed_description,win_url,linux_url,mac_url,tags,type_status,passed_status,author) " +
-            "values(#{userId},#{softwareName},#{versionType},#{verison},#{briefDescription},#{detailedDescription}," +
-            "#{winUrl},#{linuxUrl},#{macUrl},#{tagsToString},#{typeStatus},#{passedStatus},#{author})")
+            "values(#{userId},#{softwareName},#{versionType},#{version},#{briefDescription},#{detailedDescription}," +
+            "#{winUrl},#{linuxUrl},#{macUrl},#{tagsString},#{typeStatus},#{passedStatus},#{author})")
     int addSoftwareInfoTemp(SoftwareInfoTemp softwareInfoTemp);
 
 
