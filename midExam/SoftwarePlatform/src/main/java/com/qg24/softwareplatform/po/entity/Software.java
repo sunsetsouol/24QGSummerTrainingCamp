@@ -37,15 +37,15 @@ public class Software {
 
     //将tags转为string便于存入mysql
     public void TagsToString(){
-        if(tags!=null){
-            tagsString= JSON.toJSONString(tags);
+        if(tags != null){
+            tagsString = JSON.toJSONString(tags);
         }
     }
 
     //将tagsString转为list
     public void TagsToList(){
-        if(tagsString!=null){
-            tags=JSON.parseArray(tagsString,String.class);
+        if(tagsString != null){
+            tags = JSON.parseArray(tagsString,String.class);
         }
     }
 }
