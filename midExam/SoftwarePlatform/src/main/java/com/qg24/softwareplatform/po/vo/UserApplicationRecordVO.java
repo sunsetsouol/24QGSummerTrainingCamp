@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -34,7 +36,7 @@ public class UserApplicationRecordVO {
     /**
      * 标签
      */
-    private String[] tag;
+    private List<String> tags;
     /**
      * 类型状态码(0上传/1更新)
      */
