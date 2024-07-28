@@ -78,7 +78,7 @@ public class SoftwareController {
     }
 
 
-    //上传软件/更新软件
+    // 上传软件/更新软件
     @PostMapping("/upload")
     public Result<?> upload(@ModelAttribute UploadNewSoftwareDTO uploadNewSoftwareDTO){
         if (softwareService.uploadNewSoftware(uploadNewSoftwareDTO) != 0){

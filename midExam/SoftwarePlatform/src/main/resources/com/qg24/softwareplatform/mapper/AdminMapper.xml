@@ -21,7 +21,7 @@
         <if test="status != null">
             status = #{status}
         </if>
-        Where soft_ware_id = #{softwareId}
+        Where software_id = #{softwareId}
     </update>
     
     <update id="updateSoftwareLatestInfo">
@@ -30,7 +30,7 @@
         <if test="detailedDescription != null">
             detailed_description = #{detailedDescription}
         </if>
-        Where soft_ware_id = #{softwareId} and version_type = #{versionType} and version = #{version}
+        Where software_id = #{softwareId} and version_type = #{versionType} and version = #{version}
     </update>
 
     <select id="getSoftwareInfoTempPages" resultType="com.qg24.softwareplatform.po.entity.SoftwareInfoTemp">
