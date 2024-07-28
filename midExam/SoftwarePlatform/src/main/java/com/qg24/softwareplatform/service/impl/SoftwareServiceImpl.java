@@ -3,12 +3,12 @@ package com.qg24.softwareplatform.service.impl;
 import com.qg24.softwareplatform.mapper.SoftwareMapper;
 import com.qg24.softwareplatform.po.dto.HistorySoftwareVersionDTO;
 import com.qg24.softwareplatform.po.dto.HomePageShowSoftwareDTO;
-import com.qg24.softwareplatform.po.dto.UpdateSoftwareDTO;
 import com.qg24.softwareplatform.po.dto.UploadNewSoftwareDTO;
 import com.qg24.softwareplatform.po.entity.Software;
 import com.qg24.softwareplatform.po.entity.SoftwareInfoTemp;
 import com.qg24.softwareplatform.po.entity.SoftwareVersionDownload;
 import com.qg24.softwareplatform.po.vo.DetailedSoftwareVersionTypeVO;
+import com.qg24.softwareplatform.po.vo.ShowRequiredAuthSoftwareVO;
 import com.qg24.softwareplatform.po.vo.SimpleSoftwareVO;
 import com.qg24.softwareplatform.po.vo.SoftwareHistoryVersionDownloadVO;
 import com.qg24.softwareplatform.service.SoftwareService;
@@ -60,6 +60,7 @@ public class SoftwareServiceImpl implements SoftwareService {
             //查找为非空则进行entity类包装为vo类
             DetailedSoftwareVersionTypeVO detailedSoftwareVersionTypeVO = new DetailedSoftwareVersionTypeVO();
             BeanUtils.copyProperties(ordinarySoftwareVersionInfo, detailedSoftwareVersionTypeVO);
+            detailedSoftwareVersionTypeVO.setDescription(ordinarySoftwareVersionInfo.getDetailedDescription());
             //添加到list集合中
             detailedSoftwareVersionTypeVOList.add(detailedSoftwareVersionTypeVO);
         }
@@ -69,6 +70,7 @@ public class SoftwareServiceImpl implements SoftwareService {
             //查找为非空则进行entity类包装为vo类
             DetailedSoftwareVersionTypeVO detailedSoftwareVersionTypeVO = new DetailedSoftwareVersionTypeVO();
             BeanUtils.copyProperties(professionalSoftwareVersionInfo, detailedSoftwareVersionTypeVO);
+            detailedSoftwareVersionTypeVO.setDescription(professionalSoftwareVersionInfo.getDetailedDescription());
             //添加到list集合中
             detailedSoftwareVersionTypeVOList.add(detailedSoftwareVersionTypeVO);
         }
@@ -104,9 +106,17 @@ public class SoftwareServiceImpl implements SoftwareService {
         //设置通过状态码为0(0代办/1通过/2拒绝)
         softwareInfoTemp.setPassedStatus(0);
         //将list集合转化为string存入数据库
-        softwareInfoTemp.setTagsToString(softwareInfoTemp.getTags().toString());
+        softwareInfoTemp.setTagsString(softwareInfoTemp.getTags().toString());
 
         return softwareMapper.addSoftwareInforTemp(softwareInfoTemp);
+    }
+
+    @Override
+    public List<ShowRequiredAuthSoftwareVO> showRequiredAuthSoftware(int userId) {
+        //使用联表查询，使用外连方式
+        List<ShowRequiredAuthSoftwareVO> showRequiredAuthSoftwareVOList = softwareMapper.querySoftwareVersionDownloadUserNoAuth(userId);
+
+        return showRequiredAuthSoftwareVOList;
     }
 
 

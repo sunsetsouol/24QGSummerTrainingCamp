@@ -18,9 +18,9 @@ public class DetailedSoftwareVersionTypeVO {
     /**
      * 版本号
      */
-    private String softwareVersion;
+    private String version;
     /**
      * 普/专
      */
-    private long VersionType;
+    private int versionType;
 }

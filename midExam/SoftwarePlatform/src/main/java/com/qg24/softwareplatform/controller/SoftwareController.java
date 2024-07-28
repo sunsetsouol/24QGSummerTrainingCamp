@@ -4,6 +4,7 @@ import com.qg24.softwareplatform.po.dto.*;
 import com.qg24.softwareplatform.po.entity.Software;
 import com.qg24.softwareplatform.po.result.Result;
 import com.qg24.softwareplatform.po.vo.DetailedSoftwareVersionTypeVO;
+import com.qg24.softwareplatform.po.vo.ShowRequiredAuthSoftwareVO;
 import com.qg24.softwareplatform.po.vo.SimpleSoftwareVO;
 import com.qg24.softwareplatform.po.vo.SoftwareHistoryVersionDownloadVO;
 import com.qg24.softwareplatform.service.SoftwareService;
@@ -73,7 +74,7 @@ public class SoftwareController {
 
     //软件详情页下半 历史查看
     @GetMapping("/historySoftwareVersion")
-    public Result<?> historySoftwareVersion(@RequestParam HistorySoftwareVersionDTO historySoftwareVersionDTO){
+    public Result<?> historySoftwareVersion(HistorySoftwareVersionDTO historySoftwareVersionDTO){
         List<SoftwareHistoryVersionDownloadVO> softwareHistoryVersionDownloadVOList = softwareService.historySoftwareVersion(historySoftwareVersionDTO);
         if (softwareHistoryVersionDownloadVOList.isEmpty()){
             return Result.error("");
@@ -92,6 +93,17 @@ public class SoftwareController {
              return Result.error("");
          }
 
+    }
+
+    //用户查看需要购买的软件信息
+    @GetMapping("showRequiredAuthSoftware")
+    public Result<?> showRequiredAuthSoftware(@RequestParam("userId") int userId){
+        List<ShowRequiredAuthSoftwareVO> showRequiredAuthSoftwareVOList = softwareService.showRequiredAuthSoftware(userId);
+        if (showRequiredAuthSoftwareVOList.isEmpty()){
+            return Result.error("");
+        }else{
+            return Result.success("",showRequiredAuthSoftwareVOList);
+        }
     }
 
 

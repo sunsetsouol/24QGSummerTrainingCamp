@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class HistorySoftwareVersionDTO {
     private int softwareId;
-    private String version;
+    private int versionType;
 }

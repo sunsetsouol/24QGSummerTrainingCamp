@@ -40,6 +40,6 @@ public class SoftwareInfoTemp {
  
     private String userId;
 
-    private String tagsToString;
+    private String tagsString;
 
 }

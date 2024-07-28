@@ -2,10 +2,10 @@ package com.qg24.softwareplatform.service;
 
 import com.qg24.softwareplatform.po.dto.HistorySoftwareVersionDTO;
 import com.qg24.softwareplatform.po.dto.HomePageShowSoftwareDTO;
-import com.qg24.softwareplatform.po.dto.UpdateSoftwareDTO;
 import com.qg24.softwareplatform.po.dto.UploadNewSoftwareDTO;
 import com.qg24.softwareplatform.po.entity.Software;
 import com.qg24.softwareplatform.po.vo.DetailedSoftwareVersionTypeVO;
+import com.qg24.softwareplatform.po.vo.ShowRequiredAuthSoftwareVO;
 import com.qg24.softwareplatform.po.vo.SimpleSoftwareVO;
 import com.qg24.softwareplatform.po.vo.SoftwareHistoryVersionDownloadVO;
 
@@ -24,4 +24,5 @@ public interface SoftwareService {
 
     int uploadNewSoftware(UploadNewSoftwareDTO uploadNewSoftwareDTO);
 
+    List<ShowRequiredAuthSoftwareVO> showRequiredAuthSoftware(int softwareId);
 }

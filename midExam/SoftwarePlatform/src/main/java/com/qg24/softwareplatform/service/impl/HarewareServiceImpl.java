@@ -77,7 +77,7 @@ public class HarewareServiceImpl implements HardwareService {
             for (UserSoftwareLicense userSoftwareLicense : userSoftwareLicenses) {
                 //比较时间判断是否这个许可已经过期
                 //只要出来一个是还没有到过期时间，就直接退出循环，不能删除
-                if(!TimeUtils.parseTime(userSoftwareLicense.getExpirationTime()).isBefore(LocalDateTime.now())){
+                if(!TimeUtils.parseTime(userSoftwareLicense.getExpiredTime()).isBefore(LocalDateTime.now())){
                     return false; //不能删除
                 }
             }
