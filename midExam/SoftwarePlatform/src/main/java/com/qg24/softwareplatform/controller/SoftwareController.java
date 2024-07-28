@@ -2,7 +2,6 @@ package com.qg24.softwareplatform.controller;
 
 import com.qg24.softwareplatform.po.dto.HistorySoftwareVersionDTO;
 import com.qg24.softwareplatform.po.dto.HomePageShowSoftwareDTO;
-import com.qg24.softwareplatform.po.dto.UpdateSoftwareLatestInfoDTO;
 import com.qg24.softwareplatform.po.dto.UploadNewSoftwareDTO;
 import com.qg24.softwareplatform.po.entity.Software;
 import com.qg24.softwareplatform.po.result.PageBean;
@@ -13,7 +12,6 @@ import com.qg24.softwareplatform.po.vo.SoftwareHistoryVersionDownloadVO;
 import com.qg24.softwareplatform.service.SoftwareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -80,22 +78,14 @@ public class SoftwareController {
     }
 
 
-    // 上传软件
+    //上传软件/更新软件
     @PostMapping("/upload")
-    public Result<?> upload(@RequestBody UploadNewSoftwareDTO uploadNewSoftwareDTO,
-                            @RequestParam("winPackage") MultipartFile winPackage,
-                            @RequestParam("linuxPackage") MultipartFile linuxPackage,
-                            @RequestParam("macPackage") MultipartFile macPackage){
+    public Result<?> upload(@ModelAttribute UploadNewSoftwareDTO uploadNewSoftwareDTO){
+        if (softwareService.uploadNewSoftware(uploadNewSoftwareDTO) != 0){
+            return Result.success("",null);
+        }else {
+            return Result.error("");
+        }
 
     }
-
-    // 更新软件
-    @PostMapping("/updateVersion")
-    public Result<?> updateVersion(@RequestBody UpdateSoftwareLatestInfoDTO updateSoftwareLatestInfoDTO,
-                                   @RequestParam("winPackage") MultipartFile winPackage,
-                                   @RequestParam("linuxPackage") MultipartFile linuxPackage,
-                                   @RequestParam("macPackage")MultipartFile macPackage){
-
-    }
-
 }
