@@ -1,35 +1,22 @@
 package com.qg24.softwareplatform.controller;
 
-import com.qg24.softwareplatform.po.dto.HomePageShowSoftwareDTO;
-import com.qg24.softwareplatform.po.dto.ShowPersonalSoftwareInfoDTO;
-import com.qg24.softwareplatform.po.result.PageBean;
 import com.qg24.softwareplatform.po.result.Result;
-import com.qg24.softwareplatform.po.vo.SimpleSoftwareVO;
-import com.qg24.softwareplatform.po.vo.UserApplicationRecordVO;
-import com.qg24.softwareplatform.po.vo.UserBuySoftwareVO;
-import com.qg24.softwareplatform.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
+
+    // TODO 个人开发的软件有普 专 两种 是否忽略?
     /**
      * 个人页面展示个人开发的软件
      */
-    @Autowired
-    private UserService userService;
     @GetMapping("/user/homePageShowSoftware")
-    public Result<PageBean<SimpleSoftwareVO>> homePageShowSoftware(@ModelAttribute ShowPersonalSoftwareInfoDTO dto){
-        int total = userService.getTotalSoftware(dto.getUserId());
-        List<SimpleSoftwareVO> list = userService.getHomePageShowSoftware(dto);
-        PageBean<SimpleSoftwareVO> simpleSoftwareVOPageBean = new PageBean<>();
-        simpleSoftwareVOPageBean.setData(list);
-        simpleSoftwareVOPageBean.setTotal((long)total);
-        return Result.success("", simpleSoftwareVOPageBean);
+    public Result<?> homePageShowSoftware(@RequestParam("page")int page,@RequestParam("userId")String userId){
+
     }
 
     /**
@@ -37,13 +24,6 @@ public class UserController {
      */
     @GetMapping("/applicationRecord")
     public Result<?> applicationRecord(@RequestParam("userId")String userId){
-        List<UserApplicationRecordVO> list = new ArrayList<>();
-        list=userService.getApplicationRecord(userId);
-        if(list!=null){
-            return Result.success("",list);
-        }else{
-            return Result.error("Failed");
-        }
     }
 
     /**
@@ -51,11 +31,5 @@ public class UserController {
      */
     @GetMapping("/PagedQueryAvailableSoftware")
     public Result<?> PagedQueryAvailableSoftware(@RequestParam("userId")String userId){
-        List<UserBuySoftwareVO> list = userService.getAvailableSoftware(userId);
-        if(list!=null){
-            return Result.success("",list);
-        }else{
-            return Result.error("Failed");
-        }
     }
 }
