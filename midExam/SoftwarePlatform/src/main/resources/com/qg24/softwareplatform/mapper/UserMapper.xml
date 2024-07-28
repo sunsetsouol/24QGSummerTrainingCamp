@@ -9,10 +9,4 @@
         WHERE user_id = #{userId}
         LIMIT #{limit} OFFSET #{offset}
     </select>
-
-    <select id="getApplicationRecord" resultType="com.qg24.softwareplatform.po.vo.UserApplicationRecordVO">
-        SELECT *
-        FROM software_info_temp
-        WHERE user_id = #{userId}
-    </select>
 </mapper>

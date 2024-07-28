@@ -32,7 +32,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserApplicationRecordVO> getApplicationRecord(String userId) {
-        return userMapper.getApplicationRecord(userId);
+        List<UserApplicationRecordVO> list = userMapper.getApplicationRecord(userId);
+        for(int i=0;i<list.size();i++){
+            //将tags字符串转为list
+            list.get(i).StringToTags();
+        }
+        return list;
     }
 
     @Override
