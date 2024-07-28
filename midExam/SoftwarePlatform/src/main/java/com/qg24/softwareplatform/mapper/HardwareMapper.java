@@ -13,13 +13,13 @@ public interface HardwareMapper {
     @Select("select * from user_hardware where user_id = #{userId}")
     public List<UserHardware> selectFingerprintsByUserId(String userId);
 
-//    //上传用户指纹信息
-//    @Insert("insert into user_hardware (user_id, fingerprint, hardware_name) values (#{userId}, #{fingerprint}, #{hardwareName})")
-//    public int insertFingerprint(UserHardware userHardware);
-//
-//    //根据主键id查询该指纹信息
-//    @Select("select * from user_hardware where user_hardware_id = #{useHardwareId}")
-//    public UserHardware selectByUseHardwareId(int useHardwareId);
+    //上传用户指纹信息
+    @Insert("insert into user_hardware (user_id, fingerprint, hardware_name) values (#{userId}, #{fingerprint}, #{hardwareName})")
+    public int insertFingerprint(UserHardware userHardware);
+
+    //根据主键id查询该指纹信息
+    @Select("select * from user_hardware where user_hardware_id = #{useHardwareId}")
+    public UserHardware selectByUseHardwareId(int useHardwareId);
 //
 //    //根据用户id和指纹信息查找该指纹信息是否至少绑定一个授权许可
 //    @Select("select * from user_software_auth where user_id = #{userId} And fingerprint = #{fingerprint}")

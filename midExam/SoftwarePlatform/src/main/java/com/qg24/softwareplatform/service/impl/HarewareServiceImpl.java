@@ -42,19 +42,19 @@ public class HarewareServiceImpl implements HardwareService {
         return null;
     }
 
-//    /**
-//     * 用户上传新的硬件指纹信息
-//     * @param userHardware
-//     * @return
-//     */
-//    @Override
-//    public int insertFingerprint(UserHardware userHardware) {
-//        //用不用限制说用户有多少个指纹就不能再上传了
-//
-//        //添加指纹
-//        int i = hardwareMapper.insertFingerprint(userHardware);
-//        return i;
-//    }
+    /**
+     * 用户上传新的硬件指纹信息
+     * @param userHardware
+     * @return
+     */
+    @Override
+    public int insertFingerprint(UserHardware userHardware) {
+        //用不用限制说用户有多少个指纹就不能再上传了
+
+        //添加指纹
+        int i = hardwareMapper.insertFingerprint(userHardware);
+        return i;
+    }
 
 //    /**
 //     * 用户删除指纹信息

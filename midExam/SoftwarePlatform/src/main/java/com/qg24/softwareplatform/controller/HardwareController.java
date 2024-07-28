@@ -18,30 +18,30 @@ public class HardwareController {
     @Autowired
     private HardwareService hardwareService;
 
-//    /**
-//     * 用户上传硬件指纹信息
-//     * @param userHardware
-//     * @return
-//     */
-//    @PostMapping("/insertFingerprint")
-//    public Result<?> insertFingerprint(@RequestBody UserHardware userHardware){
-//        //用不用判断用户硬件指纹的上限
-//
-//        //执行业务
-//        int i = hardwareService.insertFingerprint(userHardware);
-//        if (i != 0 ){
-//            return Result.success("上传成功");
-//        } else if(i == 0){
-//            return Result.error("上传失败");
-//        }
-//        return Result.error("unknown");
-//    }
-//
-//    //删除硬件指纹
-//    @DeleteMapping("/deleteFingerprint")
-//    public Result<?> deleteFingerprint(@RequestParam("useHardwareId") int useHardwareId){
-//
-//    }
+    /**
+     * 用户上传硬件指纹信息
+     * @param userHardware
+     * @return
+     */
+    @PostMapping("/insertFingerprint")
+    public Result<?> insertFingerprint(@RequestBody UserHardware userHardware){
+        //用不用判断用户硬件指纹的上限
+
+        //执行业务
+        int i = hardwareService.insertFingerprint(userHardware);
+        if (i != 0 ){
+            return Result.success("上传成功");
+        } else if(i == 0){
+            return Result.error("上传失败");
+        }
+        return Result.error("unknown");
+    }
+
+    //删除硬件指纹
+    @DeleteMapping("/deleteFingerprint")
+    public Result<?> deleteFingerprint(@RequestParam("useHardwareId") int useHardwareId){
+
+    }
 
 
     /**
