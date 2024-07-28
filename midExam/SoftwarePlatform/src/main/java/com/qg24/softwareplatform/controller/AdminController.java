@@ -14,11 +14,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
+
+    @Autowired
+    private AdminService adminService;
+
     /**
      * 管理员更改基本软件信息
      */
-    @Autowired
-    private AdminService adminService;
     @PostMapping("/updateSoftwareBasicInfo")
     public Result<?> UpdateSoftWareBasicInfo(@RequestBody Software software){
         if(adminService.updateSoftwareBasicInfo(software)){
