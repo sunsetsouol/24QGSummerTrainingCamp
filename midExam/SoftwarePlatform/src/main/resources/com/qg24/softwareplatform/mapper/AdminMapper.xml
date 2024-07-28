@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qg24.softwareplatform.mapper.AdminMapper">
+    <update id="updateSoftWareBasicInfo" >
+        update software
+        set
+        <if test="softwareName != null">
+            softwareName = #{softwareName},
+        </if>
+        <if test="author != null">
+            author = #{author},
+        </if>
+        <if test="description != null">
+            description = #{description},
+        </if>
+        <if test="tags != null">
+            tags = #{tagsString},
+        </if>
+        <if test="status != null">
+            status = #{status},
+        </if>
+        update_at = NOW()
+        Where softwareId = #{softwareId}
+    </update>
+    
+    <update id="updateSoftwareLatestInfo">
+        update software_version_download
+        set
+        <if test="detailedDescription != null">
+            detailedDescription = #{detailedDescription}
+        </if>
+        update_at = NOW()
+        Where softwareId = #{softwareId} and versionType = #{versionType} and version = #{version}
+    </update>
+</mapper>

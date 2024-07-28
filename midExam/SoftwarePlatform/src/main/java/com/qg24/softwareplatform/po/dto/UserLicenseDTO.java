@@ -1,5 +1,6 @@
 package com.qg24.softwareplatform.po.dto;
 
+import com.alibaba.fastjson2.JSON;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -37,6 +38,23 @@ public class UserLicenseDTO {
      * 表id
      */
     private String userLicenseId;
+
+    private String softwareListString;
+
+
+    //将list转字符串
+    public void softwareListToString(){
+        if(softwareList!=null){
+            softwareListString= JSON.toJSONString(softwareList);
+        }
+    }
+
+    //将字符串转list
+    public void softwareListStringToList(){
+        if(softwareListString!=null){
+            softwareList=JSON.parseArray(softwareListString, SoftwareSimpleInfoDTO.class);
+        }
+    }
 }
 
 
