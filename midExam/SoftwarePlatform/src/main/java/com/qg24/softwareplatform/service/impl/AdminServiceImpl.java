@@ -3,9 +3,13 @@ package com.qg24.softwareplatform.service.impl;
 import com.qg24.softwareplatform.mapper.AdminMapper;
 import com.qg24.softwareplatform.po.dto.UpdateSoftwareLatestInfoDTO;
 import com.qg24.softwareplatform.po.entity.Software;
+import com.qg24.softwareplatform.po.entity.SoftwareInfoTemp;
 import com.qg24.softwareplatform.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -28,6 +32,23 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public boolean updateSoftwareLatestInfo(UpdateSoftwareLatestInfoDTO softwareLatestInfoDTO) {
         if(adminMapper.updateSoftwareLatestInfo(softwareLatestInfoDTO)==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    //管理员查看审核记录
+    @Override
+    public List<SoftwareInfoTemp> getSoftwareInfoTempList(int page, int pageSize) {
+        return adminMapper.getSoftwareInfoTempPages(pageSize,(page-1)*pageSize);
+    }
+
+
+    //管理员更改审核通过状态码
+    @Override
+    public boolean updateSoftwareInfoTempStatus(int softwareInfoTempId, int status) {
+        if(adminMapper.updateSoftwareInfoTemp(softwareInfoTempId,status)==1){
             return true;
         }else{
             return false;
