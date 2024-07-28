@@ -2,6 +2,7 @@ package com.qg24.softwareplatform.service.impl;
 
 import com.qg24.softwareplatform.mapper.UserMapper;
 import com.qg24.softwareplatform.po.dto.HomePageShowSoftwareDTO;
+import com.qg24.softwareplatform.po.dto.NewUserInfoDTO;
 import com.qg24.softwareplatform.po.dto.ShowPersonalSoftwareInfoDTO;
 import com.qg24.softwareplatform.po.entity.UserSoftwareAuth;
 import com.qg24.softwareplatform.po.result.Result;
@@ -12,9 +13,14 @@ import com.qg24.softwareplatform.service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import com.qg24.softwareplatform.util.AliOssUtil;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -51,5 +57,17 @@ public class UserServiceImpl implements UserService {
             listBuy.add(userBuySoftwareVO);
         }
         return listBuy;
+    }
+
+    @Override
+    public int uploadNewUserInfo(NewUserInfoDTO dto) throws IOException {
+        String url = "";
+        MultipartFile headImage = dto.getHeadImage();
+        if(!headImage.isEmpty()){
+            String extension = Objects.requireNonNull(headImage.getOriginalFilename()).substring(headImage.getOriginalFilename().lastIndexOf("."));
+            String fileName = UUID.randomUUID() + extension;
+            byte[] bytes = headImage.getBytes();
+            url = aliOssUtil.upload(bytes, fileName);
+        }
     }
 }
