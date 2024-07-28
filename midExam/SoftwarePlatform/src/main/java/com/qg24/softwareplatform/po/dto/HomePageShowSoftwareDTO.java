@@ -13,7 +13,11 @@ public class HomePageShowSoftwareDTO {
     /**
      * 页码
      */
-    private long page;
+    private int page;
+
+    /**
+     *
+     */
     /**
      * 软件名
      */
