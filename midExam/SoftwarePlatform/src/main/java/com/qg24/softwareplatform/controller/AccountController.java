@@ -90,7 +90,4 @@ public class AccountController {
 
         return Result.success("", homePageUserInfo);
     }
-
-
-
 }

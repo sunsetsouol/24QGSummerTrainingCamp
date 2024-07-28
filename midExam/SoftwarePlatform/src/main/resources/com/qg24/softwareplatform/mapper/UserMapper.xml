@@ -9,4 +9,22 @@
         WHERE user_id = #{userId}
         LIMIT #{limit} OFFSET #{offset}
     </select>
+
+    <update id="updateUserInfo" >
+        update user
+        set
+        <if test="username != null">
+            username = #{username},
+        </if>
+        <if test="description != null">
+            description = #{description},
+        </if>
+        <if test="image != null">
+            image = #{image},
+        </if>
+        <if test="updateTime != null">
+            update_time = #{updateTime}
+        </if>
+        where user_id = #{userId}
+    </update>
 </mapper>
