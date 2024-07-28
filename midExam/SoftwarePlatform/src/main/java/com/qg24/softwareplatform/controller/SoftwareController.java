@@ -2,6 +2,7 @@ package com.qg24.softwareplatform.controller;
 
 import com.qg24.softwareplatform.po.dto.*;
 import com.qg24.softwareplatform.po.entity.Software;
+import com.qg24.softwareplatform.po.result.PageBean;
 import com.qg24.softwareplatform.po.result.Result;
 import com.qg24.softwareplatform.po.vo.DetailedSoftwareVersionTypeVO;
 import com.qg24.softwareplatform.po.vo.SimpleSoftwareVO;
@@ -23,14 +24,9 @@ public class SoftwareController {
     private SoftwareService softwareService;
     //首页分页展示软件
     @GetMapping("/homePageShowSoftware")
-    public Result<?> homePageShowSoftware(@RequestParam HomePageShowSoftwareDTO homePageShowSoftwareDTO){
-        List<SimpleSoftwareVO> softwareVOS = softwareService.homePageShowSoftware(homePageShowSoftwareDTO);
-        if (softwareVOS.isEmpty())
-        {
-            return Result.error("");
-        }else {
-            return Result.success("",softwareVOS);
-        }
+    public Result<PageBean<SimpleSoftwareVO>> homePageShowSoftware(@RequestParam HomePageShowSoftwareDTO homePageShowSoftwareDTO){
+        PageBean<SimpleSoftwareVO> pageBean = softwareService.homePageShowSoftware(homePageShowSoftwareDTO);
+        return Result.success("", pageBean);
     }
 
     //软件热门排行
