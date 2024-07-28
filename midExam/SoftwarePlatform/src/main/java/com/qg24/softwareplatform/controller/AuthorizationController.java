@@ -51,6 +51,9 @@ public class AuthorizationController {
         }else if ("success".equals(s)){
             //有授权，返回下载的地址
             DownloadUrlsVO downloadUrls = authorizationService.getDownloadUrls(checkAuthDTO);
+            if (downloadUrls == null){
+                return Result.error("可惜了，没有下载地址");
+            }
             return Result.success("可以下载", downloadUrls);
         }
         return Result.error("unknown");
