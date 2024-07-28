@@ -14,7 +14,7 @@ public class UserApplicationRecordVO {
     /**
      * 创建时间
      */
-    private String applyTime;
+    private String applicationTime;
     /**
      * 创作者
      */

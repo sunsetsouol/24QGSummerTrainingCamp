@@ -14,13 +14,13 @@ public class DownloadUrlsVO {
     /**
      * Linux系统下载地址
      */
-    private String LinuxUrl;
+    private String linuxUrl;
     /**
      * Mac系统下载地址
      */
-    private String MacUrl;
+    private String macUrl;
     /**
      * Windows系统下载地址
      */
-    private String WindowsUrl;
+    private String winUrl;
 }

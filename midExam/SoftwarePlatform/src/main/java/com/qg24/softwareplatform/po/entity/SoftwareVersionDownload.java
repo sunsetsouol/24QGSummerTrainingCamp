@@ -8,24 +8,24 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SoftwareVersionDownload {
-    private int softVersionId;
+    private int softwareVersionDownloadId;
 
     private String createTime;
 
     private String detailedDescription;
 
-    private String linuxUrl;
-
-    private String macUrl;
-
     private double price;
 
-    private int softId;
+    private int softwareId;
 
     private String version;
 
     private int versionType;
 
-    private int winUrl;
+    private String winUrl;
+
+    private String linuxUrl;
+
+    private String macUrl;
 
 }
