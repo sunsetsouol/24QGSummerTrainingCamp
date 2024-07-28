@@ -10,6 +10,7 @@ import com.qg24.softwareplatform.po.entity.UserAndToken;
 import com.qg24.softwareplatform.po.vo.HomePageUserInfoVO;
 import com.qg24.softwareplatform.properties.MailProperties;
 import com.qg24.softwareplatform.service.AccountService;
+import com.qg24.softwareplatform.util.AliOssUtil;
 import com.qg24.softwareplatform.util.JwtUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,8 @@ public class AccountServiceImpl implements AccountService {
 
     @Autowired
     private MailProperties mailProperties;
+    @Autowired
+    private AliOssUtil aliOssUtil;
 
     @Override
     public UserAndToken login(LoginDTO loginDTO) {
@@ -138,9 +141,12 @@ public class AccountServiceImpl implements AccountService {
     public void updateUserInfo(UpdateUserInfoDTO updateUserInfoDTO) throws IOException {
         // 取得头像文件, 保存至云端获取url
         MultipartFile image = updateUserInfoDTO.getImage();
-        File file = convertMultipartFileToFile(image);
-        // TODO 使用自己的OSS存储服务存储后得到url, 此处先模拟
-        String url = "";
+        String extension = Objects.requireNonNull(
+                image.getOriginalFilename()).substring(image.getOriginalFilename().lastIndexOf(".")
+        );
+        String fileName = UUID.randomUUID().toString() + extension;
+        byte[] bytes = updateUserInfoDTO.getImage().getBytes();
+        String url = aliOssUtil.upload(bytes, fileName);
 
         User user = new User();
         BeanUtils.copyProperties(updateUserInfoDTO, user);

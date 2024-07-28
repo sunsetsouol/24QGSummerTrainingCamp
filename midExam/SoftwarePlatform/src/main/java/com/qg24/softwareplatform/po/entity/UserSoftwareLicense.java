@@ -11,7 +11,7 @@ public class UserSoftwareLicense {
 
     private String authTime;
 
-    private String expirationTime;
+    private String expiredTime;
 
     private String fingerprint;
 

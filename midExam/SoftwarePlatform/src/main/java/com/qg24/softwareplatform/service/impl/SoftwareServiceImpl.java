@@ -12,20 +12,23 @@ import com.qg24.softwareplatform.po.vo.DetailedSoftwareVersionTypeVO;
 import com.qg24.softwareplatform.po.vo.SimpleSoftwareVO;
 import com.qg24.softwareplatform.po.vo.SoftwareHistoryVersionDownloadVO;
 import com.qg24.softwareplatform.service.SoftwareService;
+import com.qg24.softwareplatform.util.AliOssUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.io.IOException;
+import java.util.*;
 
 @Service
 public class SoftwareServiceImpl implements SoftwareService {
 
     @Autowired
     private SoftwareMapper softwareMapper;
+    @Autowired
+    private AliOssUtil aliOssUtil;
 
     @Override
     public PageBean<SimpleSoftwareVO> homePageShowSoftware(HomePageShowSoftwareDTO homePageShowSoftwareDTO) {
@@ -115,13 +118,45 @@ public class SoftwareServiceImpl implements SoftwareService {
     }
 
     @Override
-    public int uploadNewSoftware(@ModelAttribute UploadNewSoftwareDTO uploadNewSoftwareDTO) {
+    public int uploadNewSoftware(@ModelAttribute UploadNewSoftwareDTO uploadNewSoftwareDTO) throws IOException {
         SoftwareInfoTemp softwareInfoTemp = new SoftwareInfoTemp();
         BeanUtils.copyProperties(uploadNewSoftwareDTO, softwareInfoTemp);
+
+        String winUrl = "";
+        String linuxUrl = "";
+        String macUrl = "";
+
+
+        // win
+        MultipartFile winPackage = uploadNewSoftwareDTO.getWinPackage();
+        if (!winPackage.isEmpty()) {
+            String extension = Objects.requireNonNull(winPackage.getOriginalFilename()).substring(winPackage.getOriginalFilename().lastIndexOf("."));
+            String fileName = UUID.randomUUID() + extension;
+            byte[] bytes = winPackage.getBytes();
+            winUrl = aliOssUtil.upload(bytes, fileName);
+        }
+
+        // linux
+        MultipartFile linuxPackage = uploadNewSoftwareDTO.getLinuxPackage();
+        if (!linuxPackage.isEmpty()) {
+            String extension = Objects.requireNonNull(linuxPackage.getOriginalFilename()).substring(linuxPackage.getOriginalFilename().lastIndexOf("."));
+            String fileName = UUID.randomUUID() + extension;
+            byte[] bytes = linuxPackage.getBytes();
+            linuxUrl = aliOssUtil.upload(bytes, fileName);
+        }
+
+        // mac
+        MultipartFile macPackage = uploadNewSoftwareDTO.getMacPackage();
+        if (!macPackage.isEmpty()) {
+            String extension = Objects.requireNonNull(macPackage.getOriginalFilename()).substring(macPackage.getOriginalFilename().lastIndexOf("."));
+            String fileName = UUID.randomUUID() + extension;
+            byte[] bytes = macPackage.getBytes();
+            macUrl = aliOssUtil.upload(bytes, fileName);
+        }
+
+
         // TODO 模拟文件上传后返回了url实现数据库操作逻辑（并没有实现文件上传到云端服务器的逻辑）
-        String winUrl = "www.WindowsDownload.com";
-        String linuxUrl = "www.LinuxDownload.com";
-        String macUrl = "www.MacDownload.com";
+
         softwareInfoTemp.setWinUrl(winUrl);
         softwareInfoTemp.setLinuxUrl(linuxUrl);
         softwareInfoTemp.setMacUrl(macUrl);

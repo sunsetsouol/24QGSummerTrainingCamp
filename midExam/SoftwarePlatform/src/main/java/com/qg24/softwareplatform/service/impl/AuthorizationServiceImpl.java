@@ -117,7 +117,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
         //遍历每一个许可文件
         for (UserSoftwareLicense userSoftwareLicense : userSoftwareLicenses) {
             //先判断这条许可有无过期
-            if(TimeUtils.parseTime(userSoftwareLicense.getExpirationTime()).isAfter(LocalDateTime.now())){
+            if(TimeUtils.parseTime(userSoftwareLicense.getExpiredTime()).isAfter(LocalDateTime.now())){
                 //没过期，获取当时买的软件的授权信息
                 List<SoftwareSimpleInfoDTO> array = JSON.parseArray(userSoftwareLicense.getSoftwareList(), SoftwareSimpleInfoDTO.class);
                 for (SoftwareSimpleInfoDTO softwareSimpleInfoDTO : array) {
