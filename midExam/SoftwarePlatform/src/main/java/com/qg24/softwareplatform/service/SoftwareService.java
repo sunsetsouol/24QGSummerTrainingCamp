@@ -9,6 +9,7 @@ import com.qg24.softwareplatform.po.vo.DetailedSoftwareVersionTypeVO;
 import com.qg24.softwareplatform.po.vo.SimpleSoftwareVO;
 import com.qg24.softwareplatform.po.vo.SoftwareHistoryVersionDownloadVO;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface SoftwareService {
@@ -22,6 +23,6 @@ public interface SoftwareService {
 
     List<SoftwareHistoryVersionDownloadVO> historySoftwareVersion(HistorySoftwareVersionDTO historySoftwareVersionDTO);
 
-    int uploadNewSoftware(UploadNewSoftwareDTO uploadNewSoftwareDTO);
+    int uploadNewSoftware(UploadNewSoftwareDTO uploadNewSoftwareDTO) throws IOException;
 
 }
