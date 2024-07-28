@@ -1,9 +1,6 @@
 package com.qg24.softwareplatform.controller;
 
-import com.qg24.softwareplatform.po.dto.HistorySoftwareVersionDTO;
-import com.qg24.softwareplatform.po.dto.HomePageShowSoftwareDTO;
-import com.qg24.softwareplatform.po.dto.UpdateSoftwareLatestInfoDTO;
-import com.qg24.softwareplatform.po.dto.UploadNewSoftwareDTO;
+import com.qg24.softwareplatform.po.dto.*;
 import com.qg24.softwareplatform.po.entity.Software;
 import com.qg24.softwareplatform.po.result.Result;
 import com.qg24.softwareplatform.po.vo.DetailedSoftwareVersionTypeVO;
@@ -86,7 +83,7 @@ public class SoftwareController {
     }
 
 
-    //上传软件
+    //上传软件/更新软件
     @PostMapping("/upload")
     public Result<?> upload(@ModelAttribute UploadNewSoftwareDTO uploadNewSoftwareDTO){
          if (softwareService.uploadNewSoftware(uploadNewSoftwareDTO) != 0){
@@ -97,13 +94,5 @@ public class SoftwareController {
 
     }
 
-    //更新软件
-    @PostMapping("/updateVersion")
-    public Result<?> updateVersion(@RequestBody UpdateSoftwareLatestInfoDTO updateSoftwareLatestInfoDTO,
-                                   @RequestParam("winPackage") MultipartFile winPackage,
-                                   @RequestParam("linuxPackage") MultipartFile linuxPackage,
-                                   @RequestParam("macPackage")MultipartFile macPackage){
-
-    }
 
 }

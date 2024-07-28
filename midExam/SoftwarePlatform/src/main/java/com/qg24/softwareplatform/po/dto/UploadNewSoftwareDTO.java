@@ -32,6 +32,8 @@ public class UploadNewSoftwareDTO {
 
     private List<String> tags;
 
+    private int typeStatus;
+
     private MultipartFile winPackage;
 
     private MultipartFile linuxPackage;

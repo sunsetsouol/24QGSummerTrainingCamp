@@ -3,6 +3,7 @@ package com.qg24.softwareplatform.service.impl;
 import com.qg24.softwareplatform.mapper.SoftwareMapper;
 import com.qg24.softwareplatform.po.dto.HistorySoftwareVersionDTO;
 import com.qg24.softwareplatform.po.dto.HomePageShowSoftwareDTO;
+import com.qg24.softwareplatform.po.dto.UpdateSoftwareDTO;
 import com.qg24.softwareplatform.po.dto.UploadNewSoftwareDTO;
 import com.qg24.softwareplatform.po.entity.Software;
 import com.qg24.softwareplatform.po.entity.SoftwareInfoTemp;
@@ -100,8 +101,6 @@ public class SoftwareServiceImpl implements SoftwareService {
         softwareInfoTemp.setLinuxUrl(linuxUrl);
         softwareInfoTemp.setMacUrl(macUrl);
 
-        //设置申请类型状态码0上传/1更新
-        softwareInfoTemp.setTypeStatus(0);
         //设置通过状态码为0(0代办/1通过/2拒绝)
         softwareInfoTemp.setPassedStatus(0);
         //将list集合转化为string存入数据库
@@ -109,4 +108,6 @@ public class SoftwareServiceImpl implements SoftwareService {
 
         return softwareMapper.addSoftwareInforTemp(softwareInfoTemp);
     }
+
+
 }
