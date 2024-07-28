@@ -16,14 +16,14 @@ public interface AccountMapper {
      * 用户登录使用的登陆mapper
      * @return User对象
      */
-    @Select("select * from user where email = #{email} and password = #{password}")
+    @Select("select * from user where email = #{account} and password = #{password}")
     User selectByAccountAndPassword(LoginDTO loginDTO);
 
     /**
      * 管理员登陆使用的登陆mapper
      * @return User对象
      */
-    @Select("select * from user where user_id = #{userId} and password = #{password}")
+    @Select("select * from user where user_id = #{account} and password = #{password}")
     User selectByUserIdAndPassword(LoginDTO loginDTO);
 
     /**

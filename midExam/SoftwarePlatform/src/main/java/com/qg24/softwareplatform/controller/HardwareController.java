@@ -1,7 +1,6 @@
 package com.qg24.softwareplatform.controller;
 
 
-import com.qg24.softwareplatform.mapper.HardwareMapper;
 import com.qg24.softwareplatform.po.entity.UserHardware;
 import com.qg24.softwareplatform.po.result.Result;
 import com.qg24.softwareplatform.po.vo.FingerprintVO;
@@ -39,12 +38,12 @@ public class HardwareController {
 
     /**
      * 用户删除硬件指纹信息
-     * @param useHardwareId
+     * @param userHardwareId
      * @return
      */
     @DeleteMapping("/deleteFingerprint")
-    public Result<?> deleteFingerprint(@RequestParam("useHardwareId") int useHardwareId){
-        boolean b = hardwareService.deleteFingerprintByUseHardwareId(useHardwareId);
+    public Result<?> deleteFingerprint(@RequestParam("userHardwareId") int userHardwareId){
+        boolean b = hardwareService.deleteFingerprintByUseHardwareId(userHardwareId);
         if(b){
             return Result.success("删除该指纹信息成功");
         }else {

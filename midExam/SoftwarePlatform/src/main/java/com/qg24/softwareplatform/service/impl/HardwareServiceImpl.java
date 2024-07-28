@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class HarewareServiceImpl implements HardwareService {
+public class HardwareServiceImpl implements HardwareService {
 
     @Autowired
     private HardwareMapper hardwareMapper;
@@ -61,29 +61,29 @@ public class HarewareServiceImpl implements HardwareService {
 
     /**
      * 用户删除指纹信息
-     * @param useHardwareId
+     * @param userHardwareId
      * @return
      */
     @Override
-    public boolean deleteFingerprintByUseHardwareId(int useHardwareId) {
+    public boolean deleteFingerprintByUseHardwareId(int userHardwareId) {
         //查询到该指纹信息
-        UserHardware userHardware = hardwareMapper.selectByUseHardwareId(useHardwareId);
+        UserHardware userHardware = hardwareMapper.selectByUseHardwareId(userHardwareId);
         //查看用户是否有绑定一个授权许可
         List<UserSoftwareLicense> userSoftwareLicenses = hardwareMapper.selectUserSoftwareLicensesByUserIdAndFingerprint(userHardware.getUserId(), userHardware.getFingerprint());
         if (userSoftwareLicenses.size() == 0){
-            int i = hardwareMapper.deleteUserHardwareByUseHardwareId(useHardwareId);
+            int i = hardwareMapper.deleteUserHardwareByUseHardwareId(userHardwareId);
             return true; //删除成功
         }else {
             //用户有绑定授权许可
             for (UserSoftwareLicense userSoftwareLicense : userSoftwareLicenses) {
-                //比较时间判断是否这个许可已经过期
-                //只要出来一个是还没有到过期时间，就直接退出循环，不能删除
+                // 比较时间判断是否这个许可已经过期
+                // 只要出来一个是还没有到过期时间，就直接退出循环，不能删除
                 if(!TimeUtils.parseTime(userSoftwareLicense.getExpiredTime()).isBefore(LocalDateTime.now())){
                     return false; //不能删除
                 }
             }
             //所有的授权许可都已经过期，可以删除该绑定的指纹信息
-            int i = hardwareMapper.deleteUserHardwareByUseHardwareId(useHardwareId);
+            int i = hardwareMapper.deleteUserHardwareByUseHardwareId(userHardwareId);
             return true; //删除成功
         }
     }
