@@ -43,6 +43,10 @@ public class SoftwareInfoTemp {
 
     private String tagsString;
 
+    private float price;
+
+    private String softwareImage;
+
     public void TagsToString(){
         if(tags!=null){
             tagsString= JSON.toJSONString(tags);

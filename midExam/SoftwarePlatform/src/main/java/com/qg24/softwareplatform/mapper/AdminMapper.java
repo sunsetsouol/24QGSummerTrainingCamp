@@ -39,4 +39,8 @@ public interface AdminMapper {
     @Insert("insert into software_version_download (software_id,version_type,version,price,win_url,linux_url,mac_url,create_time,detailed_description) " +
             "values (#{softwareId},#{versionType},#{version},#{price},#{winUrl},#{linuxUrl},#{macUrl},#{createTime},#{detailedDescription})")
     int insertNewSoftwareDownloadTable(SoftwareVersionDownload softwareVersionDownload);
+
+    //查software表的softwareId
+    @Select("select software_id from software where software_name=#{softwareName}")
+    int getSoftwareId(String softwareName);
 }
