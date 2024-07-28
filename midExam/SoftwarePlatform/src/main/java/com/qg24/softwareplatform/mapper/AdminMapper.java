@@ -23,5 +23,5 @@ public interface AdminMapper {
     List<SoftwareInfoTemp> getSoftwareInfoTempPages(@Param("limit") int limit,@Param("offset")int offset);
 
     //管理员审查版本,更改审查记录的状态码
-    int updateSoftwareInfoTemp(int softwareInfoTempId,int status);
+    int updateSoftwareInfoTemp(@Param("softwareInfoTempId") int softwareInfoTempId, @Param("status") int status);
 }
