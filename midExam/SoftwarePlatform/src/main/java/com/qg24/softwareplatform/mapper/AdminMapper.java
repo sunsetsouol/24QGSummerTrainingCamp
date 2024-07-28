@@ -1,13 +1,10 @@
 package com.qg24.softwareplatform.mapper;
 
 import com.qg24.softwareplatform.po.dto.UpdateSoftwareLatestInfoDTO;
-import com.qg24.softwareplatform.po.dto.UserLicenseDTO;
 import com.qg24.softwareplatform.po.entity.Software;
 import com.qg24.softwareplatform.po.entity.SoftwareInfoTemp;
-import com.qg24.softwareplatform.po.entity.UserSoftwareLicense;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -23,5 +20,5 @@ public interface AdminMapper {
     List<SoftwareInfoTemp> getSoftwareInfoTempPages(@Param("limit") int limit,@Param("offset")int offset);
 
     //管理员审查版本,更改审查记录的状态码
-    int updateSoftwareInfoTemp(int softwareInfoTempId,int status);
+    int updateSoftwareInfoTemp(@Param("softwareInfoTempId") int softwareInfoTempId, @Param("status") int status);
 }

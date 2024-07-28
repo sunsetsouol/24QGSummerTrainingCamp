@@ -3,7 +3,9 @@ package com.qg24.softwareplatform.po.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.mail.Multipart;
 import java.util.List;
 
 /**
@@ -13,28 +15,29 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UploadNewSoftwareDTO {
-    /**
-     * 授权时间
-     */
-    private String authTime;
-    /**
-     * 指纹信息
-     */
-    private String fingerprint;
-    /**
-     * 过期时间
-     */
-    private String expireTime;
-    /**
-     * 软件信息列表
-     */
-    private List<SoftwareSimpleInfoDTO> softwareList;
-    /**
-     * 用户id
-     */
+
     private String userId;
-    /**
-     * 表id
-     */
-    private String userLicenseId;
+
+    private String softwareName;
+
+    private int versionType;
+
+    private String version;
+
+    private String briefDescription;
+
+    private String detailedDescription;
+
+    private String author;
+
+    private List<String> tags;
+
+    private int typeStatus;
+
+    private MultipartFile winPackage;
+
+    private MultipartFile linuxPackage;
+
+    private MultipartFile macPackage;
+
 }
