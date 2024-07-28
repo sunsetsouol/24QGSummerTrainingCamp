@@ -7,7 +7,7 @@
         update software
         set
         <if test="softwareName != null">
-            softwareName = #{softwareName},
+            software_name = #{softwareName},
         </if>
         <if test="author != null">
             author = #{author},
@@ -19,20 +19,18 @@
             tags = #{tagsString},
         </if>
         <if test="status != null">
-            status = #{status},
+            status = #{status}
         </if>
-        update_at = NOW()
-        Where softwareId = #{softwareId}
+        Where soft_ware_id = #{softwareId}
     </update>
     
     <update id="updateSoftwareLatestInfo">
         update software_version_download
         set
         <if test="detailedDescription != null">
-            detailedDescription = #{detailedDescription},
+            detailed_description = #{detailedDescription}
         </if>
-        update_at = NOW()
-        Where softwareId = #{softwareId} and versionType = #{versionType} and version = #{version}
+        Where soft_ware_id = #{softwareId} and version_type = #{versionType} and version = #{version}
     </update>
 
     <select id="getSoftwareInfoTempPages" resultType="com.qg24.softwareplatform.po.entity.SoftwareInfoTemp">
@@ -45,9 +43,8 @@
         update software_info_temp
         set
         <if test="status != null">
-            passedStatus = #{status},
+            passed_status = #{status}
         </if>
-        update_at = NOW()
-        Where softwareInfoTempId = #{softwareInfoTempId}
+        Where software_info_temp_id = #{softwareInfoTempId}
     </update>
 </mapper>
