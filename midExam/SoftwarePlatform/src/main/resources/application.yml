@@ -22,12 +22,11 @@ email:
     password: ecxcdzqqmwslddcj
     username: 3087609114@qq.com
     port: 587
-#huawei-obs:
-#    ak: F915WYG9INM7JCMKWYA8
-#    sk: bWMR0xxcVBxOA6URk86efzREAOXLzoZvu6lkU00M
-#    end-point: https://obs.cn-south-1.myhuaweicloud.com
-#    bucket-name: qg23onnx
-
+alioss:
+    bucket-name: faken
+    access-key-secret: EePxVtk99UdGJMxOtaOZeUSrdMqSGK
+    access-key-id: LTAI5tQ717VX5w1AMvos7M1A
+    endpoint: oss-cn-guangzhou.aliyuncs.com
 
 
 

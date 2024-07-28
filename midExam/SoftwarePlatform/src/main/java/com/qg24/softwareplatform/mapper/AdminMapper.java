@@ -1,11 +1,9 @@
 package com.qg24.softwareplatform.mapper;
 
 import com.qg24.softwareplatform.po.dto.UpdateSoftwareLatestInfoDTO;
-import com.qg24.softwareplatform.po.dto.UserLicenseDTO;
 import com.qg24.softwareplatform.po.entity.Software;
 import com.qg24.softwareplatform.po.entity.SoftwareInfoTemp;
 import com.qg24.softwareplatform.po.entity.SoftwareVersionDownload;
-import com.qg24.softwareplatform.po.entity.UserSoftwareLicense;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -31,7 +29,7 @@ public interface AdminMapper {
 
     //插入新软件信息到软件表(返回主键)
     @Options(useGeneratedKeys = true, keyProperty = "softwareId")
-    @Insert("insert into software (software_name,author,user_id,tags,description,softwareImage,createTime) " +
+    @Insert("insert into software (software_name,author,user_id,tags,description,software_image,create_time) " +
             "values (#{softwareName},#{author},#{userId},#{tagsString},#{description},#{softwareImage},#{createTime})")
     int insertNewSoftwareTable(Software software);
 

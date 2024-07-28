@@ -25,7 +25,7 @@ public class SoftwareController {
     private SoftwareService softwareService;
     // 首页分页展示软件
     @GetMapping("/homePageShowSoftware")
-    public Result<PageBean<SimpleSoftwareVO>> homePageShowSoftware(@RequestParam HomePageShowSoftwareDTO homePageShowSoftwareDTO){
+    public Result<PageBean<SimpleSoftwareVO>> homePageShowSoftware(@ModelAttribute HomePageShowSoftwareDTO homePageShowSoftwareDTO){
         PageBean<SimpleSoftwareVO> pageBean = softwareService.homePageShowSoftware(homePageShowSoftwareDTO);
         return Result.success("", pageBean);
     }
@@ -42,7 +42,6 @@ public class SoftwareController {
 
 
     }
-
 
     // 软件详情页 上半部分基本软件信息
     @GetMapping("/basicSoftwareInfo")
