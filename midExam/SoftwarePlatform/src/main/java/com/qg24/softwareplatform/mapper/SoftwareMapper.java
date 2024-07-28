@@ -69,6 +69,8 @@ public interface SoftwareMapper {
     @Insert("insert into software_info_temp(user_id,software_name,version_type,version,brief_description," +
             "detailed_description,win_url,linux_url,mac_url,tags,type_status,passed_status,author) " +
             "values(#{userId},#{softwareName},#{versionType},#{verison},#{briefDescription},#{detailedDescription}," +
-            "#{applicationTime},#{winUrl},#{linuxUrl},#{macUrl},#{tagsToString},#{typeStatus},#{passedStatus},#{author})")
-    int addSoftwareInforTemp(SoftwareInfoTemp softwareInfoTemp);
+            "#{winUrl},#{linuxUrl},#{macUrl},#{tagsToString},#{typeStatus},#{passedStatus},#{author})")
+    int addSoftwareInfoTemp(SoftwareInfoTemp softwareInfoTemp);
+
+    List<Software> pageQuery(String softwareName, int offset, int pageSize);
 }
