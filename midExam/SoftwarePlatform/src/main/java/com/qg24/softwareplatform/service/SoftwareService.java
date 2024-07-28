@@ -12,7 +12,7 @@ import com.qg24.softwareplatform.po.vo.SoftwareHistoryVersionDownloadVO;
 import java.util.List;
 
 public interface SoftwareService {
-    //PageBean<SimpleSoftwareVO> homePageShowSoftware(HomePageShowSoftwareDTO homePageShowSoftwareDTO);
+    PageBean<SimpleSoftwareVO> homePageShowSoftware(HomePageShowSoftwareDTO homePageShowSoftwareDTO);
 
     List<SimpleSoftwareVO> softwareRanking();
 
