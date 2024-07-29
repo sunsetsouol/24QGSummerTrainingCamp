@@ -47,7 +47,7 @@ public class AccountServiceImpl implements AccountService {
     public UserAndToken login(LoginDTO loginDTO) {
         Map<String, Object> claims = new HashMap<>();
         UserAndToken userAndToken = new UserAndToken();
-        User user = new User();
+        User user = null;
         // TODO 常量类设置 0 1
         if (loginDTO.getRole() == 1) {
             user = accountMapper.selectByAccountAndPassword(loginDTO);
