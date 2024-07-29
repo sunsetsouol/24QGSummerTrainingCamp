@@ -70,9 +70,9 @@ public class AuthorizationController {
     public Result<?> onlineVertification(@RequestBody OnlineVerificationDTO onlineVerificationDTO){
         boolean b = authorizationService.onlineVertification(onlineVerificationDTO);
         if(b){
-            return Result.success("通过");
+            return Result.success("VERIFIED");
         }else {
-            return Result.error("不通过");
+            return Result.error("REJECTED");
         }
     }
 
