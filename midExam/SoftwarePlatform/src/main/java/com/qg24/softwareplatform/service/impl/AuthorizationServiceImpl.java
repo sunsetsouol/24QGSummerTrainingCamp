@@ -33,7 +33,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     @Override
     public boolean purchaseAuth(@RequestBody PurchaseDTO purchaseDTO) {
         //把软件列表转化为字符串
-        String s = purchaseDTO.getSoftwareList().toString();
+        String s = JSON.toJSONString(purchaseDTO.getSoftwareList());
 
         //添加订单信息先
         Order order = new Order();
@@ -46,7 +46,14 @@ public class AuthorizationServiceImpl implements AuthorizationService {
         UserSoftwareLicense userSoftwareLicense = new UserSoftwareLicense();
         BeanUtils.copyProperties(purchaseDTO, userSoftwareLicense);
         userSoftwareLicense.setSoftwareList(s);
+
+        // TODO 实现将数据保存文件并加密上上传到云端服务器，返回url
+        String licenseUrl = "www.baidu.com";
+        userSoftwareLicense.setLicenseUrl(licenseUrl);
+
+
         authorizationMapper.addUserSoftwareLicense(userSoftwareLicense);
+
 
         //添加用户软件授权表
         List<AuthSoftwareDTO> authSoftwareDTOList = purchaseDTO.getSoftwareList();
