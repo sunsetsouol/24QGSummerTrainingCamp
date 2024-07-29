@@ -10,21 +10,31 @@ import com.qg24.softwareplatform.po.entity.UserSoftwareLicense;
 import com.qg24.softwareplatform.po.vo.DownloadUrlsVO;
 import com.qg24.softwareplatform.po.vo.ShowLicenseVO;
 import com.qg24.softwareplatform.service.AuthorizationService;
+import com.qg24.softwareplatform.util.AliOssUtil;
 import com.qg24.softwareplatform.util.TimeUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class AuthorizationServiceImpl implements AuthorizationService {
 
     @Autowired
     private AuthorizationMapper authorizationMapper;
+    @Autowired
+    private AliOssUtil aliOssUtil;
 
     /**
      * 用户购买授权
@@ -32,7 +42,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
      * @return
      */
     @Override
-    public boolean purchaseAuth(@RequestBody PurchaseDTO purchaseDTO) {
+    public boolean purchaseAuth(@RequestBody PurchaseDTO purchaseDTO) throws IOException {
         //把软件列表转化为字符串
         String s = JSON.toJSONString(purchaseDTO.getSoftwareList());
 
@@ -69,6 +79,43 @@ public class AuthorizationServiceImpl implements AuthorizationService {
         }
         //购买完成
         return true;
+    }
+
+    private String generateAuthFileAndUpload(String fingerprint, List<AuthSoftwareDTO> softwareList) throws IOException {
+        /**
+         * 1. 将信息写入文件
+         * 2. 转化为byte数组, 传入数组以及文件名
+         * 3. 删除文件, 返回路径
+         */
+        String randomFileName = UUID.randomUUID().toString().replace("-", "") + ".txt";
+        Path tempFilePath = null;
+        try {
+            tempFilePath = Files.createFile(Paths.get(randomFileName));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            assert tempFilePath != null;
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(tempFilePath.toFile()))) {
+                writer.write(fingerprint);
+                writer.newLine();
+                for (AuthSoftwareDTO authSoftwareDTO : softwareList) {
+                    String softwareName = authSoftwareDTO.getSoftwareName();
+                    int versionType = authSoftwareDTO.getVersionType();
+                    String softInfo = softwareName + ":" + versionType;
+                    writer.write(softInfo);
+                    writer.newLine();
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // TODO 加密
+        byte[] fileBytes = Files.readAllBytes(tempFilePath);
+
+        return aliOssUtil.upload(fileBytes, randomFileName);
     }
 
     /**
