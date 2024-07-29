@@ -53,4 +53,17 @@
     </select>
 
 
+
+<!--    查询用户可以更新的软件-->
+    <select id="selectSoftwareUserCanUpdate"
+            resultType="com.qg24.softwareplatform.po.vo.CheckLastestSoftwareVO">
+        select svd.software_id,svd.version,svd.version_type,s.software_name,s.software_image from
+        software_version_download as svd
+        inner join user_software_download as usd
+        on usd.user_id = #{userId} and svd.software_id = usd.software_id and svd.version_type = usd.version_type and svd.version != usd.version
+        inner join software as s
+        on svd.software_id = s.software_id;
+    </select>
+
+
 </mapper>

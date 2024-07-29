@@ -8,10 +8,7 @@ import com.qg24.softwareplatform.po.entity.Software;
 import com.qg24.softwareplatform.po.entity.UserSoftwareDownload;
 import com.qg24.softwareplatform.po.result.PageBean;
 import com.qg24.softwareplatform.po.result.Result;
-import com.qg24.softwareplatform.po.vo.DetailedSoftwareVersionTypeVO;
-import com.qg24.softwareplatform.po.vo.ShowRequiredAuthSoftwareVO;
-import com.qg24.softwareplatform.po.vo.SimpleSoftwareVO;
-import com.qg24.softwareplatform.po.vo.SoftwareHistoryVersionDownloadVO;
+import com.qg24.softwareplatform.po.vo.*;
 import com.qg24.softwareplatform.service.SoftwareService;
 import org.apache.logging.log4j.core.appender.rolling.action.IfAccumulatedFileCount;
 import org.springframework.beans.BeanUtils;
@@ -121,5 +118,20 @@ public class SoftwareController {
             return Result.success("操作成功");
         }
         return Result.error("unknown"); //未知操作
+    }
+
+    /**
+     * 查看用户是否有可更新的软件
+     * @param userId
+     * @return
+     */
+    @GetMapping("/checkLatestSoftware")
+    public Result<?> checkLatestSoftware (@RequestParam("userId") String userId){
+        List<CheckLastestSoftwareVO> checkLastestSoftwareVOS = softwareService.checkLatestSoftware(userId);
+        if (checkLastestSoftwareVOS == null){
+            return Result.success("没有可更新的软件");
+        }else {
+            return Result.success("有可更新的软件", checkLastestSoftwareVOS);
+        }
     }
 }

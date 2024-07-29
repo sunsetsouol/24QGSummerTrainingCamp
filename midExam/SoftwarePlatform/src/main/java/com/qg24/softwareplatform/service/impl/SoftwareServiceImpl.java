@@ -10,10 +10,7 @@ import com.qg24.softwareplatform.po.entity.SoftwareInfoTemp;
 import com.qg24.softwareplatform.po.entity.SoftwareVersionDownload;
 import com.qg24.softwareplatform.po.entity.UserSoftwareDownload;
 import com.qg24.softwareplatform.po.result.PageBean;
-import com.qg24.softwareplatform.po.vo.DetailedSoftwareVersionTypeVO;
-import com.qg24.softwareplatform.po.vo.ShowRequiredAuthSoftwareVO;
-import com.qg24.softwareplatform.po.vo.SimpleSoftwareVO;
-import com.qg24.softwareplatform.po.vo.SoftwareHistoryVersionDownloadVO;
+import com.qg24.softwareplatform.po.vo.*;
 import com.qg24.softwareplatform.service.SoftwareService;
 import com.qg24.softwareplatform.util.AliOssUtil;
 import org.springframework.beans.BeanUtils;
@@ -199,6 +196,22 @@ public class SoftwareServiceImpl implements SoftwareService {
         }else {
             //有此记录，更新新版本号即可
             return softwareMapper.updateUserSoftwareDownload(userSoftwareDownload);
+        }
+    }
+
+    /**
+     * 判断用户是否有可更新的软件
+     * @param userId
+     * @return
+     */
+    @Override
+    public List<CheckLastestSoftwareVO> checkLatestSoftware(String userId) {
+        List<CheckLastestSoftwareVO> checkLastestSoftwareVOS = softwareMapper.selectSoftwareUserCanUpdate(userId);
+        //判断是否有东西
+        if (checkLastestSoftwareVOS.size() == 0){
+            return null;
+        }else {
+            return checkLastestSoftwareVOS;
         }
     }
 
