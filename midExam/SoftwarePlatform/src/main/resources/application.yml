@@ -22,11 +22,7 @@ email:
     password: ecxcdzqqmwslddcj
     username: 3087609114@qq.com
     port: 587
-alioss:
-    bucket-name: faken
-    access-key-secret: EePxVtk99UdGJMxOtaOZeUSrdMqSGK
-    access-key-id: LTAI5tQ717VX5w1AMvos7M1A
-    endpoint: oss-cn-guangzhou.aliyuncs.com
+
 
 
 
