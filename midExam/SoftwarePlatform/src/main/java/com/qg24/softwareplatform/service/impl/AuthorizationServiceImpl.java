@@ -49,7 +49,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
         userSoftwareLicense.setSoftwareList(s);
 
         // TODO 实现将数据保存文件并加密上上传到云端服务器，返回url
-        String licenseUrl = "www.baidu.com";
+        String licenseUrl = generateAuthFileAndUpload(purchaseDTO.getFingerprint(), purchaseDTO.getSoftwareList());
         userSoftwareLicense.setLicenseUrl(licenseUrl);
 
 
