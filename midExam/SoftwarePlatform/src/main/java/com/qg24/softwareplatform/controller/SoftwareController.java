@@ -3,7 +3,9 @@ package com.qg24.softwareplatform.controller;
 import com.qg24.softwareplatform.po.dto.HistorySoftwareVersionDTO;
 import com.qg24.softwareplatform.po.dto.HomePageShowSoftwareDTO;
 import com.qg24.softwareplatform.po.dto.UploadNewSoftwareDTO;
+import com.qg24.softwareplatform.po.dto.UserDownloadSoftwareDTO;
 import com.qg24.softwareplatform.po.entity.Software;
+import com.qg24.softwareplatform.po.entity.UserSoftwareDownload;
 import com.qg24.softwareplatform.po.result.PageBean;
 import com.qg24.softwareplatform.po.result.Result;
 import com.qg24.softwareplatform.po.vo.DetailedSoftwareVersionTypeVO;
@@ -11,6 +13,8 @@ import com.qg24.softwareplatform.po.vo.ShowRequiredAuthSoftwareVO;
 import com.qg24.softwareplatform.po.vo.SimpleSoftwareVO;
 import com.qg24.softwareplatform.po.vo.SoftwareHistoryVersionDownloadVO;
 import com.qg24.softwareplatform.service.SoftwareService;
+import org.apache.logging.log4j.core.appender.rolling.action.IfAccumulatedFileCount;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,21 +27,22 @@ public class SoftwareController {
 
     @Autowired
     private SoftwareService softwareService;
+
     // 首页分页展示软件
     @GetMapping("/homePageShowSoftware")
-    public Result<PageBean<SimpleSoftwareVO>> homePageShowSoftware(@ModelAttribute HomePageShowSoftwareDTO homePageShowSoftwareDTO){
+    public Result<PageBean<SimpleSoftwareVO>> homePageShowSoftware(@ModelAttribute HomePageShowSoftwareDTO homePageShowSoftwareDTO) {
         PageBean<SimpleSoftwareVO> pageBean = softwareService.homePageShowSoftware(homePageShowSoftwareDTO);
         return Result.success("", pageBean);
     }
 
     // 软件热门排行
     @GetMapping("/softwareRanking")
-    public Result<?> softwareRanking(){
+    public Result<?> softwareRanking() {
         List<SimpleSoftwareVO> softwareVOS = softwareService.softwareRanking();
-        if (softwareVOS.isEmpty()){
+        if (softwareVOS.isEmpty()) {
             return Result.error("");
-        }else {
-            return Result.success("",softwareVOS);
+        } else {
+            return Result.success("", softwareVOS);
         }
 
 
@@ -45,11 +50,11 @@ public class SoftwareController {
 
     // 软件详情页 上半部分基本软件信息
     @GetMapping("/basicSoftwareInfo")
-    public Result<?> basicSoftwareInfo(@RequestParam("softwareId") int softwareId){
+    public Result<?> basicSoftwareInfo(@RequestParam("softwareId") int softwareId) {
         Software software = softwareService.basicSoftwareInfo(softwareId);
-        if (software != null ){
-            return Result.success("",software);
-        }else {
+        if (software != null) {
+            return Result.success("", software);
+        } else {
             return Result.error("");
         }
 
@@ -58,23 +63,23 @@ public class SoftwareController {
 
     // 软件详情页 下半部分 普通/专业 软件信息
     @GetMapping("/detailedSoftwareInfo")
-    public Result<?> detailedSoftwareInfo(@RequestParam("softwareId") int softwareId){
+    public Result<?> detailedSoftwareInfo(@RequestParam("softwareId") int softwareId) {
         List<DetailedSoftwareVersionTypeVO> detailedSoftwareVersionTypeVOList = softwareService.detailedSoftwareInfo(softwareId);
-        if (detailedSoftwareVersionTypeVOList.isEmpty()){
+        if (detailedSoftwareVersionTypeVOList.isEmpty()) {
             return Result.error("");
-        }else {
-            return Result.success("",detailedSoftwareVersionTypeVOList);
+        } else {
+            return Result.success("", detailedSoftwareVersionTypeVOList);
         }
     }
 
     // 软件详情页下半 历史查看
     @GetMapping("/historySoftwareVersion")
-    public Result<?> historySoftwareVersion(@RequestParam HistorySoftwareVersionDTO historySoftwareVersionDTO){
+    public Result<?> historySoftwareVersion(@RequestParam HistorySoftwareVersionDTO historySoftwareVersionDTO) {
         List<SoftwareHistoryVersionDownloadVO> softwareHistoryVersionDownloadVOList = softwareService.historySoftwareVersion(historySoftwareVersionDTO);
-        if (softwareHistoryVersionDownloadVOList.isEmpty()){
+        if (softwareHistoryVersionDownloadVOList.isEmpty()) {
             return Result.error("");
-        }else {
-            return Result.success("",softwareHistoryVersionDownloadVOList);
+        } else {
+            return Result.success("", softwareHistoryVersionDownloadVOList);
         }
     }
 
@@ -82,9 +87,9 @@ public class SoftwareController {
     // 上传软件/更新软件
     @PostMapping("/upload")
     public Result<?> upload(@ModelAttribute UploadNewSoftwareDTO uploadNewSoftwareDTO) throws IOException {
-        if (softwareService.uploadNewSoftware(uploadNewSoftwareDTO) != 0){
-            return Result.success("",null);
-        }else {
+        if (softwareService.uploadNewSoftware(uploadNewSoftwareDTO) != 0) {
+            return Result.success("", null);
+        } else {
             return Result.error("");
         }
 
@@ -92,14 +97,29 @@ public class SoftwareController {
 
     //用户查看需要购买的软件信息
     @GetMapping("/showRequiredAuthSoftware")
-    public Result<?> showRequiredAuthSoftware(@RequestParam("userId") int userId){
+    public Result<?> showRequiredAuthSoftware(@RequestParam("userId") int userId) {
         List<ShowRequiredAuthSoftwareVO> showRequiredAuthSoftwareVOList = softwareService.showRequiredAuthSoftware(userId);
-        if (showRequiredAuthSoftwareVOList.isEmpty()){
+        if (showRequiredAuthSoftwareVOList.isEmpty()) {
             return Result.error("");
-        }else{
-            return Result.success("",showRequiredAuthSoftwareVOList);
+        } else {
+            return Result.success("", showRequiredAuthSoftwareVOList);
         }
     }
 
-
+    /**
+     * 用户下载后保存此次下载记录,或者
+     *
+     * @param userDownloadSoftwareDTO
+     * @return
+     */
+    @PostMapping("/downloadSoftware")
+    public Result<?> downloadSoftware(@RequestBody UserDownloadSoftwareDTO userDownloadSoftwareDTO) {
+        int i = softwareService.addOrUpdateUserSoftwareDownload(userDownloadSoftwareDTO);
+        if (i == 0) {
+            return Result.error("操作失败");
+        } else if (i != 0) {
+            return Result.success("操作成功");
+        }
+        return Result.error("unknown"); //未知操作
+    }
 }
