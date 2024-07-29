@@ -20,4 +20,6 @@ public class UserSoftwareLicense {
     private String userId;
 
     private int userSoftwareLicenseId;
+
+    private String licenseUrl;
 }

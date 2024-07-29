@@ -4,6 +4,9 @@ import com.qg24.softwareplatform.po.dto.CheckAuthDTO;
 import com.qg24.softwareplatform.po.dto.OnlineVerificationDTO;
 import com.qg24.softwareplatform.po.dto.PurchaseDTO;
 import com.qg24.softwareplatform.po.vo.DownloadUrlsVO;
+import com.qg24.softwareplatform.po.vo.ShowLicenseVO;
+
+import java.util.List;
 
 public interface AuthorizationService {
 
@@ -20,4 +23,6 @@ public interface AuthorizationService {
     public boolean onlineVertification(OnlineVerificationDTO onlineVerificationDTO);
 
 
+    // 获取用户的授权许可，成功返回List集合
+    List<ShowLicenseVO> getLicense(String userId);
 }

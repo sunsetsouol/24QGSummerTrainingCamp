@@ -40,4 +40,7 @@ public interface AuthorizationMapper {
     public List<UserSoftwareLicense> selectByFingerprint(String fingerprint);
 
 
+    // 根据用户id查找用户软件授权许可表
+    @Select("select * from user_software_license where user_id = #{userId}")
+    List<UserSoftwareLicense> selectLicenseByUserId(String userId);
 }

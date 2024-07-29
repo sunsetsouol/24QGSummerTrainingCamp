@@ -8,6 +8,7 @@ import com.qg24.softwareplatform.po.entity.SoftwareVersionDownload;
 import com.qg24.softwareplatform.po.entity.UserSoftwareAuth;
 import com.qg24.softwareplatform.po.entity.UserSoftwareLicense;
 import com.qg24.softwareplatform.po.vo.DownloadUrlsVO;
+import com.qg24.softwareplatform.po.vo.ShowLicenseVO;
 import com.qg24.softwareplatform.service.AuthorizationService;
 import com.qg24.softwareplatform.util.TimeUtils;
 import org.springframework.beans.BeanUtils;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -32,7 +34,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     @Override
     public boolean purchaseAuth(@RequestBody PurchaseDTO purchaseDTO) {
         //把软件列表转化为字符串
-        String s = purchaseDTO.getSoftwareList().toString();
+        String s = JSON.toJSONString(purchaseDTO.getSoftwareList());
 
         //添加订单信息先
         Order order = new Order();
@@ -130,6 +132,33 @@ public class AuthorizationServiceImpl implements AuthorizationService {
             }
         }
         return false; //失败
+    }
+
+    /**
+     *  用户查看自己购买的授权许可
+     * @param userId
+     * @return
+     */
+    @Override
+    public List<ShowLicenseVO> getLicense(String userId) {
+        // 根据用户id查找用户授权许可表
+        List<UserSoftwareLicense> userSoftwareLicenseList = authorizationMapper.selectLicenseByUserId(userId);
+        List<ShowLicenseVO> showLicenseVOList = new ArrayList<>();
+
+        // 遍历每条数据
+        for (UserSoftwareLicense userSoftwareLicense : userSoftwareLicenseList) {
+            ShowLicenseVO showLicenseVO = new ShowLicenseVO();
+            // 将entity包装成VO类
+            BeanUtils.copyProperties(userSoftwareLicense, showLicenseVO);
+            String softwareList = userSoftwareLicense.getSoftwareList();
+            // 将字符串形式转化为List集合
+            List<AuthSoftwareDTO> softwareDTOList = JSON.parseArray(softwareList, AuthSoftwareDTO.class);
+            // 进行包装
+            showLicenseVO.setSoftwareList(softwareDTOList);
+            // 将这个对象封装到集合中
+            showLicenseVOList.add(showLicenseVO);
+        }
+        return showLicenseVOList;
     }
 
 
