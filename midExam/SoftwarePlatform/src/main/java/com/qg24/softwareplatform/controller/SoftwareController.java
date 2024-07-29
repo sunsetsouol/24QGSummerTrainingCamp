@@ -5,13 +5,10 @@ import com.qg24.softwareplatform.po.dto.HomePageShowSoftwareDTO;
 import com.qg24.softwareplatform.po.dto.UploadNewSoftwareDTO;
 import com.qg24.softwareplatform.po.dto.UserDownloadSoftwareDTO;
 import com.qg24.softwareplatform.po.entity.Software;
-import com.qg24.softwareplatform.po.entity.UserSoftwareDownload;
 import com.qg24.softwareplatform.po.result.PageBean;
 import com.qg24.softwareplatform.po.result.Result;
 import com.qg24.softwareplatform.po.vo.*;
 import com.qg24.softwareplatform.service.SoftwareService;
-import org.apache.logging.log4j.core.appender.rolling.action.IfAccumulatedFileCount;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

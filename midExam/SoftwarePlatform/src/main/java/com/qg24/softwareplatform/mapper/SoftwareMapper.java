@@ -6,16 +6,8 @@ import com.qg24.softwareplatform.po.entity.SoftwareInfoTemp;
 import com.qg24.softwareplatform.po.entity.SoftwareVersionDownload;
 import com.qg24.softwareplatform.po.entity.UserSoftwareDownload;
 import com.qg24.softwareplatform.po.vo.CheckLastestSoftwareVO;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
 import com.qg24.softwareplatform.po.vo.ShowRequiredAuthSoftwareVO;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Select;
+import com.qg24.softwareplatform.po.vo.SimpleSoftwareVO;
 import org.apache.ibatis.annotations.*;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -30,7 +22,7 @@ public interface SoftwareMapper {
      * 主页分页查询软件，模糊查询
      * @return List<Software>
      */
-    List<Software> pagedQuerySoftwareBySoftNameAndTags(@Param("softwareName") String softwareName, @Param("offset") int offset, @Param("pageSize") int pageSize);
+    List<SimpleSoftwareVO> pagedQuerySoftwareBySoftNameAndTags(@Param("softwareName") String softwareName, @Param("offset") int offset, @Param("pageSize") int pageSize, @Param("tags") List<String> tags);
 
     /**
      * 根据下载量判断软件最热排行
