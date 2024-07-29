@@ -94,11 +94,11 @@ public interface SoftwareMapper {
     int addUserSoftwareDownload(UserSoftwareDownload userSoftwareDownload);
 
     //查找用户的软件下载记录
-    @Select("select * from user_software_download where user_id = #{userId} And sofrware_id = #{softwareId} And version_type = #{versionType}")
+    @Select("select * from user_software_download where user_id = #{userId} And software_id = #{softwareId} And version_type = #{versionType}")
     UserSoftwareDownload selectByThreeConditions(UserSoftwareDownload userSoftwareDownload);
 
     //更新用户下载记录
-    @Update("update user_software_download set version = #{version} where user_id = #{userId} And sofrware_id = #{softwareId} And version_type = #{versionType}")
+    @Update("update user_software_download set version = #{version} where user_id = #{userId} And software_id = #{softwareId} And version_type = #{versionType}")
     int updateUserSoftwareDownload(UserSoftwareDownload userSoftwareDownload);
 
 
