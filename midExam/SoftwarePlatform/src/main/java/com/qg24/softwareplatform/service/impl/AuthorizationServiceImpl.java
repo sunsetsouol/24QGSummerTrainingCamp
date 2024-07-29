@@ -1,7 +1,6 @@
 package com.qg24.softwareplatform.service.impl;
 
 import com.alibaba.fastjson2.JSON;
-import com.alibaba.fastjson2.JSONArray;
 import com.qg24.softwareplatform.mapper.AuthorizationMapper;
 import com.qg24.softwareplatform.po.dto.*;
 import com.qg24.softwareplatform.po.entity.Order;
@@ -108,12 +107,12 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 
     /**
      * (非前端)本地软件发送信息进行服务器比对接口
-     * @param onlineVertificationDTO
+     * @param onlineVerificationDTO
      * @return
      */
     @Override
-    public boolean onlineVertification(OnlineVertificationDTO onlineVertificationDTO) {
-        List<UserSoftwareLicense> userSoftwareLicenses = authorizationMapper.selectByFingerprint(onlineVertificationDTO.getFingerprint());
+    public boolean onlineVertification(OnlineVerificationDTO onlineVerificationDTO) {
+        List<UserSoftwareLicense> userSoftwareLicenses = authorizationMapper.selectByFingerprint(onlineVerificationDTO.getFingerprint());
         //遍历每一个许可文件
         for (UserSoftwareLicense userSoftwareLicense : userSoftwareLicenses) {
             //先判断这条许可有无过期
@@ -122,8 +121,8 @@ public class AuthorizationServiceImpl implements AuthorizationService {
                 List<SoftwareSimpleInfoDTO> array = JSON.parseArray(userSoftwareLicense.getSoftwareList(), SoftwareSimpleInfoDTO.class);
                 for (SoftwareSimpleInfoDTO softwareSimpleInfoDTO : array) {
                         //判断是否有这个信息匹配
-                    if(onlineVertificationDTO.getSoftwareName().equals(softwareSimpleInfoDTO.getSoftwareName())
-                    && onlineVertificationDTO.getVersionType() == (softwareSimpleInfoDTO.getVersionType())) {
+                    if(onlineVerificationDTO.getSoftwareName().equals(softwareSimpleInfoDTO.getSoftwareName())
+                    && onlineVerificationDTO.getVersionType() == (softwareSimpleInfoDTO.getVersionType())) {
                         //两个信息都匹配则为成功
                         return true;
                     }
