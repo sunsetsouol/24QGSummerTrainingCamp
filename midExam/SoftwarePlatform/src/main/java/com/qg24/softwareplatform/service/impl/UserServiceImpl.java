@@ -89,6 +89,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<Order> showUserOrder(String userId) {
+        // 根据用户id查看order表格
         List<Order> orderList = userMapper.selectOrderByUserId(userId);
         return orderList;
     }

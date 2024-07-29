@@ -74,6 +74,11 @@ public class UserController {
         }
     }
 
+    /**
+     *  用户查看购买记录
+     * @param userId
+     * @return
+     */
     @GetMapping("/showUserOrder")
     public Result<?> showUserOrder(@RequestParam("userId")String userId){
         List<Order> orderList = userService.showUserOrder(userId);
