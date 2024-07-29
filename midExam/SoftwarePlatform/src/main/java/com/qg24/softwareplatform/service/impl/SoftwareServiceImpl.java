@@ -44,8 +44,8 @@ public class SoftwareServiceImpl implements SoftwareService {
 
         // 进行子集的判断
         softwareList.forEach(software -> {
-            if (new HashSet<>(tags).containsAll(software.getTags())) {
-                // tags为用户想要软件拥有的标签, 查询软件时软件的标签应该为tags的子集
+            if (new HashSet<>(software.getTags()).containsAll(tags)) {
+                // tags为用户想要软件拥有的标签, 查询软件时软件的标签应该为tags的超集, 即tags全部都属于软件标签集合中
                 SimpleSoftwareVO simpleSoftwareVO = new SimpleSoftwareVO();
                 BeanUtils.copyProperties(software, simpleSoftwareVO);
                 simpleSoftwareVOS.add(simpleSoftwareVO);
