@@ -77,9 +77,9 @@ public interface SoftwareMapper {
      * @return
      */
     @Insert("insert into software_info_temp(user_id,software_name,version_type,version,brief_description," +
-            "detailed_description,win_url,linux_url,mac_url,tags,type_status,passed_status,author) " +
+            "detailed_description,win_url,linux_url,mac_url,tags,type_status,passed_status,author,software_image) " +
             "values(#{userId},#{softwareName},#{versionType},#{version},#{briefDescription},#{detailedDescription}," +
-            "#{winUrl},#{linuxUrl},#{macUrl},#{tagsString},#{typeStatus},#{passedStatus},#{author})")
+            "#{winUrl},#{linuxUrl},#{macUrl},#{tagsString},#{typeStatus},#{passedStatus},#{author},#{softwareImage})")
     int addSoftwareInfoTemp(SoftwareInfoTemp softwareInfoTemp);
 
 
