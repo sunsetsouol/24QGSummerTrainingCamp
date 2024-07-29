@@ -23,7 +23,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -98,9 +100,17 @@ public class AuthorizationServiceImpl implements AuthorizationService {
         try {
             assert tempFilePath != null;
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(tempFilePath.toFile()))) {
+                // 写入指纹, 原始数据为fingerprint
                 writer.write(fingerprint);
                 writer.newLine();
+
+                // 写入一年后的时间戳, 原始数据为oneYearLater
+                String oneYearLater = Instant.now().plus(1, ChronoUnit.YEARS).toString();
+                writer.write(oneYearLater);
+                writer.newLine();
+
                 for (AuthSoftwareDTO authSoftwareDTO : softwareList) {
+                    // 写入软件信息, 每条原始数据为authSoftwareDTO
                     String softwareName = authSoftwareDTO.getSoftwareName();
                     int versionType = authSoftwareDTO.getVersionType();
                     String softInfo = softwareName + ":" + versionType;
