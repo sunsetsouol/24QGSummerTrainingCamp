@@ -4,6 +4,7 @@ import com.qg24.softwareplatform.po.dto.HistorySoftwareVersionDTO;
 import com.qg24.softwareplatform.po.entity.Software;
 import com.qg24.softwareplatform.po.entity.SoftwareInfoTemp;
 import com.qg24.softwareplatform.po.entity.SoftwareVersionDownload;
+import com.qg24.softwareplatform.po.entity.UserSoftwareDownload;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -87,4 +88,18 @@ public interface SoftwareMapper {
     List<Map<String, Object>> select(String userId);
 
     int getTotal(@Param("softwareName") String softwareName, @Param("tags") List<String> tags);
+
+    //插入新的用户软件下载信息
+    @Insert("insert into user_software_download (user_id, software_id, version_type, version) values (#{userId}, #{softwareId}, #{versionType}, #{version})")
+    int addUserSoftwareDownload(UserSoftwareDownload userSoftwareDownload);
+
+    //查找用户的软件下载记录
+    @Select("select * from user_software_download where user_id = #{userId} And software_id = #{softwareId} And version_type = #{versionType}")
+    UserSoftwareDownload selectByThreeConditions(UserSoftwareDownload userSoftwareDownload);
+
+    //更新用户下载记录
+    @Update("update user_software_download set version = #{version} where user_id = #{userId} And software_id = #{softwareId} And version_type = #{versionType}")
+    int updateUserSoftwareDownload(UserSoftwareDownload userSoftwareDownload);
+
+
 }

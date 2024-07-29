@@ -4,9 +4,11 @@ import com.qg24.softwareplatform.mapper.SoftwareMapper;
 import com.qg24.softwareplatform.po.dto.HistorySoftwareVersionDTO;
 import com.qg24.softwareplatform.po.dto.HomePageShowSoftwareDTO;
 import com.qg24.softwareplatform.po.dto.UploadNewSoftwareDTO;
+import com.qg24.softwareplatform.po.dto.UserDownloadSoftwareDTO;
 import com.qg24.softwareplatform.po.entity.Software;
 import com.qg24.softwareplatform.po.entity.SoftwareInfoTemp;
 import com.qg24.softwareplatform.po.entity.SoftwareVersionDownload;
+import com.qg24.softwareplatform.po.entity.UserSoftwareDownload;
 import com.qg24.softwareplatform.po.result.PageBean;
 import com.qg24.softwareplatform.po.vo.DetailedSoftwareVersionTypeVO;
 import com.qg24.softwareplatform.po.vo.ShowRequiredAuthSoftwareVO;
@@ -180,5 +182,24 @@ public class SoftwareServiceImpl implements SoftwareService {
         return showRequiredAuthSoftwareVOList;
     }
 
+    /**
+     * 用户下载的话即添加下载记录，更新就更新版本号
+     * @param userDownloadSoftwareDTO
+     * @return
+     */
+    @Override
+    public int addOrUpdateUserSoftwareDownload(UserDownloadSoftwareDTO userDownloadSoftwareDTO) {
+        UserSoftwareDownload userSoftwareDownload = new UserSoftwareDownload();
+        BeanUtils.copyProperties(userDownloadSoftwareDTO, userSoftwareDownload);
+        //先判断是否有些条下载记录
+        UserSoftwareDownload userSoftwareDownload1 = softwareMapper.selectByThreeConditions(userSoftwareDownload);
+        if (userSoftwareDownload1 == null){
+            //添加此下载记录
+            return softwareMapper.addUserSoftwareDownload(userSoftwareDownload);
+        }else {
+            //有此记录，更新新版本号即可
+            return softwareMapper.updateUserSoftwareDownload(userSoftwareDownload);
+        }
+    }
 
 }
