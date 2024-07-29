@@ -20,8 +20,6 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -47,7 +45,7 @@ public class AccountServiceImpl implements AccountService {
     public UserAndToken login(LoginDTO loginDTO) {
         Map<String, Object> claims = new HashMap<>();
         UserAndToken userAndToken = new UserAndToken();
-        User user = new User();
+        User user = null;
         // TODO 常量类设置 0 1
         if (loginDTO.getRole() == 1) {
             user = accountMapper.selectByAccountAndPassword(loginDTO);
@@ -144,7 +142,7 @@ public class AccountServiceImpl implements AccountService {
         String extension = Objects.requireNonNull(
                 image.getOriginalFilename()).substring(image.getOriginalFilename().lastIndexOf(".")
         );
-        String fileName = UUID.randomUUID().toString() + extension;
+        String fileName = UUID.randomUUID() + extension;
         byte[] bytes = updateUserInfoDTO.getImage().getBytes();
         String url = aliOssUtil.upload(bytes, fileName);
 
@@ -161,11 +159,4 @@ public class AccountServiceImpl implements AccountService {
         return String.valueOf(code);
     }
 
-    private File convertMultipartFileToFile(MultipartFile multipartFile) throws IOException {
-        File tempFile = File.createTempFile("temp", multipartFile.getOriginalFilename());
-        try (FileOutputStream fos = new FileOutputStream(tempFile)) {
-            fos.write(multipartFile.getBytes());
-        }
-        return tempFile;
-    }
 }

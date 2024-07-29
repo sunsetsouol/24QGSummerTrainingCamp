@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OnlineVertificationDTO {
+public class OnlineVerificationDTO {
    private String fingerprint;
    private int versionType;
    private String softwareName;

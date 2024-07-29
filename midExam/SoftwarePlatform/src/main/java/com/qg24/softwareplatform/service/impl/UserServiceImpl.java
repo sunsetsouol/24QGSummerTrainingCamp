@@ -4,6 +4,7 @@ import com.qg24.softwareplatform.mapper.UserMapper;
 import com.qg24.softwareplatform.po.dto.HomePageShowSoftwareDTO;
 import com.qg24.softwareplatform.po.dto.NewUserInfoDTO;
 import com.qg24.softwareplatform.po.dto.ShowPersonalSoftwareInfoDTO;
+import com.qg24.softwareplatform.po.entity.Order;
 import com.qg24.softwareplatform.po.entity.UserSoftwareAuth;
 import com.qg24.softwareplatform.po.result.Result;
 import com.qg24.softwareplatform.po.vo.SimpleSoftwareVO;
@@ -84,5 +85,12 @@ public class UserServiceImpl implements UserService {
         }else{
             return false;
         }
+    }
+
+    @Override
+    public List<Order> showUserOrder(String userId) {
+        // 根据用户id查看order表格
+        List<Order> orderList = userMapper.selectOrderByUserId(userId);
+        return orderList;
     }
 }

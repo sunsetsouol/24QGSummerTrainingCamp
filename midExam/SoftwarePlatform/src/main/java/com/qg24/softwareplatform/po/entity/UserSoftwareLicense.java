@@ -21,5 +21,5 @@ public class UserSoftwareLicense {
 
     private int userSoftwareLicenseId;
 
-    private String licenseUrl; //许可文件的地址
+    private String licenseUrl;
 }

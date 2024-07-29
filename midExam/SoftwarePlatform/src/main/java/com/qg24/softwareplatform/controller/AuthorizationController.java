@@ -2,16 +2,16 @@ package com.qg24.softwareplatform.controller;
 
 
 import com.qg24.softwareplatform.po.dto.CheckAuthDTO;
-import com.qg24.softwareplatform.po.dto.OnlineVertificationDTO;
+import com.qg24.softwareplatform.po.dto.OnlineVerificationDTO;
 import com.qg24.softwareplatform.po.dto.PurchaseDTO;
 import com.qg24.softwareplatform.po.result.Result;
 import com.qg24.softwareplatform.po.vo.DownloadUrlsVO;
+import com.qg24.softwareplatform.po.vo.ShowLicenseVO;
 import com.qg24.softwareplatform.service.AuthorizationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/auth")
@@ -62,12 +62,12 @@ public class AuthorizationController {
 
     /**
      * (非前端)本地软件发送信息进行服务器比对接口
-     * @param onlineVertificationDTO
+     * @param onlineVerificationDTO
      * @return
      */
     @PostMapping("/onlineVertification")
-    public Result<?> onlineVertification(@RequestBody OnlineVertificationDTO onlineVertificationDTO){
-        boolean b = authorizationService.onlineVertification(onlineVertificationDTO);
+    public Result<?> onlineVertification(@RequestBody OnlineVerificationDTO onlineVerificationDTO){
+        boolean b = authorizationService.onlineVertification(onlineVerificationDTO);
         if(b){
             return Result.success("通过");
         }else {
@@ -75,6 +75,21 @@ public class AuthorizationController {
         }
     }
 
+    /**
+     * 查看用户授权许可
+     * @param userId
+     * @return
+     */
+
+    @GetMapping("/getLicense")
+    public Result<?> getLicense(@RequestParam("userId")String userId){
+        List<ShowLicenseVO> showLicenseVOList = authorizationService.getLicense(userId);
+        if(showLicenseVOList != null){
+            return Result.success("", showLicenseVOList);
+        }else {
+            return Result.error("");
+        }
+    }
 
 
 

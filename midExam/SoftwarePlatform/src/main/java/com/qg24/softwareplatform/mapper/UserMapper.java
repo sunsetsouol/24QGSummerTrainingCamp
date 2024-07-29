@@ -1,6 +1,7 @@
 package com.qg24.softwareplatform.mapper;
 
 import com.qg24.softwareplatform.po.dto.NewUserInfoDTO;
+import com.qg24.softwareplatform.po.entity.Order;
 import com.qg24.softwareplatform.po.entity.UserSoftwareAuth;
 import com.qg24.softwareplatform.po.vo.SimpleSoftwareVO;
 import com.qg24.softwareplatform.po.vo.UserApplicationRecordVO;
@@ -30,4 +31,7 @@ public interface UserMapper {
     String getSoftwareName(int softwareId);//获得软件名
 
     int updateUserInfo(NewUserInfoDTO newUserInfoDTO);//更新用户信息
+
+    @Select("select * from order_tb where user_id = #{userId}")
+    List<Order> selectOrderByUserId(String userId);
 }
