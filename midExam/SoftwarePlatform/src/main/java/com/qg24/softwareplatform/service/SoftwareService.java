@@ -7,10 +7,7 @@ import com.qg24.softwareplatform.po.dto.UserDownloadSoftwareDTO;
 import com.qg24.softwareplatform.po.entity.Software;
 import com.qg24.softwareplatform.po.entity.UserSoftwareDownload;
 import com.qg24.softwareplatform.po.result.PageBean;
-import com.qg24.softwareplatform.po.vo.DetailedSoftwareVersionTypeVO;
-import com.qg24.softwareplatform.po.vo.ShowRequiredAuthSoftwareVO;
-import com.qg24.softwareplatform.po.vo.SimpleSoftwareVO;
-import com.qg24.softwareplatform.po.vo.SoftwareHistoryVersionDownloadVO;
+import com.qg24.softwareplatform.po.vo.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -32,5 +29,8 @@ public interface SoftwareService {
 
     //用户添加/更新新的下载记录
     int addOrUpdateUserSoftwareDownload(UserDownloadSoftwareDTO userDownloadSoftwareDTO);
+
+    //查看用户有无可更新的软件
+    List<CheckLastestSoftwareVO> checkLatestSoftware(String userId);
 
 }

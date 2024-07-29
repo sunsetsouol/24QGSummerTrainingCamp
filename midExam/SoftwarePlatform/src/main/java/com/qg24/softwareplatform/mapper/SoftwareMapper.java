@@ -5,6 +5,7 @@ import com.qg24.softwareplatform.po.entity.Software;
 import com.qg24.softwareplatform.po.entity.SoftwareInfoTemp;
 import com.qg24.softwareplatform.po.entity.SoftwareVersionDownload;
 import com.qg24.softwareplatform.po.entity.UserSoftwareDownload;
+import com.qg24.softwareplatform.po.vo.CheckLastestSoftwareVO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -102,4 +103,6 @@ public interface SoftwareMapper {
     int updateUserSoftwareDownload(UserSoftwareDownload userSoftwareDownload);
 
 
+    //查看用户下载过的软件是否有可以更新
+    List<CheckLastestSoftwareVO> selectSoftwareUserCanUpdate(String userId);
 }
