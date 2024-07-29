@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -24,7 +25,9 @@ public class SoftwareController {
 
     // 首页分页展示软件
     @GetMapping("/homePageShowSoftware")
-    public Result<PageBean<SimpleSoftwareVO>> homePageShowSoftware(@ModelAttribute HomePageShowSoftwareDTO homePageShowSoftwareDTO) {
+    public Result<PageBean<SimpleSoftwareVO>> homePageShowSoftware(@RequestParam("page") int page, @RequestParam("pageSize") int pageSize, @RequestParam("softwareName") String softwareName, @RequestParam("tags") String tags) {
+        List<String> tagsList = Arrays.asList(tags.split(","));
+        HomePageShowSoftwareDTO homePageShowSoftwareDTO = new HomePageShowSoftwareDTO(page, pageSize, softwareName, tagsList);
         PageBean<SimpleSoftwareVO> pageBean = softwareService.homePageShowSoftware(homePageShowSoftwareDTO);
         return Result.success("", pageBean);
     }
@@ -68,7 +71,7 @@ public class SoftwareController {
 
     // 软件详情页下半 历史查看
     @GetMapping("/historySoftwareVersion")
-    public Result<?> historySoftwareVersion(@RequestParam HistorySoftwareVersionDTO historySoftwareVersionDTO) {
+    public Result<List<SoftwareHistoryVersionDownloadVO>> historySoftwareVersion(@ModelAttribute HistorySoftwareVersionDTO historySoftwareVersionDTO) {
         List<SoftwareHistoryVersionDownloadVO> softwareHistoryVersionDownloadVOList = softwareService.historySoftwareVersion(historySoftwareVersionDTO);
         if (softwareHistoryVersionDownloadVOList.isEmpty()) {
             return Result.error("");
