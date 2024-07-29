@@ -20,7 +20,7 @@
         select count(*) from software
         <where>
             <if test="softwareName != ''">and software_name = #{softwareName}</if>
-            <if test="tags.size > 0 and tags != null">
+            <if test="tags != null and tags.size > 0">
                 <foreach collection="tags" item="tag">
                     and tags like concat('%', #{tag}, '%')
                 </foreach>
