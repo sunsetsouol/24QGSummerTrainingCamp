@@ -16,7 +16,6 @@ import com.qg24.softwareplatform.util.AliOssUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -36,7 +35,6 @@ public class SoftwareServiceImpl implements SoftwareService {
     @Override
     public PageBean<SimpleSoftwareVO> homePageShowSoftware(HomePageShowSoftwareDTO homePageShowSoftwareDTO) {
         PageBean<SimpleSoftwareVO> pageBean = new PageBean<>();
-        List<SimpleSoftwareVO> simpleSoftwareVOS = new ArrayList<>();
 
         int offset = (homePageShowSoftwareDTO.getPage() - 1) * homePageShowSoftwareDTO.getPageSize();
         List<SimpleSoftwareVO> softwareList = softwareMapper.pagedQuerySoftwareBySoftNameAndTags(homePageShowSoftwareDTO.getSoftwareName(), offset, homePageShowSoftwareDTO.getPageSize(), homePageShowSoftwareDTO.getTags());
@@ -113,7 +111,7 @@ public class SoftwareServiceImpl implements SoftwareService {
     }
 
     @Override
-    public int uploadNewSoftware(@ModelAttribute UploadNewSoftwareDTO uploadNewSoftwareDTO) throws IOException {
+    public int uploadNewSoftware(UploadNewSoftwareDTO uploadNewSoftwareDTO) throws IOException {
         SoftwareInfoTemp softwareInfoTemp = new SoftwareInfoTemp();
         BeanUtils.copyProperties(uploadNewSoftwareDTO, softwareInfoTemp);
 
