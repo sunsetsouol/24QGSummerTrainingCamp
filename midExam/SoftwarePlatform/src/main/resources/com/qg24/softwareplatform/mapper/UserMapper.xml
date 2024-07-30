@@ -10,6 +10,18 @@
         LIMIT #{limit} OFFSET #{offset}
     </select>
 
+
+<!--    查询用户购买过的软件-->
+    <select id="getAvailableSoftware" resultType="com.qg24.softwareplatform.po.vo.UserBuySoftwareVO">
+        select usa.expired_time, usa.version_type,
+        s.description, s.software_image, s.software_name
+        from user_software_auth as usa
+        inner join software as s
+        on usa.software_id = s.software_id
+            and usa.expired_time > now()
+        where usa.user_id= #{userId}
+    </select>
+
     <update id="updateUserInfo" >
         update user
         set

@@ -23,4 +23,9 @@ public class UserBuySoftwareVO {
      * 版本
      */
     private int versionType;
+
+    private String description;
+
+    private String softwareImage;
+
 }

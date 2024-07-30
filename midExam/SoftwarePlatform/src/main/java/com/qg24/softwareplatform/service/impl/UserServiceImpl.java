@@ -49,17 +49,17 @@ public class UserServiceImpl implements UserService {
         return list;
     }
 
+    /**
+     * 获取用户购买过的没过期的软件
+     * @param userId
+     * @return
+     */
     @Override
     public List<UserBuySoftwareVO> getAvailableSoftware(String userId) {
-        List<UserSoftwareAuth> list = userMapper.getAvailableSoftware(userId);//获得授权过的软件
-        List<UserBuySoftwareVO> listBuy = new ArrayList<>();
-        for(int i=0;i<list.size();i++){
-            UserBuySoftwareVO userBuySoftwareVO = new UserBuySoftwareVO();
-            BeanUtils.copyProperties(list.get(i),userBuySoftwareVO);//将usersoftwareauth对象封入userbuysoftwarevo内
-            userBuySoftwareVO.setSoftwareName(userMapper.getSoftwareName(list.get(i).getSoftwareId()));//获取软件名
-            listBuy.add(userBuySoftwareVO);
-        }
-        return listBuy;
+        //获取数据
+        List<UserBuySoftwareVO> availableSoftwareList = userMapper.getAvailableSoftware(userId);
+        //返回结果
+        return availableSoftwareList;
     }
 
     @Override
