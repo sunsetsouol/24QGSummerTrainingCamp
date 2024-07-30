@@ -6,12 +6,13 @@ import com.qg24.softwareplatform.po.dto.PurchaseDTO;
 import com.qg24.softwareplatform.po.vo.DownloadUrlsVO;
 import com.qg24.softwareplatform.po.vo.ShowLicenseVO;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface AuthorizationService {
 
     //用户购买授权
-    public boolean purchaseAuth(PurchaseDTO purchaseDTO);
+    public boolean purchaseAuth(PurchaseDTO purchaseDTO) throws IOException;
 
     //检验授权
     public String checkAuth(CheckAuthDTO checkAuthDTO);

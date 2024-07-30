@@ -5,13 +5,10 @@ import com.qg24.softwareplatform.po.dto.HomePageShowSoftwareDTO;
 import com.qg24.softwareplatform.po.dto.UploadNewSoftwareDTO;
 import com.qg24.softwareplatform.po.dto.UserDownloadSoftwareDTO;
 import com.qg24.softwareplatform.po.entity.Software;
-import com.qg24.softwareplatform.po.entity.UserSoftwareDownload;
 import com.qg24.softwareplatform.po.result.PageBean;
 import com.qg24.softwareplatform.po.result.Result;
 import com.qg24.softwareplatform.po.vo.*;
 import com.qg24.softwareplatform.service.SoftwareService;
-import org.apache.logging.log4j.core.appender.rolling.action.IfAccumulatedFileCount;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +24,8 @@ public class SoftwareController {
 
     // 首页分页展示软件
     @GetMapping("/homePageShowSoftware")
-    public Result<PageBean<SimpleSoftwareVO>> homePageShowSoftware(@ModelAttribute HomePageShowSoftwareDTO homePageShowSoftwareDTO) {
+    public Result<PageBean<SimpleSoftwareVO>> homePageShowSoftware(@RequestParam("page") int page, @RequestParam("pageSize") int pageSize, @RequestParam(value = "softwareName", required = false) String softwareName, @RequestParam(value = "tags[]", required = false) List<String> tags) {
+        HomePageShowSoftwareDTO homePageShowSoftwareDTO = new HomePageShowSoftwareDTO(page, pageSize, softwareName, tags);
         PageBean<SimpleSoftwareVO> pageBean = softwareService.homePageShowSoftware(homePageShowSoftwareDTO);
         return Result.success("", pageBean);
     }
@@ -71,7 +69,7 @@ public class SoftwareController {
 
     // 软件详情页下半 历史查看
     @GetMapping("/historySoftwareVersion")
-    public Result<?> historySoftwareVersion(@RequestParam HistorySoftwareVersionDTO historySoftwareVersionDTO) {
+    public Result<List<SoftwareHistoryVersionDownloadVO>> historySoftwareVersion(@ModelAttribute HistorySoftwareVersionDTO historySoftwareVersionDTO) {
         List<SoftwareHistoryVersionDownloadVO> softwareHistoryVersionDownloadVOList = softwareService.historySoftwareVersion(historySoftwareVersionDTO);
         if (softwareHistoryVersionDownloadVOList.isEmpty()) {
             return Result.error("");
