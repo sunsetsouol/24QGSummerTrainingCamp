@@ -25,7 +25,7 @@ public interface SoftwareService {
 
     int uploadNewSoftware(UploadNewSoftwareDTO uploadNewSoftwareDTO) throws IOException;
 
-    List<ShowRequiredAuthSoftwareVO> showRequiredAuthSoftware(int softwareId);
+    List<ShowRequiredAuthSoftwareVO> showRequiredAuthSoftware(String softwareId,int page);
 
     //用户添加/更新新的下载记录
     int addOrUpdateUserSoftwareDownload(UserDownloadSoftwareDTO userDownloadSoftwareDTO);

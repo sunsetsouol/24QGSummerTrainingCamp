@@ -19,5 +19,9 @@ public class ShowRequiredAuthSoftwareVO {
 
     private double price;
 
+    private String softwareImage;
+
+    private String description;
+
 
 }

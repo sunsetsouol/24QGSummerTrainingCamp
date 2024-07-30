@@ -26,7 +26,7 @@ public class AuthorizationController {
      * @return
      */
     @PostMapping("/purchaseAuth")
-    public Result<?> purchaseAuth(@RequestBody PurchaseDTO purchaseDTO){
+    public Result<?> purchaseAuth(@RequestBody PurchaseDTO purchaseDTO) throws Exception {
         boolean b = authorizationService.purchaseAuth(purchaseDTO);
         if(b){
             return Result.success("购买成功");
@@ -69,9 +69,9 @@ public class AuthorizationController {
     public Result<?> onlineVertification(@RequestBody OnlineVerificationDTO onlineVerificationDTO){
         boolean b = authorizationService.onlineVertification(onlineVerificationDTO);
         if(b){
-            return Result.success("通过");
+            return Result.success("VERIFIED");
         }else {
-            return Result.error("不通过");
+            return Result.error("REJECTED");
         }
     }
 

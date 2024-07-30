@@ -6,16 +6,8 @@ import com.qg24.softwareplatform.po.entity.SoftwareInfoTemp;
 import com.qg24.softwareplatform.po.entity.SoftwareVersionDownload;
 import com.qg24.softwareplatform.po.entity.UserSoftwareDownload;
 import com.qg24.softwareplatform.po.vo.CheckLastestSoftwareVO;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
 import com.qg24.softwareplatform.po.vo.ShowRequiredAuthSoftwareVO;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Select;
+import com.qg24.softwareplatform.po.vo.SimpleSoftwareVO;
 import org.apache.ibatis.annotations.*;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -30,7 +22,7 @@ public interface SoftwareMapper {
      * 主页分页查询软件，模糊查询
      * @return List<Software>
      */
-    List<Software> pagedQuerySoftwareBySoftNameAndTags(@Param("softwareName") String softwareName, @Param("offset") int offset, @Param("pageSize") int pageSize);
+    List<SimpleSoftwareVO> pagedQuerySoftwareBySoftNameAndTags(@Param("softwareName") String softwareName, @Param("offset") int offset, @Param("pageSize") int pageSize, @Param("tags") List<String> tags);
 
     /**
      * 根据下载量判断软件最热排行
@@ -77,13 +69,13 @@ public interface SoftwareMapper {
      * @return
      */
     @Insert("insert into software_info_temp(user_id,software_name,version_type,version,brief_description," +
-            "detailed_description,win_url,linux_url,mac_url,tags,type_status,passed_status,author) " +
+            "detailed_description,win_url,linux_url,mac_url,tags,type_status,passed_status,author,software_image,price) " +
             "values(#{userId},#{softwareName},#{versionType},#{version},#{briefDescription},#{detailedDescription}," +
-            "#{winUrl},#{linuxUrl},#{macUrl},#{tagsString},#{typeStatus},#{passedStatus},#{author})")
+            "#{winUrl},#{linuxUrl},#{macUrl},#{tagsString},#{typeStatus},#{passedStatus},#{author},#{softwareImage},#{price})")
     int addSoftwareInfoTemp(SoftwareInfoTemp softwareInfoTemp);
 
 
-    List<ShowRequiredAuthSoftwareVO> querySoftwareVersionDownloadUserNoAuth(@Param("userId") int userId);
+    List<ShowRequiredAuthSoftwareVO> querySoftwareVersionDownloadUserNoAuth(@Param("userId") String userId,@Param("offset")int offset);
 
     @Select("select software_id, version_type from user_software_auth where user_id = #{userId}")
     List<Map<String, Object>> select(String userId);

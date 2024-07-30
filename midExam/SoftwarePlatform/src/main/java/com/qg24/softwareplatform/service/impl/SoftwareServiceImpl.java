@@ -20,7 +20,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 
 @Service
 public class SoftwareServiceImpl implements SoftwareService {
@@ -36,24 +39,14 @@ public class SoftwareServiceImpl implements SoftwareService {
         List<SimpleSoftwareVO> simpleSoftwareVOS = new ArrayList<>();
 
         int offset = (homePageShowSoftwareDTO.getPage() - 1) * homePageShowSoftwareDTO.getPageSize();
-        List<Software> softwareList = softwareMapper.pagedQuerySoftwareBySoftNameAndTags(homePageShowSoftwareDTO.getSoftwareName(), offset, homePageShowSoftwareDTO.getPageSize());
+        List<SimpleSoftwareVO> softwareList = softwareMapper.pagedQuerySoftwareBySoftNameAndTags(homePageShowSoftwareDTO.getSoftwareName(), offset, homePageShowSoftwareDTO.getPageSize(), homePageShowSoftwareDTO.getTags());
         int total = softwareMapper.getTotal(homePageShowSoftwareDTO.getSoftwareName(), homePageShowSoftwareDTO.getTags());
-        List<String> tags = homePageShowSoftwareDTO.getTags();
-        // 将tagString转换为List类型的tags
-        softwareList.forEach(Software::TagsToList);
 
-        // 进行子集的判断
-        softwareList.forEach(software -> {
-            if (new HashSet<>(tags).containsAll(software.getTags())) {
-                // tags为用户想要软件拥有的标签, 查询软件时软件的标签应该为tags的子集
-                SimpleSoftwareVO simpleSoftwareVO = new SimpleSoftwareVO();
-                BeanUtils.copyProperties(software, simpleSoftwareVO);
-                simpleSoftwareVOS.add(simpleSoftwareVO);
-            }
-        });
+        // 将tagString转换为List类型的tags
+        softwareList.forEach(SimpleSoftwareVO::TagsToList);
 
         pageBean.setTotal((long) total);
-        pageBean.setData(simpleSoftwareVOS);
+        pageBean.setData(softwareList);
 
         return pageBean;
     }
@@ -127,6 +120,7 @@ public class SoftwareServiceImpl implements SoftwareService {
         String winUrl = "";
         String linuxUrl = "";
         String macUrl = "";
+        String softwareImageUrl = "";
 
 
         // win
@@ -156,12 +150,18 @@ public class SoftwareServiceImpl implements SoftwareService {
             macUrl = aliOssUtil.upload(bytes, fileName);
         }
 
-
-        // TODO 模拟文件上传后返回了url实现数据库操作逻辑（并没有实现文件上传到云端服务器的逻辑）
+        MultipartFile softwareImage = uploadNewSoftwareDTO.getSoftwareImage();
+        if (!softwareImage.isEmpty()) {
+            String extension = Objects.requireNonNull(softwareImage.getOriginalFilename()).substring(softwareImage.getOriginalFilename().lastIndexOf("."));
+            String fileName = UUID.randomUUID() + extension;
+            byte[] bytes = softwareImage.getBytes();
+            softwareImageUrl = aliOssUtil.upload(bytes, fileName);
+        }
 
         softwareInfoTemp.setWinUrl(winUrl);
         softwareInfoTemp.setLinuxUrl(linuxUrl);
         softwareInfoTemp.setMacUrl(macUrl);
+        softwareInfoTemp.setSoftwareImage(softwareImageUrl);
 
         //设置通过状态码为0(0代办/1通过/2拒绝)
         softwareInfoTemp.setPassedStatus(0);
@@ -172,9 +172,10 @@ public class SoftwareServiceImpl implements SoftwareService {
     }
 
     @Override
-    public List<ShowRequiredAuthSoftwareVO> showRequiredAuthSoftware(int userId) {
+    public List<ShowRequiredAuthSoftwareVO> showRequiredAuthSoftware(String userId,int page) {
+        int offset = (page - 1) * 24;
         //使用联表查询，使用外连方式
-        List<ShowRequiredAuthSoftwareVO> showRequiredAuthSoftwareVOList = softwareMapper.querySoftwareVersionDownloadUserNoAuth(userId);
+        List<ShowRequiredAuthSoftwareVO> showRequiredAuthSoftwareVOList = softwareMapper.querySoftwareVersionDownloadUserNoAuth(userId,offset);
 
         return showRequiredAuthSoftwareVOList;
     }

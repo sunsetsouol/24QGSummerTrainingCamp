@@ -3,37 +3,62 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qg24.softwareplatform.mapper.SoftwareMapper">
-    <resultMap id="softwareTagResultMap" type="com.qg24.softwareplatform.po.entity.Software">
+    <resultMap id="softwareTagResultMap" type="com.qg24.softwareplatform.po.vo.SimpleSoftwareVO">
         <result property="tagsString" column="tags"/>
     </resultMap>
 
     <select id="pagedQuerySoftwareBySoftNameAndTags"
-            resultType="com.qg24.softwareplatform.po.entity.Software" resultMap="softwareTagResultMap">
-        select * from software
+            resultType="com.qg24.softwareplatform.po.vo.SimpleSoftwareVO" resultMap="softwareTagResultMap">
+        select s.*, svd.version from software as s
+                 left join
+            (select software_id, max(version) as version from software_version_download where version_type = 0 group by software_id )
+                 as svd on s.software_id = svd.software_id
         <where>
-            <if test="softwareName != ''">and software_name = #{softwareName}</if>
+            <if test="softwareName != ''">and software_name like concat('%',#{softwareName},'%')</if>
+        <if test="tags != null and tags.size > 0">
+            <foreach collection="tags" item="tag">
+                and tags like concat('%', #{tag}, '%')
+            </foreach>
+        </if>
         </where>
         limit #{offset}, #{pageSize}
     </select>
 
     <select id="getTotal" resultType="java.lang.Integer">
-        select count(*) from software
+        select count(*) from software as s
+        left join
+        (select software_id, max(version) as version from software_version_download where version_type = 0 group by software_id )
+        as svd on s.software_id = svd.software_id
         <where>
-            <if test="softwareName != ''">and software_name = #{softwareName}</if>
-            <if test="tags.size > 0 and tags != null">
+            <if test="softwareName != ''">and software_name like concat('%',#{softwareName},'%')</if>
+            <if test="tags != null and tags.size > 0">
                 <foreach collection="tags" item="tag">
                     and tags like concat('%', #{tag}, '%')
                 </foreach>
             </if>
         </where>
     </select>
+
+
+<!--    <select id="getTotal" resultType="java.lang.Integer">-->
+<!--        select count(*) from software-->
+<!--        <where>-->
+<!--            <if test="softwareName != ''">and software_name like concat('%', #{softwareName}, '%')</if>-->
+<!--            <if test="tags != null and tags.size > 0">-->
+<!--                <foreach collection="tags" item="tag">-->
+<!--                    and tags like concat('%', #{tag}, '%')-->
+<!--                </foreach>-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </select>-->
+
     <select id="querySoftwareVersionDownloadUserNoAuth"
             resultType="com.qg24.softwareplatform.po.vo.ShowRequiredAuthSoftwareVO">
         SELECT DISTINCT
             svd.software_id,
             svd.version_type,
             s.software_name,
-            svd.price
+            svd.price,s.software_image,s.description,s.create_time
         FROM
             software_version_download AS svd
                 LEFT JOIN
@@ -49,7 +74,8 @@
                 s.software_id = svd.software_id
         WHERE
             (svd.software_id, svd.version_type) != (usa.software_id, usa.version_type)
-           OR (usa.software_id IS NULL AND usa.version_type IS NULL);
+           OR (usa.software_id IS NULL AND usa.version_type IS NULL)
+        LIMIT #{offset},24;
     </select>
 
 
