@@ -28,7 +28,7 @@ public interface SoftwareMapper {
      * 根据下载量判断软件最热排行
      * @return
      */
-    @Select("select * from software order by download_count desc limit 10")
+    @Select("select * from software where status = 1 order by download_count desc limit 10")
     List<Software> querySoftwareRankByDownload();
 
     /**
@@ -36,7 +36,7 @@ public interface SoftwareMapper {
      * @param softwareId
      * @return
      */
-    @Select("select * from software where software_id = #{softwareId}")
+    @Select("select * from software where software_id = #{softwareId} and status = 1")
     Software querySoftwareInfoBySoftId(@RequestParam("softwareId") int softwareId);
 
     /**

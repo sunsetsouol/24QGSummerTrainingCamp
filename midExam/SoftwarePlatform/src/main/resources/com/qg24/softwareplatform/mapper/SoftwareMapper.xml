@@ -13,6 +13,7 @@
                  left join
             (select software_id, max(version) as version from software_version_download where version_type = 0 group by software_id )
                  as svd on s.software_id = svd.software_id
+        where s.status = 1
         <where>
             <if test="softwareName != ''">and software_name like concat('%',#{softwareName},'%')</if>
         <if test="tags != null and tags.size > 0">
@@ -29,6 +30,7 @@
         left join
         (select software_id, max(version) as version from software_version_download where version_type = 0 group by software_id )
         as svd on s.software_id = svd.software_id
+        where status = 1
         <where>
             <if test="softwareName != ''">and software_name like concat('%',#{softwareName},'%')</if>
             <if test="tags != null and tags.size > 0">
@@ -74,7 +76,7 @@
                 s.software_id = svd.software_id
         WHERE
             (svd.software_id, svd.version_type) != (usa.software_id, usa.version_type)
-           OR (usa.software_id IS NULL AND usa.version_type IS NULL)
+           OR (usa.software_id IS NULL AND usa.version_type IS NULL)  and s.status = 1
         LIMIT #{offset},24;
     </select>
 
@@ -88,7 +90,8 @@
         inner join user_software_download as usd
         on usd.user_id = #{userId} and svd.software_id = usd.software_id and svd.version_type = usd.version_type and svd.version != usd.version
         inner join software as s
-        on svd.software_id = s.software_id;
+        on svd.software_id = s.software_id
+        where s.status = 1;
     </select>
 
 
