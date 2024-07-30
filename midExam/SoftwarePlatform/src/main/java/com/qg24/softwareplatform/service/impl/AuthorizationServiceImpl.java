@@ -11,6 +11,7 @@ import com.qg24.softwareplatform.po.vo.DownloadUrlsVO;
 import com.qg24.softwareplatform.po.vo.ShowLicenseVO;
 import com.qg24.softwareplatform.service.AuthorizationService;
 import com.qg24.softwareplatform.util.AliOssUtil;
+import com.qg24.softwareplatform.util.EncryptionUtil;
 import com.qg24.softwareplatform.util.TimeUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,11 +63,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
         BeanUtils.copyProperties(purchaseDTO, userSoftwareLicense);
         userSoftwareLicense.setSoftwareList(s);
 
-        LocalDate currentDate = LocalDate.now();
-        LocalDate futureDate = currentDate.plusYears(1);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d");
-        String formattedDate = futureDate.format(formatter);
-        userSoftwareLicense.setExpiredTime(formattedDate);
+
         // TODO 实现将数据保存文件并加密上上传到云端服务器，返回url
         String licenseUrl = generateAuthFileAndUpload(purchaseDTO.getFingerprint(), purchaseDTO.getSoftwareList());
         userSoftwareLicense.setLicenseUrl(licenseUrl);
@@ -91,7 +88,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
         return true;
     }
 
-    private String generateAuthFileAndUpload(String fingerprint, List<AuthSoftwareDTO> softwareList) throws IOException {
+    private String generateAuthFileAndUpload(String fingerprint, List<AuthSoftwareDTO> softwareList) throws Exception {
         /**
          * 1. 将信息写入文件
          * 2. 转化为byte数组, 传入数组以及文件名
@@ -109,11 +106,13 @@ public class AuthorizationServiceImpl implements AuthorizationService {
             assert tempFilePath != null;
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(tempFilePath.toFile()))) {
                 // 写入指纹, 原始数据为fingerprint
+                fingerprint = EncryptionUtil.Encyotion(fingerprint);
                 writer.write(fingerprint);
                 writer.newLine();
 
                 // 写入一年后的时间戳, 原始数据为oneYearLater
                 String oneYearLater = Instant.now().plus(1, ChronoUnit.YEARS).toString();
+                oneYearLater = EncryptionUtil.Encyotion(oneYearLater);
                 writer.write(oneYearLater);
                 writer.newLine();
 
@@ -121,6 +120,8 @@ public class AuthorizationServiceImpl implements AuthorizationService {
                     // 写入软件信息, 每条原始数据为authSoftwareDTO
                     String softwareName = authSoftwareDTO.getSoftwareName();
                     int versionType = authSoftwareDTO.getVersionType();
+                    softwareName = EncryptionUtil.Encyotion(softwareName);
+                    String encryptVersionType =  EncryptionUtil.Encyotion(String.valueOf(versionType));
                     String softInfo = softwareName + ":" + versionType;
                     writer.write(softInfo);
                     writer.newLine();

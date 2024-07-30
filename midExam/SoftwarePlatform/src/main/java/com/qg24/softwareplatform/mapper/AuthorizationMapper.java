@@ -18,7 +18,7 @@ public interface AuthorizationMapper {
     public void addOrder (Order order);
 
     //添加用户新的购买许可
-    @Insert("insert into user_software_license (user_id, software_list, fingerprint, license_url,expired_time) values (#{userId}, #{softwareList}, #{fingerprint}, #{licenseUrl},#{expiredTime})")
+    @Insert("insert into user_software_license (user_id, software_list, fingerprint, license_url) values (#{userId}, #{softwareList}, #{fingerprint}, #{licenseUrl}")
     public void addUserSoftwareLicense(UserSoftwareLicense usersoftwareLicense);
 
     //添加用户软件授权表
