@@ -66,8 +66,8 @@ public class UserController {
      * 用户修改头像，描述，昵称
      */
     @PostMapping("/updateUserInfo")
-    public Result<?> updateUserInfo(@ModelAttribute NewUserInfoDTO dto) throws IOException {
-        if(userService.uploadNewUserInfo(dto)){
+    public Result<?> updateUserInfo(@ModelAttribute NewUserInfoDTO dto, @RequestPart(required = false) MultipartFile headImage) throws IOException {
+        if(userService.uploadNewUserInfo(dto, headImage)){
             return Result.success("Success");
         }else{
             return Result.error("Failed");

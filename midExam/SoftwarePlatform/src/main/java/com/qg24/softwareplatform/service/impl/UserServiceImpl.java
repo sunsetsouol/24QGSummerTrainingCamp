@@ -1,21 +1,19 @@
 package com.qg24.softwareplatform.service.impl;
 
 import com.qg24.softwareplatform.mapper.UserMapper;
-import com.qg24.softwareplatform.po.dto.HomePageShowSoftwareDTO;
 import com.qg24.softwareplatform.po.dto.NewUserInfoDTO;
 import com.qg24.softwareplatform.po.dto.ShowPersonalSoftwareInfoDTO;
 import com.qg24.softwareplatform.po.entity.Order;
 import com.qg24.softwareplatform.po.entity.UserSoftwareAuth;
-import com.qg24.softwareplatform.po.result.Result;
 import com.qg24.softwareplatform.po.vo.SimpleSoftwareVO;
 import com.qg24.softwareplatform.po.vo.UserApplicationRecordVO;
 import com.qg24.softwareplatform.po.vo.UserBuySoftwareVO;
 import com.qg24.softwareplatform.service.UserService;
+import com.qg24.softwareplatform.util.AliOssUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import com.qg24.softwareplatform.util.AliOssUtil;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -65,15 +63,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean uploadNewUserInfo(NewUserInfoDTO dto) throws IOException {
+    public boolean uploadNewUserInfo(NewUserInfoDTO dto, MultipartFile headImage) throws IOException {
         String url = "";
-        MultipartFile headImage = dto.getHeadImage();
+
         //获取当前时间
         LocalDateTime localDatetime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String time = localDatetime.format(formatter);
         dto.setUpdateTime(time);
-        if(!headImage.isEmpty()){
+        if(Objects.nonNull(headImage)){
             String extension = Objects.requireNonNull(headImage.getOriginalFilename()).substring(headImage.getOriginalFilename().lastIndexOf("."));
             String fileName = UUID.randomUUID() + extension;
             byte[] bytes = headImage.getBytes();
