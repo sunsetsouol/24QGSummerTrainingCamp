@@ -9,8 +9,8 @@ spring:
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver
         username: root
-        password: 123456
-        url: jdbc:mysql://localhost:3306/software_platform
+        password: Il02mayi
+        url: jdbc:mysql://localhost:3306/db_qgsoftware
     redis:
         host: localhost
         port: 6379
@@ -22,7 +22,11 @@ email:
     password: ecxcdzqqmwslddcj
     username: 3087609114@qq.com
     port: 587
-
+alioss:
+    bucket-name: faken
+    access-key-secret: DBHso3lWRctacim2d526P9OS4QEGvt
+    access-key-id: LTAI5tRW66tNtLVeMASWo71F
+    endpoint: oss-cn-guangzhou.aliyuncs.com
 
 
 

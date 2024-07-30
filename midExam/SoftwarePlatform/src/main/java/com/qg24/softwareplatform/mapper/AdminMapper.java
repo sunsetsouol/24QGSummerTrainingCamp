@@ -41,4 +41,8 @@ public interface AdminMapper {
     //查software表的softwareId
     @Select("select software_id from software where software_name=#{softwareName}")
     int getSoftwareId(String softwareName);
+
+    //查历史版本下载表的price
+    @Select("select price from software_version_download where software_id = #{softwareId} and version_type = #{versionType}")
+    float getPrice(String softwareName,int versionType);
 }
