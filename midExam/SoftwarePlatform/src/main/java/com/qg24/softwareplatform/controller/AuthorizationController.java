@@ -11,7 +11,6 @@ import com.qg24.softwareplatform.service.AuthorizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -27,7 +26,7 @@ public class AuthorizationController {
      * @return
      */
     @PostMapping("/purchaseAuth")
-    public Result<?> purchaseAuth(@RequestBody PurchaseDTO purchaseDTO) throws IOException {
+    public Result<?> purchaseAuth(@RequestBody PurchaseDTO purchaseDTO) throws Exception {
         boolean b = authorizationService.purchaseAuth(purchaseDTO);
         if(b){
             return Result.success("购买成功");
