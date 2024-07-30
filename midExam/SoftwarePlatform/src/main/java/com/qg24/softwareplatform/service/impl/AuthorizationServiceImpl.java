@@ -16,7 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,9 +50,17 @@ public class AuthorizationServiceImpl implements AuthorizationService {
         BeanUtils.copyProperties(purchaseDTO, userSoftwareLicense);
         userSoftwareLicense.setSoftwareList(s);
 
+        LocalDate currentDate = LocalDate.now();
+        LocalDate futureDate = currentDate.plusYears(1);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d");
+        String formattedDate = futureDate.format(formatter);
+        userSoftwareLicense.setExpiredTime(formattedDate);
         // TODO 实现将数据保存文件并加密上上传到云端服务器，返回url
+        System.out.println(userSoftwareLicense);
+
         String licenseUrl = "www.baidu.com";
         userSoftwareLicense.setLicenseUrl(licenseUrl);
+
 
 
         authorizationMapper.addUserSoftwareLicense(userSoftwareLicense);
