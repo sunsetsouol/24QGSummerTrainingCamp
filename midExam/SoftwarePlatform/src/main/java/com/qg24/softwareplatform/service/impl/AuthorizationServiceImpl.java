@@ -111,7 +111,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
                 writer.newLine();
 
                 // 写入一年后的时间戳, 原始数据为oneYearLater
-                String oneYearLater = Instant.now().plus(1, ChronoUnit.YEARS).toString();
+                String oneYearLater = LocalDateTime.now().plusYears(1).toString();
                 oneYearLater = EncryptionUtil.Encyotion(oneYearLater);
                 writer.write(oneYearLater);
                 writer.newLine();
