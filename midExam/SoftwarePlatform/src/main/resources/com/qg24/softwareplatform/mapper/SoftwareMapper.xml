@@ -15,19 +15,22 @@
                  as svd on s.software_id = svd.software_id
         <where>
             <if test="softwareName != ''">and software_name like concat('%',#{softwareName},'%')</if>
-        </where>
         <if test="tags != null and tags.size > 0">
             <foreach collection="tags" item="tag">
                 and tags like concat('%', #{tag}, '%')
             </foreach>
         </if>
+        </where>
         limit #{offset}, #{pageSize}
     </select>
 
     <select id="getTotal" resultType="java.lang.Integer">
-        select count(*) from software
+        select count(*) from software as s
+        left join
+        (select software_id, max(version) as version from software_version_download where version_type = 0 group by software_id )
+        as svd on s.software_id = svd.software_id
         <where>
-            <if test="softwareName != ''">and software_name like concat('%', #{softwareName}, '%')</if>
+            <if test="softwareName != ''">and software_name like concat('%',#{softwareName},'%')</if>
             <if test="tags != null and tags.size > 0">
                 <foreach collection="tags" item="tag">
                     and tags like concat('%', #{tag}, '%')
