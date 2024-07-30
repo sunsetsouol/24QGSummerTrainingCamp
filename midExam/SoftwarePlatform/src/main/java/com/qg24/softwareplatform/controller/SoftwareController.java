@@ -92,8 +92,8 @@ public class SoftwareController {
 
     //用户查看需要购买的软件信息
     @GetMapping("/showRequiredAuthSoftware")
-    public Result<?> showRequiredAuthSoftware(@RequestParam("userId") int userId) {
-        List<ShowRequiredAuthSoftwareVO> showRequiredAuthSoftwareVOList = softwareService.showRequiredAuthSoftware(userId);
+    public Result<?> showRequiredAuthSoftware(@RequestParam("userId") String userId,@RequestParam("page") int page) {
+        List<ShowRequiredAuthSoftwareVO> showRequiredAuthSoftwareVOList = softwareService.showRequiredAuthSoftware(userId,page);
         if (showRequiredAuthSoftwareVOList.isEmpty()) {
             return Result.error("");
         } else {

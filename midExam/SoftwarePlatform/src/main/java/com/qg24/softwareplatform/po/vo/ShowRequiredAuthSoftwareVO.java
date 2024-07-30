@@ -21,4 +21,7 @@ public class ShowRequiredAuthSoftwareVO {
 
     private String softwareImage;
 
+    private String description;
+
+
 }
