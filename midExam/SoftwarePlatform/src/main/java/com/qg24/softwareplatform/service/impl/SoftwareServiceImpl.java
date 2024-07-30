@@ -172,9 +172,10 @@ public class SoftwareServiceImpl implements SoftwareService {
     }
 
     @Override
-    public List<ShowRequiredAuthSoftwareVO> showRequiredAuthSoftware(int userId) {
+    public List<ShowRequiredAuthSoftwareVO> showRequiredAuthSoftware(String userId,int page) {
+        int offset = (page - 1) * 24;
         //使用联表查询，使用外连方式
-        List<ShowRequiredAuthSoftwareVO> showRequiredAuthSoftwareVOList = softwareMapper.querySoftwareVersionDownloadUserNoAuth(userId);
+        List<ShowRequiredAuthSoftwareVO> showRequiredAuthSoftwareVOList = softwareMapper.querySoftwareVersionDownloadUserNoAuth(userId,offset);
 
         return showRequiredAuthSoftwareVOList;
     }

@@ -55,7 +55,7 @@
             svd.software_id,
             svd.version_type,
             s.software_name,
-            svd.price,s.software_image
+            svd.price,s.software_image,s.description,s.create_time
         FROM
             software_version_download AS svd
                 LEFT JOIN
@@ -71,7 +71,8 @@
                 s.software_id = svd.software_id
         WHERE
             (svd.software_id, svd.version_type) != (usa.software_id, usa.version_type)
-           OR (usa.software_id IS NULL AND usa.version_type IS NULL);
+           OR (usa.software_id IS NULL AND usa.version_type IS NULL)
+        LIMIT #{offset},24;
     </select>
 
 

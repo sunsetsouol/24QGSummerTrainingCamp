@@ -75,7 +75,7 @@ public interface SoftwareMapper {
     int addSoftwareInfoTemp(SoftwareInfoTemp softwareInfoTemp);
 
 
-    List<ShowRequiredAuthSoftwareVO> querySoftwareVersionDownloadUserNoAuth(@Param("userId") int userId);
+    List<ShowRequiredAuthSoftwareVO> querySoftwareVersionDownloadUserNoAuth(@Param("userId") String userId,@Param("offset")int offset);
 
     @Select("select software_id, version_type from user_software_auth where user_id = #{userId}")
     List<Map<String, Object>> select(String userId);

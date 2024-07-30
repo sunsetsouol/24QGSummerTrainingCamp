@@ -27,7 +27,7 @@ public class AuthorizationController {
      * @return
      */
     @PostMapping("/purchaseAuth")
-    public Result<?> purchaseAuth(@RequestBody PurchaseDTO purchaseDTO) throws IOException {
+    public Result<?> purchaseAuth(@RequestBody PurchaseDTO purchaseDTO) throws Exception {
         boolean b = authorizationService.purchaseAuth(purchaseDTO);
         if(b){
             return Result.success("购买成功");
