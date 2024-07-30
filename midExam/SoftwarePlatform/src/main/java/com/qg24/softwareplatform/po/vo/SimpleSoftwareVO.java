@@ -40,6 +40,8 @@ public class SimpleSoftwareVO {
 
     private String tagsString;
 
+    private int status; //上下架状态
+
     //将tags转为string便于存入mysql
     public void TagsToString(){
         if(tags != null){

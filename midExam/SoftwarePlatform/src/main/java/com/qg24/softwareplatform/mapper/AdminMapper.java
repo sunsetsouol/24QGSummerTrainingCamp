@@ -4,6 +4,7 @@ import com.qg24.softwareplatform.po.dto.UpdateSoftwareLatestInfoDTO;
 import com.qg24.softwareplatform.po.entity.Software;
 import com.qg24.softwareplatform.po.entity.SoftwareInfoTemp;
 import com.qg24.softwareplatform.po.entity.SoftwareVersionDownload;
+import com.qg24.softwareplatform.po.vo.SimpleSoftwareVO;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -45,4 +46,11 @@ public interface AdminMapper {
     //查历史版本下载表的price
     @Select("select price from software_version_download where software_id = #{softwareId} and version_type = #{versionType}")
     float getPrice(String softwareName,int versionType);
+
+    //管理员查看所有软件，包括上架和下架
+    List<SimpleSoftwareVO> homePageShowAllSoftware(@Param("softwareName") String softwareName, @Param("offset") int offset, @Param("pageSize") int pageSize, @Param("tags") List<String> tags);
+
+    //获取总条数
+    int getTotal(@Param("softwareName") String softwareName, @Param("tags") List<String> tags);
+
 }
