@@ -122,7 +122,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
                     int versionType = authSoftwareDTO.getVersionType();
                     softwareName = EncryptionUtil.Encyotion(softwareName);
                     String encryptVersionType =  EncryptionUtil.Encyotion(String.valueOf(versionType));
-                    String softInfo = softwareName + ":" + versionType;
+                    String softInfo = softwareName + ":" + encryptVersionType;
                     writer.write(softInfo);
                     writer.newLine();
                 }
