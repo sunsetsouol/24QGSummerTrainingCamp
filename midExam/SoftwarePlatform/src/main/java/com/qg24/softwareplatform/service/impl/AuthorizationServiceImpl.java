@@ -47,7 +47,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
      * @return
      */
     @Override
-    public boolean purchaseAuth(@RequestBody PurchaseDTO purchaseDTO) throws IOException {
+    public boolean purchaseAuth(@RequestBody PurchaseDTO purchaseDTO) throws Exception {
         //把软件列表转化为字符串
         String s = JSON.toJSONString(purchaseDTO.getSoftwareList());
 

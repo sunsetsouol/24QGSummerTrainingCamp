@@ -12,7 +12,7 @@ import java.util.List;
 public interface AuthorizationService {
 
     //用户购买授权
-    public boolean purchaseAuth(PurchaseDTO purchaseDTO) throws IOException;
+    public boolean purchaseAuth(PurchaseDTO purchaseDTO) throws Exception;
 
     //检验授权
     public String checkAuth(CheckAuthDTO checkAuthDTO);
