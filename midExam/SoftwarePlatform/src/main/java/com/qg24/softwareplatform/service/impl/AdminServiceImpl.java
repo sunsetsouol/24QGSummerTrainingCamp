@@ -1,10 +1,13 @@
 package com.qg24.softwareplatform.service.impl;
 
 import com.qg24.softwareplatform.mapper.AdminMapper;
+import com.qg24.softwareplatform.po.dto.HomePageShowSoftwareDTO;
 import com.qg24.softwareplatform.po.dto.UpdateSoftwareLatestInfoDTO;
 import com.qg24.softwareplatform.po.entity.Software;
 import com.qg24.softwareplatform.po.entity.SoftwareInfoTemp;
 import com.qg24.softwareplatform.po.entity.SoftwareVersionDownload;
+import com.qg24.softwareplatform.po.result.PageBean;
+import com.qg24.softwareplatform.po.vo.SimpleSoftwareVO;
 import com.qg24.softwareplatform.service.AdminService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,5 +123,27 @@ public class AdminServiceImpl implements AdminService {
         }else{
             return false;
         }
+    }
+
+    /**
+     * 管理员查看所有软件，包括上架和下架
+     * @param homePageShowSoftwareDTO
+     * @return
+     */
+    @Override
+    public PageBean<SimpleSoftwareVO> homePageShowAllSoftware(HomePageShowSoftwareDTO homePageShowSoftwareDTO) {
+        PageBean<SimpleSoftwareVO> pageBean = new PageBean<>();
+
+        int offset = (homePageShowSoftwareDTO.getPage() - 1) * homePageShowSoftwareDTO.getPageSize();
+        List<SimpleSoftwareVO> softwareList = adminMapper.homePageShowAllSoftware(homePageShowSoftwareDTO.getSoftwareName(), offset, homePageShowSoftwareDTO.getPageSize(), homePageShowSoftwareDTO.getTags());
+        int total = adminMapper.getTotal(homePageShowSoftwareDTO.getSoftwareName(), homePageShowSoftwareDTO.getTags());
+
+        // 将tagString转换为List类型的tags
+        softwareList.forEach(SimpleSoftwareVO::TagsToList);
+
+        pageBean.setTotal((long) total);
+        pageBean.setData(softwareList);
+
+        return pageBean;
     }
 }

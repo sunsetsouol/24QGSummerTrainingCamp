@@ -1,8 +1,11 @@
 package com.qg24.softwareplatform.service;
 
+import com.qg24.softwareplatform.po.dto.HomePageShowSoftwareDTO;
 import com.qg24.softwareplatform.po.dto.UpdateSoftwareLatestInfoDTO;
 import com.qg24.softwareplatform.po.entity.Software;
 import com.qg24.softwareplatform.po.entity.SoftwareInfoTemp;
+import com.qg24.softwareplatform.po.result.PageBean;
+import com.qg24.softwareplatform.po.vo.SimpleSoftwareVO;
 
 import java.util.List;
 
@@ -12,4 +15,7 @@ public interface AdminService {
     List<SoftwareInfoTemp> getSoftwareInfoTempList(int page, int pageSize);//分页查询审核记录
 
     boolean updateSoftwareInfoTempStatus(int softwareInfoTempId,int status);//更新审核通过状态码
+
+    PageBean<SimpleSoftwareVO> homePageShowAllSoftware(HomePageShowSoftwareDTO homePageShowSoftwareDTO);
+
 }
