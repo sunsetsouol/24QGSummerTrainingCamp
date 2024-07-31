@@ -47,7 +47,18 @@ public class AdminServiceImpl implements AdminService {
     //管理员查看审核记录
     @Override
     public List<SoftwareInfoTemp> getSoftwareInfoTempList(int page, int pageSize) {
-        return adminMapper.getSoftwareInfoTempPages(pageSize,(page-1)*pageSize);
+        List<SoftwareInfoTemp> softwareInfoTempList =  adminMapper.getSoftwareInfoTempPages(pageSize,(page-1)*pageSize);
+        for (SoftwareInfoTemp softwareInfoTemp : softwareInfoTempList) {
+            int passedStatus = softwareInfoTemp.getPassedStatus();
+            if (passedStatus == 0) {
+                softwareInfoTemp.setPassedStringStatus("代办");
+            }else if (passedStatus == 1) {
+                softwareInfoTemp.setPassedStringStatus("已通过");
+            }else{
+                softwareInfoTemp.setPassedStringStatus("已拒绝");
+            }
+        }
+        return softwareInfoTempList;
     }
 
 

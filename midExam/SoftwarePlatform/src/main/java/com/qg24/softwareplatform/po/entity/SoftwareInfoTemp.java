@@ -47,6 +47,8 @@ public class SoftwareInfoTemp {
 
     private String softwareImage;
 
+    private String passedStringStatus;
+
     public void TagsToString(){
         if(tags!=null){
             tagsString= JSON.toJSONString(tags);
