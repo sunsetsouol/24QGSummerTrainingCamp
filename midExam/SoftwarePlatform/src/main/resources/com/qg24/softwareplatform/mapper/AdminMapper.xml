@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qg24.softwareplatform.mapper.AdminMapper">
+    <update id="updateSoftWareBasicInfo" >
+        update software
+        set
+        <if test="softwareName != null">
+            software_name = #{softwareName},
+        </if>
+        <if test="author != null">
+            author = #{author},
+        </if>
+        <if test="description != null">
+            description = #{description},
+        </if>
+        <if test="tags != null">
+            tags = #{tagsString},
+        </if>
+        <if test="status != null">
+            status = #{status}
+        </if>
+        Where software_id = #{softwareId}
+    </update>
+    
+    <update id="updateSoftwareLatestInfo">
+        update software_version_download
+        set
+        <if test="detailedDescription != null">
+            detailed_description = #{detailedDescription}
+        </if>
+        Where software_id = #{softwareId} and version_type = #{versionType} and version = #{version}
+    </update>
+
+    <select id="getSoftwareInfoTempPages" resultType="com.qg24.softwareplatform.po.entity.SoftwareInfoTemp">
+        SELECT *
+        FROM software_info_temp
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <update id="updateSoftwareInfoTemp">
+        update software_info_temp
+        set
+        <if test="status != null">
+            passed_status = #{status}
+        </if>
+        Where software_info_temp_id = #{softwareInfoTempId}
+    </update>
+
+    <resultMap id="softwareTagResultMap" type="com.qg24.softwareplatform.po.vo.AdminShowAllSoftwareVO">
+        <result property="tagsString" column="tags"/>
+    </resultMap>
+
+    <select id="homePageShowAllSoftware"
+            resultType="com.qg24.softwareplatform.po.vo.AdminShowAllSoftwareVO" resultMap="softwareTagResultMap">
+        select s.*, svd.version from software as s
+        left join
+        (select software_id, max(version) as version from software_version_download where version_type = 0 group by software_id )
+        as svd on s.software_id = svd.software_id
+        <where>
+            <if test="softwareName != ''">and software_name like concat('%',#{softwareName},'%')</if>
+            <if test="tags != null and tags.size > 0">
+                <foreach collection="tags" item="tag">
+                    and tags like concat('%', #{tag}, '%')
+                </foreach>
+            </if>
+        </where>
+        limit #{offset}, #{pageSize}
+    </select>
+
+    <select id="getTotal" resultType="java.lang.Integer">
+        select count(*) from software as s
+        left join
+        (select software_id, max(version) as version from software_version_download where version_type = 0 group by software_id )
+        as svd on s.software_id = svd.software_id
+        <where>
+            <if test="softwareName != ''">and software_name like concat('%',#{softwareName},'%')</if>
+            <if test="tags != null and tags.size > 0">
+                <foreach collection="tags" item="tag">
+                    and tags like concat('%', #{tag}, '%')
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+
+</mapper>

@@ -1,0 +1,109 @@
+/* 底部 */
+.bottom_footer {
+    width: calc(100vw - 16px);
+    height: 300px;
+    background-color: #25115D;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    min-width: 1300px;
+}
+
+.bottom_footer_content {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+/* footer上方部分 */
+.footer_top{
+    width: 100%;
+    height: 70%;
+    color: #fff;
+    display: flex;
+
+}
+/* footer上方左边 */
+.footer_left{
+    height: 100%;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+}
+.footer_left h3{
+    margin-top: 40px;
+    font-size: 20px;
+}
+.footer_left h6{
+    width: 60%;
+    font-weight: 200;
+    margin-top: 20px;
+    font-size: 12px;
+    line-height: 2;
+}
+/* footer上方中间 */
+.footer_middle{
+    height: 100%;
+    width: 55%;
+    display: flex;
+}
+.footer_middle h6{
+    font-weight: 200;
+    margin-top: 10px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+.footer_middle .title{
+    font-size: 16px;
+    margin-top: 40px;
+margin-bottom: 10px;
+}
+.footer_product{
+    height: 100%;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+}
+.footer_about{
+    height: 100%;
+    width: 30%;
+    display: flex;
+        flex-direction: column;
+}
+.footer_callus{
+    height: 100%;
+    width: 40%;
+    display: flex;
+        flex-direction: column;
+}
+/* footer上方右边 */
+.footer_right{
+    height: 100%;
+    width: 20%;
+    display: flex;
+    justify-content: end;
+}
+.language{
+    font-weight: 200;
+    margin-top: 40px;
+        font-size: 16px;
+letter-spacing: 1px;
+}
+/* footer下方部分 */
+.footer_bottom {
+    width: 100%;
+    height: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 2px solid #766a9a;
+}
+.belong h6{
+    color: #fff;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 1px;
+}

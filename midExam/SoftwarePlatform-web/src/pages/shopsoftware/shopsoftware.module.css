@@ -1,0 +1,43 @@
+.shopsoftware{
+  width: 100%;
+  height: 120vh;
+  min-height: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #eaf0ff;
+}
+/* 第一部分 选项卡 */
+.selectcardbox{
+  width: 80%;
+  height: 20vh;
+  min-height: 200px;
+  /* background-color: red; */
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.selectcard{
+  height: 50%;
+}
+.inputbox{
+  /* background-color: green; */
+  width: 100%;
+  height: 10vh;
+  min-height: 100px;
+  margin-top: -25px;
+  display: flex;
+  justify-content: space-between;
+}
+.everyselect{
+  width: 23%;
+  height: 100%;
+  /* background-color: #fff; */
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.everyselect span{
+  display: inline-block;
+  /* font-size: 1vw; */
+}

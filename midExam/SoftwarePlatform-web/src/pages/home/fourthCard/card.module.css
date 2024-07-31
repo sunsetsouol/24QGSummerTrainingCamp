@@ -1,0 +1,54 @@
+.fourthcard{
+    display: flex;
+    background-color: #fff;
+    /* width: 45%;
+    height: 40%; */
+    width: 480px;
+    height: 154px;
+ position: relative;
+}
+.pic{
+    height: 100%;
+    width:160px;
+    background-color: #c4c4c4;
+}
+.card_content{
+   
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    width: 50%;
+    height: 100%;
+}
+.card_content h6{
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: 400;
+}
+.discription {
+    margin-top: 5px;
+    /* background-color: red; */
+    width: 80%;
+    height: 60px;
+    overflow-wrap: break-word;
+    overflow: auto;
+    text-overflow: ellipsis;
+    font-size: 16px;
+}
+.discription::-webkit-scrollbar{
+    display: none;
+}
+
+.discription p {
+    white-space: normal;
+    text-overflow: ellipsis;
+}
+.score{
+    position: absolute;
+    bottom: 15px;
+    width: 150px;
+    height: 30px;
+    /* background-color: red; */
+    background-image: url('../../../assets/images/Star.png');
+    background-size: 100% 100%;
+}

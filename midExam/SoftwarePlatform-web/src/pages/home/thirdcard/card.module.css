@@ -1,0 +1,59 @@
+.card{
+    margin-top: 30px;
+    height: 510px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.pic{
+width: 100%;
+height:280px;
+background-image: url('../../../assets/images/homethirdpageCard.png');
+background-size: cover;
+margin-top: -16px;
+
+}
+.card_bottom{
+
+    display: flex;
+    flex-direction: column;
+}
+.card_bottom h3 {
+    color: #1E0E62;
+    font-weight: 400;
+    font-size: 22px;
+}
+.card_bottom h5{
+    font-weight: 400;
+    color: #dbdbe1;
+    font-size: 16px;
+}
+
+.discription {
+    margin-top: 5px;
+    /* background-color: red; */
+    width: 100%;
+    height: 78px;
+    overflow-wrap: break-word;
+    overflow: auto;
+    text-overflow: ellipsis;
+    color: #dbdbe1;
+        font-size: 16px;
+}
+.discription::-webkit-scrollbar {
+    display: none;
+}
+.discription p{
+    white-space: normal;
+    text-overflow: ellipsis;
+}
+/* 按钮 */
+.more{
+    width: 80px;
+    position: absolute;
+    bottom: 20px;
+    border-radius: 100px;
+    color:#1E0E62;
+    border: 1px solid #EBEAED;
+}

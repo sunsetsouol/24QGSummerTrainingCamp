@@ -1,0 +1,105 @@
+.home_firstpage{
+    width: 100%;
+   height: 860px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background-color: red; */
+    background-image: url("../../../assets/images/homefirstpage.png") ;
+    background-size: cover;
+    background-position: center;
+}
+/* 第一页头部 */
+.firstpage_head{
+    width: 552px;
+    height: 131px;
+    margin-top: 30px;
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+    letter-spacing: 2px;
+}
+/* 第一页中间 */
+.firstpage_middle{
+    width: 938px;
+    height: 246px;
+    margin-top: 75px;
+    display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        letter-spacing: 2px;
+    /* background-color: #000; */
+}
+/* 第一页底部 */
+.firstpage_bottom {
+    width: 970px;
+    height: 108px;
+    margin-top: 134px;
+    display: flex;
+    /* background-color: green; */
+    align-items: start;
+    justify-content: space-evenly;
+    letter-spacing: 2px;
+}
+
+
+/* 第一页头部文字 */
+.firstpage_head h3{
+/* font-size: 36px; */
+    font-size:44px;
+    color: #fff;
+    line-height: 1.5;
+}
+/* 第一页中间文字 */
+.firstpage_middle h3 {
+    /* font-size: 36px; */
+    font-size: 44px;
+    color: #fff;
+line-height: 1.5;
+}
+/* 第一页底部三盒子 */
+.firstpage_bottom_left{
+    width: 269px;
+    height: 108px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+.firstpage_bottom_middle {
+   width: 269px;
+   height: 108px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}.firstpage_bottom_right {
+width: 269px;
+    height: 108px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+.firstpage_bottom h3{
+    /* font-size: 26px; */
+    font-size: 30px;
+}
+.firstpage_bottom h6 {
+    line-height: 2;
+    width: 230px;
+    font-size: 15px;
+    /* font-size: 16px; */
+    /* font-size: clamp(16px, 1vw ,18px); */
+    margin-top: 10px;
+    font-weight:400;
+    text-align: center;
+    white-space: wrap;
+}

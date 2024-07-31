@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qg24.softwareplatform.mapper.UserMapper">
+    <select id="getUserSoftware" resultType="com.qg24.softwareplatform.po.vo.SimpleSoftwareVO">
+        SELECT *
+        FROM software
+        WHERE user_id = #{userId}
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+
+<!--    查询用户购买过的软件-->
+    <select id="getAvailableSoftware" resultType="com.qg24.softwareplatform.po.vo.UserBuySoftwareVO">
+        select usa.expired_time, usa.version_type,
+        s.description, s.software_image, s.software_name
+        from user_software_auth as usa
+        inner join software as s
+        on usa.software_id = s.software_id
+        where usa.user_id= #{userId}
+          and usa.expired_time > now()
+    </select>
+
+    <update id="updateUserInfo" >
+        update user
+        set
+        <if test="username != null">
+            username = #{username},
+        </if>
+        <if test="description != null">
+            description = #{description},
+        </if>
+        <if test="image != null">
+            image = #{image},
+        </if>
+        <if test="updateTime != null">
+            update_time = #{updateTime}
+        </if>
+        where user_id = #{userId}
+    </update>
+</mapper>

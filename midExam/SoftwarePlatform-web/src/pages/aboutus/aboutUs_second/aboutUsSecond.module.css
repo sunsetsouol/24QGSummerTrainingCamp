@@ -1,0 +1,7 @@
+.secondpage{
+    width: 100%;
+    background-color: #eaf0ff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

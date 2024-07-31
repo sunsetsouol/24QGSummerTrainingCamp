@@ -1,0 +1,50 @@
+.home_fourthpage {
+    width: 100%;
+  height: 500px;
+    background-color: #eaf0ff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.title {
+      
+    margin-top: 100px;
+height: 42px;
+    font-size:32px;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.content{
+    width: 1003px;
+    height: 348px;
+    margin-top: 30px;
+    /* background-color: #fff; */
+    
+}
+/* .goodUser{
+padding-top: 100px;
+    background-color: rgb(234, 240, 255);
+    width: 100%;
+    background-color: rebeccapurple;
+    padding-left: 50%;
+}
+
+.MetaList{
+    width: 100%;
+    padding-top: 30px;
+display: flex;
+justify-content: center;
+align-items: center;
+padding-left: 35%;
+    background-color: rgb(234, 240, 255);
+        border: none;
+}
+
+
+.title{
+ background-color: rgb(234, 240, 255);
+ font-size: 32px;
+ text-align: center;
+} */

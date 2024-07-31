@@ -1,0 +1,430 @@
+.person_page{
+    width: 100%;
+    background-color: #eaf0ff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.title {
+    margin-top: 50px;
+    color: #1E0E62;
+    font-size: 32px;
+    letter-spacing: 2px;
+}
+/* 个人信息部分 */
+.information_part{
+    width: 1200px;
+    height: 500px;
+    position: relative;
+}
+/* 用户上传软件 */
+
+
+.openbox {
+    position: absolute;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 2px;
+    top: 50px;
+    right: 0;
+    width: 188px;
+    height: 52px;
+    border-radius: 41px;
+    color: #fff;
+    background-color: #816AFF;
+}
+
+.shangchuan {
+    width: 200px;
+}
+
+.preview {
+    width: 120px;
+    height: 100px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    position: relative;
+    /* background-color: red; */
+}
+
+.preview img {
+    width: 100%;
+    height: 100%;
+}
+
+.cancel {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    top: 0;
+    left: 0;
+    border: 0;
+    background-color: transparent;
+}
+.information_box{
+    width: 100%;
+    height: 340px;
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+/* 个人资料卡 */
+.information_card{
+    height: 100%;
+    position: relative;
+}
+.message_box{
+    width: 100%;
+    height: 300px;
+    /* background-color: red; */
+    display: flex;
+    align-items: center;
+}
+/* 头像盒子 */
+.headbox{
+    width: 280px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.mymessage{
+    width: 493px;
+    height: 80%;
+    /* background-color: green; */
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-between;
+}
+/* 信息列表 */
+.mylist_message {
+    width: 80%;
+    
+}
+.text_key {
+    white-space: nowrap;
+    overflow: hidden;
+        text-overflow: ellipsis;
+}
+
+.text_information {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* border: 0px; */
+}
+ .text_information .ant-input-disabled {
+     background-color: #fff !important;
+     color: #000 !important;
+     border: 0px;
+     cursor: pointer !important;
+ }
+ .myprivate{
+    /* background-color: red; */
+    /* display: inline-block; */
+    /* width: 30px; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+ }
+.myfingerprint_btn{
+    width: 493px;
+    height: 56px;
+    border-radius: 44px;
+    background-color: #D8D1FF;
+    color:#8846BC;
+    border: 0;
+}
+.change_message{
+    position: absolute;
+    right: 0;
+    top: 20px;
+    border: 0px;
+    color: #8846BC;
+}
+/* 修改个人信息弹窗 */
+.change_message_modal{
+height: 400px;
+display: flex;
+flex-direction: column;
+justify-content: space-evenly;
+align-items: center;
+}
+.change_input{
+    height: 50px;
+}
+/* 管理硬件指纹弹窗 */
+.fingerprint{
+height: 700px;
+display: flex;
+flex-direction: column;
+justify-content: space-evenly;
+position: relative;
+}
+.finger_cue{
+    width: 100%;
+    text-align: center;
+    font-weight: 700;
+}
+.fingerlist{
+    height: 400px;
+    overflow: auto;
+}
+.fingerlist::-webkit-scrollbar{
+    display: none;
+}
+.fingerbox{
+    width: 100%;
+    height: 50px;
+    /* background-color: red; */
+    display: flex;
+    justify-content: space-evenly;
+}
+.fingerkey{
+    width: 100px;
+    height: 100%;
+        font-size: 14px;
+    overflow: auto;
+    
+}
+.fingerkey::-webkit-scrollbar{
+    display: none;
+}
+.fingerdetail{
+    font-weight: 400;
+    font-size: 14px;
+    width: 200px;
+    height: 100%;
+    overflow: auto;
+
+}
+.fingerdetail::-webkit-scrollbar{
+    display: none;
+}
+.add_btn_box{
+    display: flex;
+    justify-content: space-evenly;
+}
+.add_detail{
+    width: 100%;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.add_input{
+    width: 200px;
+    height:30px;
+    margin-bottom: 10px;
+}
+
+
+
+/* 第二部分 消息 */
+.mymessage_part {
+    width: 1200px;
+    height: 500px;
+}
+.myprivate_box{
+    width: 100%;
+    height: 300px;
+    margin-top: 37px;
+}
+.privatecard{
+    height: 100%;
+    position: relative;
+}
+.private_content{
+    width: 100%;
+    height: 200px;
+    /* background-color: pink; */
+    overflow: auto;
+}
+.private_content::-webkit-scrollbar{
+    display: none;
+}
+.everymessage{
+    width: 100%;
+    height: 26px;
+    display: flex;
+    justify-content: space-between;
+
+}
+.detail{
+    width: 70%;
+    height: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* background-color: green; */
+}
+.cue{
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    margin-right: 10px;
+    background-color: red;
+}
+.detail_right{
+width: 20%;
+height: 100%;
+/* background-color: red; */
+display: flex;
+justify-content: space-evenly;
+}
+.messagetime{
+    color: #505050;
+
+    flex: 1.5;
+}
+.disknow{
+    color: #8846BC;
+        flex: 1;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+}
+.isknow{
+    color:#CCCCCC;
+        
+}
+.delete{
+    border: 0;
+    width: 20px;
+    height: 20px;
+    color:#999999;
+    flex: 1;
+}
+.pagebtn{
+    position: absolute;
+    bottom:17px;
+    left: 560px;
+}
+
+
+
+
+
+/* 第三部分 已购买的软件 */
+.bought_part{
+width: 1200px;
+/* height: 1200px; */
+max-height: 1200px;
+margin-bottom: 30px;
+}
+.Bought_box{
+    width: 100%;
+    /* height: 1010px; */
+    max-height: 1010px;
+    margin-top: 40px;
+}
+.Boughtcard{
+    /* height: 100%; */
+}
+.everybought{
+    width: 1120px;
+    height: 120px;
+    display: flex;
+    align-items: start;
+    position: relative;
+    
+}
+.bought_content{
+    width: 100%;
+    /* height: 950px; */
+    max-height: 950px;
+    /* background-color: red; */
+    overflow: auto;
+
+}
+.bought_content::-webkit-scrollbar{
+    display: none;
+}
+.pic{
+    width: 80px;
+    height: 80px;
+    border-radius: 18px;
+    background-color: #CCCCCC;
+    background-image: url('../../assets/images/Rectangle\ 1079.png');
+    background-size: 100% 100%;
+}
+.description{
+    margin-left: 12px;
+    /* background-color: red; */
+    width: 300px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.softwaretitle{
+    color: #303030;
+    font-size: 22px;
+    font-weight: 600;
+}
+.soft_description{
+    overflow: hidden;
+
+}
+.update_time{
+    margin-left: 184px;
+    width: 300px;
+    height: 100%;
+    line-height: 6;
+    font-size: 16px;
+}
+.download{
+    position: absolute;
+    right: 0;
+    top: 26px;
+    width: 106px;
+    height: 48px;
+    border-radius: 41px;
+    background-color: #816AFF;
+    font-size: 16px;
+    color: #fff;
+}
+.update {
+    position: absolute;
+    right: 0;
+    top: 32px;
+    width: 96px;
+    height: 38px;
+    border-radius: 41px;
+    background-color: #D8D1FF;
+    color: #530095;
+    display: none;
+}
+.btn_cue{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    background-color: red;
+    right: 10px;
+    top: -5px;
+}
+
+.bought_content li{
+  border-bottom: 1px solid rgb(80, 77, 77);
+}
+
+.normalVersion{
+    background-color: #816AFF;
+    font-size: 16px;
+    color: #fff;
+}
+.highVersion{
+    background-color: rgb(255, 215, 0);
+    font-size: 16px;
+    color: #fff;
+}
+
+.choose_system{
+    width: 100%;
+    height: 50px;
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
