@@ -29,7 +29,7 @@ public class UserApplicationRecordVO {
     /**
      * 通过状态码(0代办/1通过/2拒绝)
      */
-    private String passedStatus;
+    private int passedStatus;
     /**
      * 软件名
      */
@@ -41,7 +41,7 @@ public class UserApplicationRecordVO {
     /**
      * 类型状态码(0上传/1更新)
      */
-    private String typeStatus;
+    private int typeStatus;
     /**
      * 版本号
      */
