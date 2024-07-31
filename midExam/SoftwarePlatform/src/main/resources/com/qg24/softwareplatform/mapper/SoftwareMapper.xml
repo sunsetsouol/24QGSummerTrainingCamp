@@ -13,8 +13,8 @@
                  left join
             (select software_id, max(version) as version from software_version_download where version_type = 0 group by software_id )
                  as svd on s.software_id = svd.software_id
-        where s.status = 1
         <where>
+            s.status = 1
             <if test="softwareName != ''">and software_name like concat('%',#{softwareName},'%')</if>
         <if test="tags != null and tags.size > 0">
             <foreach collection="tags" item="tag">
