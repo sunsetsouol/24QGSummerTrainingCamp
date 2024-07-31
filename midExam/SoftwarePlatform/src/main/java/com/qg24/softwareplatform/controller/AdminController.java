@@ -7,6 +7,7 @@ import com.qg24.softwareplatform.po.entity.Software;
 import com.qg24.softwareplatform.po.entity.SoftwareInfoTemp;
 import com.qg24.softwareplatform.po.result.PageBean;
 import com.qg24.softwareplatform.po.result.Result;
+import com.qg24.softwareplatform.po.vo.AdminShowAllSoftwareVO;
 import com.qg24.softwareplatform.po.vo.SimpleSoftwareVO;
 import com.qg24.softwareplatform.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,9 +84,9 @@ public class AdminController {
      * @return
      */
     @GetMapping("/homePageShowAllSoftware")
-    public Result<PageBean<SimpleSoftwareVO>> homePageShowSoftware(@RequestParam("page") int page, @RequestParam("pageSize") int pageSize, @RequestParam(value = "softwareName", required = false) String softwareName, @RequestParam(value = "tags[]", required = false) List<String> tags) {
+    public Result<PageBean<AdminShowAllSoftwareVO>> homePageShowSoftware(@RequestParam("page") int page, @RequestParam("pageSize") int pageSize, @RequestParam(value = "softwareName", required = false) String softwareName, @RequestParam(value = "tags[]", required = false) List<String> tags) {
         HomePageShowSoftwareDTO homePageShowSoftwareDTO = new HomePageShowSoftwareDTO(page, pageSize, softwareName, tags);
-        PageBean<SimpleSoftwareVO> pageBean = adminService.homePageShowAllSoftware(homePageShowSoftwareDTO);
+        PageBean<AdminShowAllSoftwareVO> pageBean = adminService.homePageShowAllSoftware(homePageShowSoftwareDTO);
         return Result.success("", pageBean);
     }
 
