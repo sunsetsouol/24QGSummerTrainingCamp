@@ -1,5 +1,6 @@
 package com.qg24.softwareplatform.interceptor;
 
+import com.qg24.softwareplatform.util.JwtUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -14,11 +15,10 @@ public class RequestInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler) {
-//        String token = request.getParameter("Authorization");
+        String token = request.getParameter("Authorization");
 
+        return token != null && JwtUtils.isTokenExpired(token);
         // TODO 正式上线时将token验证打开
-//        return !JwtUtils.isTokenExpired(token);
-        return true;
     }
 
 
