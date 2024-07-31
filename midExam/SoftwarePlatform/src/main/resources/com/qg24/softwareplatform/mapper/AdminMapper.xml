@@ -53,7 +53,7 @@
     </resultMap>
 
     <select id="homePageShowAllSoftware"
-            resultType="com.qg24.softwareplatform.po.vo.SimpleSoftwareVO" resultMap="softwareTagResultMap">
+            resultType="com.qg24.softwareplatform.po.vo.AdminShowAllSoftwareVO" resultMap="softwareTagResultMap">
         select s.*, svd.version from software as s
         left join
         (select software_id, max(version) as version from software_version_download where version_type = 0 group by software_id )
