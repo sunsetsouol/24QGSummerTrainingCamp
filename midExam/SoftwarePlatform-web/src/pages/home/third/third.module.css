@@ -1,0 +1,35 @@
+.home_thirdpage{
+    width: 100%;
+    height: 1400px;
+    background-color: #eaf0ff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* 标题 */
+.title{
+    color:#1E0E62;
+    height: 10%;
+    font-size: 44px;
+    margin-top: 100px;
+}
+/* 主要内容 */
+.maincontent{
+    height: 1110px;
+    width: 1220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.maincontent h3{
+    height: 42px;
+    font-size: 32px;
+}
+.content{
+    margin-top: 12px;
+    width: 1220px;
+    height: 1060px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
