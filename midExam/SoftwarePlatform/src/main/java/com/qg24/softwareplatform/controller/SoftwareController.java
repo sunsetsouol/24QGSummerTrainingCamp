@@ -11,6 +11,7 @@ import com.qg24.softwareplatform.po.vo.*;
 import com.qg24.softwareplatform.service.SoftwareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -81,8 +82,12 @@ public class SoftwareController {
 
     // 上传软件/更新软件
     @PostMapping("/upload")
-    public Result<?> upload(@ModelAttribute UploadNewSoftwareDTO uploadNewSoftwareDTO) throws IOException {
-        if (softwareService.uploadNewSoftware(uploadNewSoftwareDTO) != 0) {
+    public Result<?> upload(@ModelAttribute UploadNewSoftwareDTO uploadNewSoftwareDTO,
+                            @RequestPart(required = false) MultipartFile winPackage,
+                            @RequestPart(required = false) MultipartFile linuxPackage,
+                            @RequestPart(required = false) MultipartFile macPackage,
+                            @RequestPart(required = false) MultipartFile softwareImage) throws IOException {
+        if (softwareService.uploadNewSoftware(uploadNewSoftwareDTO, winPackage, linuxPackage, macPackage, softwareImage) != 0) {
             return Result.success("", null);
         } else {
             return Result.error("");
@@ -130,6 +135,21 @@ public class SoftwareController {
             return Result.success("没有可更新的软件");
         }else {
             return Result.success("有可更新的软件", checkLastestSoftwareVOS);
+        }
+    }
+
+    /**
+     * 判断某个软件是否有专业版本
+     * @param softwareId
+     * @return
+     */
+    @GetMapping("/judgeWhetherHavaPro")
+    public Result<?> judgeWhetherHavaPro(@RequestParam("softwareId") int softwareId){
+        boolean b = softwareService.judgeWhetherHavaPro(softwareId);
+        if (b == true){
+            return Result.success();
+        }else {
+            return Result.error("error");
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.qg24.softwareplatform.po.vo;
 
+
 import com.alibaba.fastjson2.JSON;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +11,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SimpleSoftwareVO {
+public class AdminShowAllSoftwareVO {
+
     /**
      * 创建时间
      */
@@ -40,6 +42,11 @@ public class SimpleSoftwareVO {
 
     private String tagsString;
 
+    private int status; //上下架状态
+
+    private String author;
+
+    private String userId;
 
     //将tags转为string便于存入mysql
     public void TagsToString(){
@@ -55,6 +62,4 @@ public class SimpleSoftwareVO {
             tagsString = null;
         }
     }
-
-
 }
