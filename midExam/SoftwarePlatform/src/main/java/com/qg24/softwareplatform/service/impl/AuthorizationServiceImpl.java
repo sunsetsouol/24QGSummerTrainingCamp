@@ -28,6 +28,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Service
 public class AuthorizationServiceImpl implements AuthorizationService {
@@ -106,18 +108,22 @@ public class AuthorizationServiceImpl implements AuthorizationService {
                 writer.newLine();
 
                 // 写入一年后的时间戳, 原始数据为oneYearLater
-                String oneYearLater = LocalDateTime.now().plusYears(1).toString();
-                oneYearLater = EncryptionUtil.Encyotion(oneYearLater);
-                writer.write(oneYearLater);
+                LocalDateTime oneYearLater = LocalDateTime.now().plusYears(1);
+                String oneYearLaterString = oneYearLater.toString();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d");
+                String formattedDate = oneYearLater.format(formatter);
+                formattedDate = EncryptionUtil.Encyotion(formattedDate);
+                writer.write(formattedDate);
                 writer.newLine();
 
                 for (AuthSoftwareDTO authSoftwareDTO : softwareList) {
                     // 写入软件信息, 每条原始数据为authSoftwareDTO
                     String softwareName = authSoftwareDTO.getSoftwareName();
                     int versionType = authSoftwareDTO.getVersionType();
-                    softwareName = EncryptionUtil.Encyotion(softwareName);
-                    String encryptVersionType =  EncryptionUtil.Encyotion(String.valueOf(versionType));
-                    String softInfo = softwareName + ":" + encryptVersionType;
+//                    softwareName = EncryptionUtil.Encyotion(softwareName);
+//                    String encryptVersionType =  EncryptionUtil.Encyotion(String.valueOf(versionType));
+                    String softInfo = softwareName + ":" + versionType;
+                    softInfo =  EncryptionUtil.Encyotion(softInfo);
                     writer.write(softInfo);
                     writer.newLine();
                 }
