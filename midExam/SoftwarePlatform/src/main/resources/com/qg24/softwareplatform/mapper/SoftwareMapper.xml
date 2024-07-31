@@ -30,8 +30,8 @@
         left join
         (select software_id, max(version) as version from software_version_download where version_type = 0 group by software_id )
         as svd on s.software_id = svd.software_id
-        where status = 1
         <where>
+            status = 1
             <if test="softwareName != ''">and software_name like concat('%',#{softwareName},'%')</if>
             <if test="tags != null and tags.size > 0">
                 <foreach collection="tags" item="tag">
@@ -68,13 +68,15 @@
             ON
                 svd.software_id = usa.software_id
                     AND svd.version_type = usa.version_type
-                    AND usa.user_id = #{userId}
-                    AND usa.expired_time > now()
+
                 LEFT JOIN
             software AS s
             ON
                 s.software_id = svd.software_id
         WHERE
+            usa.user_id = #{userId}
+            AND usa.expired_time > now()
+        and
             (svd.software_id, svd.version_type) != (usa.software_id, usa.version_type)
            OR (usa.software_id IS NULL AND usa.version_type IS NULL)  and s.status = 1
         LIMIT #{offset},24;
