@@ -39,7 +39,7 @@ public class UploadNewSoftwareDTO {
 
     private MultipartFile macPackage;
 
-    private float price;
+    private Float price;
 
     private MultipartFile softwareImage;
 
