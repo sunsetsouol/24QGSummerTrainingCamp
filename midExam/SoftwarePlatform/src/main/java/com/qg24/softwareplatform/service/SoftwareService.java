@@ -33,4 +33,8 @@ public interface SoftwareService {
     //查看用户有无可更新的软件
     List<CheckLastestSoftwareVO> checkLatestSoftware(String userId);
 
+    //判断某个软件是否有专业版本
+    boolean judgeWhetherHavaPro(int softwareId);
+
+
 }

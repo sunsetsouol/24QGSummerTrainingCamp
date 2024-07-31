@@ -214,4 +214,24 @@ public class SoftwareServiceImpl implements SoftwareService {
         }
     }
 
+    /**
+     * 判断某个软件是否有专业版本
+     * @param softwareId
+     * @return
+     */
+    @Override
+    public boolean judgeWhetherHavaPro(int softwareId) {
+        List<Integer> integers = softwareMapper.selectBySoftwareIdWhetherHavePro(softwareId);
+        if (integers.size() == 0){
+            return false; //没有此软件信息
+        }else {
+            for (Integer integer : integers) {
+                if(integer == 1){
+                    return true; //有专业版本
+                }
+            }
+            return false;
+        }
+    }
+
 }

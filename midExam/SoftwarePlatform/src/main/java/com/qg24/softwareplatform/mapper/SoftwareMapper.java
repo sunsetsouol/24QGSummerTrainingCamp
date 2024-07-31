@@ -97,4 +97,10 @@ public interface SoftwareMapper {
 
     //查看用户下载过的软件是否有可以更新
     List<CheckLastestSoftwareVO> selectSoftwareUserCanUpdate(String userId);
+
+
+    //查看某个软件是否有专业版本
+    @Select("select version_type from software_version_download where software_id = #{softwareId}")
+    List<Integer> selectBySoftwareIdWhetherHavePro(int softwareId);
+
 }

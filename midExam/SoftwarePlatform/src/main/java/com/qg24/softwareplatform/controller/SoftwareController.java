@@ -132,4 +132,19 @@ public class SoftwareController {
             return Result.success("有可更新的软件", checkLastestSoftwareVOS);
         }
     }
+
+    /**
+     * 判断某个软件是否有专业版本
+     * @param softwareId
+     * @return
+     */
+    @GetMapping("/judgeWhetherHavaPro")
+    public Result<?> judgeWhetherHavaPro(@RequestParam("softwareId") int softwareId){
+        boolean b = softwareService.judgeWhetherHavaPro(softwareId);
+        if (b == true){
+            return Result.success();
+        }else {
+            return Result.error("error");
+        }
+    }
 }
