@@ -48,7 +48,7 @@
         Where software_info_temp_id = #{softwareInfoTempId}
     </update>
 
-    <resultMap id="softwareTagResultMap" type="com.qg24.softwareplatform.po.vo.SimpleSoftwareVO">
+    <resultMap id="softwareTagResultMap" type="com.qg24.softwareplatform.po.vo.AdminShowAllSoftwareVO">
         <result property="tagsString" column="tags"/>
     </resultMap>
 
