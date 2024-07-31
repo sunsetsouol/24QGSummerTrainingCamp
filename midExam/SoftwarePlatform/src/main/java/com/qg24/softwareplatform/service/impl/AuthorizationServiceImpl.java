@@ -24,11 +24,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -64,7 +60,6 @@ public class AuthorizationServiceImpl implements AuthorizationService {
         userSoftwareLicense.setSoftwareList(s);
 
 
-        // TODO 实现将数据保存文件并加密上上传到云端服务器，返回url
         String licenseUrl = generateAuthFileAndUpload(purchaseDTO.getFingerprint(), purchaseDTO.getSoftwareList());
         userSoftwareLicense.setLicenseUrl(licenseUrl);
 

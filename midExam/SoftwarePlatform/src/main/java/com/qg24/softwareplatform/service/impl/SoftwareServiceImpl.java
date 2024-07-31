@@ -111,10 +111,13 @@ public class SoftwareServiceImpl implements SoftwareService {
     }
 
     @Override
-    public int uploadNewSoftware(UploadNewSoftwareDTO uploadNewSoftwareDTO) throws IOException {
+    public int uploadNewSoftware(UploadNewSoftwareDTO uploadNewSoftwareDTO, MultipartFile winPackage, MultipartFile linuxPackage, MultipartFile macPackage, MultipartFile softwareImage) throws IOException {
         SoftwareInfoTemp softwareInfoTemp = new SoftwareInfoTemp();
-        BeanUtils.copyProperties(uploadNewSoftwareDTO, softwareInfoTemp);
+        BeanUtils.copyProperties(uploadNewSoftwareDTO, softwareInfoTemp, "price");
 
+        if (!Objects.isNull(uploadNewSoftwareDTO.getPrice())) {
+            softwareInfoTemp.setPrice(uploadNewSoftwareDTO.getPrice());
+        }
         String winUrl = "";
         String linuxUrl = "";
         String macUrl = "";
@@ -122,8 +125,7 @@ public class SoftwareServiceImpl implements SoftwareService {
 
 
         // win
-        MultipartFile winPackage = uploadNewSoftwareDTO.getWinPackage();
-        if (!winPackage.isEmpty()) {
+        if (Objects.nonNull(winPackage)) {
             String extension = Objects.requireNonNull(winPackage.getOriginalFilename()).substring(winPackage.getOriginalFilename().lastIndexOf("."));
             String fileName = UUID.randomUUID() + extension;
             byte[] bytes = winPackage.getBytes();
@@ -131,8 +133,7 @@ public class SoftwareServiceImpl implements SoftwareService {
         }
 
         // linux
-        MultipartFile linuxPackage = uploadNewSoftwareDTO.getLinuxPackage();
-        if (!linuxPackage.isEmpty()) {
+        if (Objects.nonNull(linuxPackage)) {
             String extension = Objects.requireNonNull(linuxPackage.getOriginalFilename()).substring(linuxPackage.getOriginalFilename().lastIndexOf("."));
             String fileName = UUID.randomUUID() + extension;
             byte[] bytes = linuxPackage.getBytes();
@@ -140,16 +141,14 @@ public class SoftwareServiceImpl implements SoftwareService {
         }
 
         // mac
-        MultipartFile macPackage = uploadNewSoftwareDTO.getMacPackage();
-        if (!macPackage.isEmpty()) {
+        if (Objects.nonNull(macPackage)) {
             String extension = Objects.requireNonNull(macPackage.getOriginalFilename()).substring(macPackage.getOriginalFilename().lastIndexOf("."));
             String fileName = UUID.randomUUID() + extension;
             byte[] bytes = macPackage.getBytes();
             macUrl = aliOssUtil.upload(bytes, fileName);
         }
 
-        MultipartFile softwareImage = uploadNewSoftwareDTO.getSoftwareImage();
-        if (!softwareImage.isEmpty()) {
+        if (Objects.nonNull(softwareImage)) {
             String extension = Objects.requireNonNull(softwareImage.getOriginalFilename()).substring(softwareImage.getOriginalFilename().lastIndexOf("."));
             String fileName = UUID.randomUUID() + extension;
             byte[] bytes = softwareImage.getBytes();

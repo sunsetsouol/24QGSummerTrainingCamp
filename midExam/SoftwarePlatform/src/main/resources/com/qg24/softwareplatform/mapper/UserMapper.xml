@@ -18,8 +18,8 @@
         from user_software_auth as usa
         inner join software as s
         on usa.software_id = s.software_id
-            and usa.expired_time > now()
         where usa.user_id= #{userId}
+          and usa.expired_time > now()
     </select>
 
     <update id="updateUserInfo" >

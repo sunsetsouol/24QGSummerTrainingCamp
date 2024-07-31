@@ -3,7 +3,6 @@ package com.qg24.softwareplatform.po.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -33,14 +32,8 @@ public class UploadNewSoftwareDTO {
 
     private int typeStatus;
 
-    private MultipartFile winPackage;
+    private Float price;
 
-    private MultipartFile linuxPackage;
 
-    private MultipartFile macPackage;
-
-    private float price;
-
-    private MultipartFile softwareImage;
 
 }
