@@ -87,13 +87,44 @@
 <!--    查询用户可以更新的软件-->
     <select id="selectSoftwareUserCanUpdate"
             resultType="com.qg24.softwareplatform.po.vo.CheckLastestSoftwareVO">
-        select svd.software_id,svd.version,svd.version_type,s.software_name,s.software_image from
-        software_version_download as svd
-        inner join user_software_download as usd
-        on usd.user_id = #{userId} and svd.software_id = usd.software_id and svd.version_type = usd.version_type and svd.version != usd.version
-        inner join software as s
-        on svd.software_id = s.software_id
-        where s.status = 1;
+        select
+            svd.software_id,
+            svd.version,
+            svd.version_type,
+            s.software_name,
+            s.software_image
+        from
+            software_version_download as svd
+                inner join
+            user_software_download as usd
+            on
+                svd.software_id = usd.software_id
+                    and svd.version_type = usd.version_type
+                inner join
+            software as s
+            on
+                svd.software_id = s.software_id
+        where
+            s.status = 1
+          and usd.user_id = #{userId}
+          and svd.version = (
+            select
+                max(svd_latest.version)
+            from
+                software_version_download as svd_latest
+            where
+                svd_latest.software_id = svd.software_id
+              and svd_latest.version_type = svd.version_type
+        )
+          and usd.version != (
+            select
+                max(svd_latest.version)
+            from
+                software_version_download as svd_latest
+            where
+                svd_latest.software_id = svd.software_id
+              and svd_latest.version_type = svd.version_type
+        )
     </select>
 
 
