@@ -116,15 +116,7 @@
                 svd_latest.software_id = svd.software_id
               and svd_latest.version_type = svd.version_type
         )
-          and usd.version != (
-            select
-                max(svd_latest.version)
-            from
-                software_version_download as svd_latest
-            where
-                svd_latest.software_id = svd.software_id
-              and svd_latest.version_type = svd.version_type
-        )
+          and usd.version != svd.version
     </select>
 
 

@@ -49,7 +49,7 @@ public class AccountServiceImpl implements AccountService {
         // TODO 常量类设置 0 1
         if (loginDTO.getRole() == 1) {
             user = accountMapper.selectByAccountAndPassword(loginDTO);
-        } else if (loginDTO.getRole() == 2) {
+        } else if (loginDTO.getRole() == 0) {
             user = accountMapper.selectByUserIdAndPassword(loginDTO);
         }
 
