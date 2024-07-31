@@ -1,0 +1,410 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+
+
+.scroll-container {
+  overflow: auto; /* 显示滚动条 */
+  scrollbar-width: none; /* 隐藏滚动条 Firefox */
+  -ms-overflow-style: none; /* 隐藏滚动条 IE 10+ */
+}
+
+.scroll-container::-webkit-scrollbar {
+  display: none; /* 隐藏滚动条 WebKit */
+}
+
+
+
+li{
+    list-style: none;
+}
+img{
+    width: 100%;
+    height: 100%;
+}
+.shop{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(234, 240, 255);
+   width: 100%;
+}
+.todayfind{
+    margin-top: 48px;
+     font-size:35px; /* 设置最小、理想和最大字体大小 */
+    margin-bottom: 35px;
+   color: rgb(30, 14, 98);
+}
+.bigImage {
+     width: 1300px;
+  height: 700px;
+  background-size: cover; /* 按比例缩放以完全覆盖盒子 */
+  background-position: center; /* 图片在盒子内部居中显示 */
+  background-repeat: no-repeat; /* 禁止背景图片重复 */
+ margin-bottom: 50px;
+  border-radius: 10px;
+   overflow: hidden; /* 防止内容溢出 */
+   cursor: pointer;
+}
+
+.carouselImage{
+    width: 1300px;
+        height: 700px;
+}
+
+
+.smallImages{
+    width: 1300px;
+height: 320px;
+display: flex;
+justify-content: space-between;
+margin-bottom: 20px;
+
+}
+.smallImages img{
+      border-radius: 10px;
+}
+.smallImages li{
+    width: 24%;
+       box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+       cursor: pointer;
+}
+.smallImages li:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.2); /* 悬浮时的阴影效果 */
+}
+
+.smallImages_li{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+      border-radius: 10px;
+      height: 320px;
+          width: 1300px;
+}
+.smallImages_li div:nth-child(1){
+    height: 65%;
+}
+.smallImages_li div:nth-child(1) img{
+    width: 100%;
+    height: 100%;
+    border-radius: 0px;
+}
+
+
+
+.smallImages_li div:nth-of-type(2){
+    padding-left: 25px;
+    padding-right: 5px;
+      height: 35%;
+    display: flex;
+    flex-direction: column;
+}
+.smallImages_li div:nth-of-type(2) h2{
+    font-size: 20px; /* 设置最小、理想和最大字体大小 */
+    height: 25%;
+   
+}
+.smallImages_li div:nth-of-type(2) div{
+width: 100%;
+height: 35%;
+}
+.smallImages_li div:nth-of-type(2) p{
+    width: 100%;
+    height: 40%;
+    font-size: 15px;/* 设置最小、理想和最大字体大小 */
+    overflow: auto;
+    scrollbar-width: none; /* 隐藏滚动条 Firefox */
+    -ms-overflow-style: none; /* 隐藏滚动条 IE 10+ */
+ 
+}
+.tages{
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.tages ul{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-left: -5px;
+    padding-left: 0px;
+    flex: 3;
+    height: 100%;
+}
+.tages ul li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-wrap: nowrap;
+    background-color: rgb(229, 223, 244);
+    margin-right: 10px;
+    border-radius: 20px;
+    height: 60%;
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: rgb(99, 61, 177);
+    font-size: 12px; /* 设置最小、理想和最大字体大小 */
+    white-space: nowrap; /* 禁止文本换行 */
+    font-weight: 400;
+}
+.tages div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+     font-size: 20px; /* 设置最小、理想和最大字体大小 */
+    color: rgb(255, 206, 79);
+    font-weight: 700;
+    margin-right: 10px;
+
+}
+.everyoneDownLoad{
+     width: 1300px;
+  height: 1000px;
+  display: flex;
+  flex-wrap: wrap;
+ justify-content: space-between;
+ align-content: space-between;
+
+}
+
+.everyoneDownLoad li{
+      width: 48%;
+      height: 48%;
+     border-radius: 15px;
+     background-color: white;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+.everyoneDownLoad li:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.2); /* 悬浮时的阴影效果 */
+}
+
+.everyoneDownLoad li div:nth-of-type(1){
+    width: 100%;
+    height: 75%;
+        border-radius: 15px;
+}
+.everyoneDownLoad li div:nth-of-type(1) img{
+    border-radius: 15px;
+}
+.everyoneDownLoad li div:nth-of-type(2){
+    width: 100%;
+    height: 25%;
+    padding-left: 2%;
+}
+.everyoneDownLoad li div:nth-of-type(2) h3{
+    display: flex;
+    align-items: center;
+   height: 40%;
+
+     font-size:19px; /* 设置最小、理想和最大字体大小 */
+}
+.everyoneDownLoad li div:nth-of-type(2) p{
+      display: flex;
+    align-items: center;
+   height: 20%;
+      font-size:14px; /* 设置最小、理想和最大字体大小 */
+}
+.everyoneDownLoad li div:nth-of-type(2) ul{
+    display: flex;
+    align-items: center;
+   height: 40%;
+
+}
+.everyoneDownLoad li div:nth-of-type(2) ul li{
+  font-size: 14px; /* 设置最小、理想和最大字体大小 */
+  color: rgb(99, 61, 177);
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(229, 223, 244);
+  border-radius: 20px;
+  margin-right: 3%;
+}
+.recommendLi{
+       width: 100%;
+  border-radius: 20px;
+    height: 140px;
+    border: 1px solid rgb(155, 156, 160);
+    margin-bottom: 2vh;
+    display: flex;
+           box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.recommendLi:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.2); /* 悬浮时的阴影效果 */
+}
+
+.recommendUl{
+     border-radius: 20px;
+    width: 1300px;
+       display: flex;
+       flex-direction: column;
+margin-bottom: 50px;
+}
+.recommendLi div:nth-of-type(1){
+    width: 15%;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.recommendLi div:nth-of-type(1) img{
+width: 55%;
+height: 70%;
+}
+.recommendLi div:nth-of-type(2){
+padding-left: 2%;
+width: 60%;
+display: flex;
+align-items: center;
+}
+.recommendLi div:nth-of-type(2) div{
+    width: 100%;
+display: flex;
+height: 80%;
+flex-direction: column;
+align-items: start;
+justify-content: start;
+
+
+}
+.recommendLi div:nth-of-type(2) div ul{
+    height: 30%;
+    width: 100%;
+display: flex;
+}
+.recommendLi div:nth-of-type(2) div h3{
+    margin-bottom: 1%;
+     font-size: 25px; /* 设置最小、理想和最大字体大小 */
+}
+.recommendLi div:nth-of-type(2) div h5{
+        margin-bottom: 1%;
+    font-size: 15px; /* 设置最小、理想和最大字体大小 */
+}
+.recommendLi div:nth-of-type(3){
+   width: 25%;
+display: flex;
+}
+.recommendLi div:nth-of-type(3) img{
+border-radius: 16px;
+}
+.recommendTag li{
+    width: 8%;
+     color: rgb(99, 61, 177);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(229, 223, 244);
+  margin-right: 1%;
+  border-radius: 20px;
+    font-size: 16px; /* 设置最小、理想和最大字体大小 */
+}
+.countUl{
+    margin-top: 50px;
+       width: 1300px;
+       height: 400px;
+       display: flex;
+       justify-content: space-between;
+       margin-bottom: 20vh;
+}
+.countUl li{
+   width: 32%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+           box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.countUl li:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.2); /* 悬浮时的阴影效果 */
+}
+
+.countUl li div:nth-of-type(1){
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+.countUl li div:nth-of-type(1) img{
+    height: 85%;
+    width: 85%;
+}
+.countUl li div:nth-of-type(2){
+       width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+}
+.countUl li div:nth-of-type(2) div{
+       width: 85%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-start;
+
+}
+.countUl li div:nth-of-type(2) div h2{
+    display: flex;
+    align-items: center;
+    flex:1.5;
+    width: 100%;
+    font-weight: 400;
+    font-size: 28px; /* 设置最小、理想和最大字体大小 */
+
+}
+.countUl li div:nth-of-type(2) div p{
+     display: flex;
+    align-items: flex-start;
+    flex:1;
+    width: 100%;
+       font-size: 20px; /* 设置最小、理想和最大字体大小 */
+       color: rgb(78, 78, 78);
+}
+.countUl li div:nth-of-type(2) div p:nth-of-type(2) div{
+    border-radius: 5px;
+    width: 30%;
+    height: 70%;
+    background-color: rgb(216, 209, 255);
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    
+}
+
+.carouselTitle {
+position: relative;
+width: 100%;
+height: 100%;
+}
+.carouselTitle .picname{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-start;
+  top: 450px;
+    margin-left: 5%;
+}
+
+
+.carouselTitle h1{
+font-size: 35px; /* 设置最小、理想和最大字体大小 */
+}
+.carouselTitle h2{
+margin-top: 10px;
+font-size:20px; /* 设置最小、理想和最大字体大小 */
+font-weight: 400;
+}
