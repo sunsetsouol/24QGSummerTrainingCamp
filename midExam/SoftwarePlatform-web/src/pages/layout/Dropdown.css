@@ -1,0 +1,16 @@
+/* StoreDropDown.css */
+.custom-dropdown .ant-dropdown-menu {
+  background-color: #26125E;
+  /* 设置紫色背景 */
+}
+
+.custom-dropdown .ant-dropdown-menu-item {
+  color: #f0f0f0 !important;
+  opacity: 0.8;
+
+}
+.custom-dropdown .ant-dropdown-menu-item:hover {
+  color: #f0f0f0;
+  opacity: 1;
+
+}

@@ -1,0 +1,175 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+/* 头部 */
+.top_head{
+    position: fixed;
+    width: 100%;
+    height: 64px;
+    background-color: #26125E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1300px;
+z-index: 100;
+}
+/* 顶部四个大盒子 */
+.top_title{
+    /* background-color: #000; */
+    color: #fff;
+    height: 100%;
+    width: 20vw;
+    min-width: 180px;
+    box-sizing: border-box;
+    padding: 15px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    white-space: nowrap;
+}
+.top_nav{
+    height: 100%;
+    flex-grow: 2;
+    display: flex;
+    border: 0;
+}
+.top_search{
+    /* background-color: #fff; */
+    height: 100%;
+    flex-grow: 1;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+.top_btn{
+    /* background-color: red; */
+    height: 100%;
+    flex-grow: 2;
+    display: flex;
+    margin-left: 20px;
+    align-items: center;
+}
+/* 顶部第一部分 */
+.top_title h3{
+    font-size: 20px;
+}
+/* 顶部第二部分菜单 */
+.top_menu{
+    background-color: transparent;
+    color: #fff;
+    width: 320px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    min-width: 0;
+    padding: 0 !important;
+    flex:1;
+    border:0 !important;
+}
+.top_menu_item{
+    width: 80px !important;
+    background-color: transparent;
+    color: #fff !important;
+   text-align: center;
+   font-size: 16px;
+   padding: 0 !important;
+   margin: 0 !important;
+}
+.top_menu_item:hover {
+    background-color: transparent !important;
+    /* 鼠标悬停颜色 */
+}
+
+.top_menu .ant-menu-item-selected {
+    background-color: transparent !important;
+    /* 点击选中后的背景颜色 */
+}
+/* 搜索宽框 */
+.top_input{
+    width: 170px;
+    color: #FFF ;
+    border-radius: 8px;
+}
+/* 自定义搜索按钮的样式 */
+.top_input .ant-input-search-button {
+    background-color: transparent;
+    height: 30px;
+    /* 按钮背景颜色 */
+    color: #fff !important;
+    /* 按钮字体颜色 */
+    border: 1px solid #786192;
+    border-left: 0 !important;
+    /* 去除默认边框 */
+}
+/* 自定义搜索按钮的样式 */
+.top_input .ant-input-search-button:hover{
+    background-color: transparent !important;
+    border: 1px solid #786192 !important;
+    border-left: 0 !important;
+    color: #FFF !important;
+}
+.top_input .ant-input {
+    height: 30px;
+    background-color: transparent;
+    border: 1px solid #786192;
+    border-right: 0 !important;
+    color: #72688d !important;
+}
+.top_input .ant-input::placeholder{
+    color: #72688d !important;
+}
+/* 鼠标悬停和聚焦状态的样式 */
+.top_input .ant-input:hover {
+    border: 1px solid #786192 !important;
+    border-right: 0 !important;
+    /* 悬停时边框颜色 */
+}
+
+.top_input .ant-input:focus-within {
+    border: 1px solid #786192 !important;
+    border-right: 0 !important;
+    /* 聚焦时边框颜色 */
+}
+
+/* 顶部登录注册按钮 */
+.top_link_btn{
+height: 30px;
+width: 70px;
+border-radius: 15px;
+margin-left: 10px;
+color:#fff;
+}
+.linkto_register{
+background-color: transparent;
+border: 2px solid #786192 !important;
+}
+.linkto_register:hover{
+    /* background-color: #786192 !important;
+    color: #26125E !important; */
+    background-color: transparent !important;
+        border: 2px solid #786192 !important;
+        color: #fff !important;
+        /* 扩散效果为 2px，红色的阴影 */
+}
+.linkto_login{
+    background-color: #25dac4;
+    border: 2px solid #25dac4 !important;
+}
+.linkto_login:hover {
+    /* background-color: #786192 !important;
+    color: #26125E !important; */
+    background-color: #25dac4 !important;
+        border: 2px solid #25dac4 !important;
+    color: #fff !important;
+    /* 扩散效果为 2px，红色的阴影 */
+}
+
+/* 主要内容 */
+.main_content{
+    width: calc(100vw - 16px);
+    margin-top: 64px;
+    min-width: 1300px;
+}
+

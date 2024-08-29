@@ -1,0 +1,20 @@
+.history{
+    width: 1170px;
+  height: 480px;
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+}
+.history h3{
+    margin-top: 100px;
+    font-size: 32px;
+    color: #1E0E62;
+}
+.content{
+    margin-top: 20px;
+}
+.content p{
+    font-size: 24px;
+    line-height: 3;
+    letter-spacing: 2px;
+}
